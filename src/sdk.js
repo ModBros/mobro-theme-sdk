@@ -3,15 +3,18 @@ import generalChannels from "mobro/enum/channels";
 import commands from "mobro/enum/commands";
 import com from "mobro/enum/com";
 
-const socket = new Socket();
-
 const SDK = {
     generalChannels: generalChannels,
     commands: commands,
     com: com,
+    socket: null,
+
+    init() {
+        this.socket = new Socket();
+    },
 
     getSocket() {
-        return socket;
+        return this.socket;
     },
 
     isConnected() {

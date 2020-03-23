@@ -9077,14 +9077,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const socket = new mobro_socket__WEBPACK_IMPORTED_MODULE_0__["default"]();
 const SDK = {
   generalChannels: mobro_enum_channels__WEBPACK_IMPORTED_MODULE_1__["default"],
   commands: mobro_enum_commands__WEBPACK_IMPORTED_MODULE_2__["default"],
   com: mobro_enum_com__WEBPACK_IMPORTED_MODULE_3__["default"],
+  socket: null,
+
+  init() {
+    this.socket = new mobro_socket__WEBPACK_IMPORTED_MODULE_0__["default"]();
+  },
 
   getSocket() {
-    return socket;
+    return this.socket;
   },
 
   isConnected() {
