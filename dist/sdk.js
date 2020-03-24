@@ -9029,13 +9029,16 @@ class Socket {
 
     _defineProperty(this, "isConnected", false);
 
+    _defineProperty(this, "originalSearchParams", null);
+
+    this.originalSearchParams = window.location.search;
     this.url = `${window.location.protocol}//${window.location.hostname}:42100`;
     this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_0___default()(`${window.location.protocol}//${window.location.hostname}:42100${window.location.search}`);
     this.on("change:theme", data => {
       console.info("Switching theme to", data.theme);
-      fetch(`${this.url}/theme?theme=${data.theme}`).then(() => {
+      fetch(`${this.url}/theme/?theme=${data.theme}`).then(() => {
         console.info("Reloading due to theme switch ...");
-        window.location = `/${window.location.search}`;
+        window.location = `/${this.originalSearchParams}`;
       }).catch(error => {
         console.error("Could not switch themes", error);
       });
