@@ -2,15 +2,38 @@ import Socket from "mobro/socket";
 import generalChannels from "mobro/enum/channels";
 import commands from "mobro/enum/commands";
 import com from "mobro/enum/com";
+import Helper from "mobro/helper";
 
 const SDK = {
     generalChannels: generalChannels,
     commands: commands,
     com: com,
     socket: null,
+    initialized: false,
+    helper: null,
 
     init() {
-        this.socket = new Socket();
+        return new Promise((resolve) => {
+            this.socket = new Socket();
+
+            const handler = async () => {
+                // sanity check
+                if (this.initialized) {
+                    return;
+                }
+
+                this.initialized = true;
+                this.socket.off("connect", handler);
+
+                const settings = await this.emit("settings");
+
+                this.helper = new Helper(settings);
+
+                resolve();
+            };
+
+            this.socket.on("connect", handler);
+        });
     },
 
     getSocket() {

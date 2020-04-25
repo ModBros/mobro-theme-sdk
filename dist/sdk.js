@@ -9006,6 +9006,125 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/mobro/helper.js":
+/*!*****************************!*\
+  !*** ./src/mobro/helper.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Helper; });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class Helper {
+  constructor(settings) {
+    _defineProperty(this, "settings", {});
+
+    this.settings = settings;
+  }
+
+  isPercentageData(data) {
+    return data.unit && data.unit === "%";
+  }
+
+  getValueByPath(data, path) {
+    const parts = path.split(".");
+
+    for (let i = 0; i < parts.length; i++) {
+      let part = parts[i];
+
+      if (!data || typeof data !== "object") {
+        return null;
+      }
+
+      data = data[part];
+    }
+  }
+
+  isTemperatureData(data) {
+    return this.getValueByPath(data, "_config.sensortype") === "Temperature";
+  }
+
+  mapTemperatureValue(data) {
+    if (!data) {
+      return null;
+    }
+
+    if (typeof data === "number") {
+      data = {
+        value: data,
+        unit: null
+      };
+    }
+
+    if (this.settings.temperatureAsFahrenheit && data.unit !== "F") {
+      return Math.round(data.value * (9 / 5) + 32);
+    }
+
+    return data.value;
+  }
+
+  getTemperatureConfig(data) {
+    const hardwareType = this.getValueByPath(data, "_config.hardwaretype");
+    const temperatures = this.getValueByPath(this.settings, "settings.hardware.temperature") || [];
+    return temperatures.find(config => {
+      return config.hardwaretype === hardwareType;
+    });
+  }
+
+  getMaxValue(data) {
+    if (!data) {
+      return null;
+    }
+
+    if (this.isPercentageData(data)) {
+      return 100;
+    }
+
+    if (this.isTemperatureData(data)) {
+      const config = this.getTemperatureConfig(data);
+
+      if (config) {
+        return config.max;
+      }
+
+      return null;
+    }
+
+    return data.max;
+  }
+
+  formatValue(data, fixate = true) {
+    if (!data) {
+      return null;
+    }
+
+    let value = data.value;
+
+    if (typeOf(value) !== "number" || !fixate) {
+      return value;
+    }
+
+    let fixed = 0;
+
+    if (this.isTemperatureData(data)) {
+      value = this.mapTemperatureValue(data);
+    }
+
+    if (!this.isPercentageData(data) && value % 1 !== 0) {
+      fixed = 1;
+    }
+
+    return value.toFixed(fixed);
+  }
+
+}
+;
+
+/***/ }),
+
 /***/ "./src/mobro/socket.js":
 /*!*****************************!*\
   !*** ./src/mobro/socket.js ***!
@@ -9076,6 +9195,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var mobro_enum_channels__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! mobro/enum/channels */ "./src/mobro/enum/channels.js");
 /* harmony import */ var mobro_enum_commands__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! mobro/enum/commands */ "./src/mobro/enum/commands.js");
 /* harmony import */ var mobro_enum_com__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! mobro/enum/com */ "./src/mobro/enum/com.js");
+/* harmony import */ var mobro_helper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! mobro/helper */ "./src/mobro/helper.js");
+
 
 
 
@@ -9085,9 +9206,28 @@ const SDK = {
   commands: mobro_enum_commands__WEBPACK_IMPORTED_MODULE_2__["default"],
   com: mobro_enum_com__WEBPACK_IMPORTED_MODULE_3__["default"],
   socket: null,
+  initialized: false,
+  helper: null,
 
   init() {
-    this.socket = new mobro_socket__WEBPACK_IMPORTED_MODULE_0__["default"]();
+    return new Promise(resolve => {
+      this.socket = new mobro_socket__WEBPACK_IMPORTED_MODULE_0__["default"]();
+
+      const handler = async () => {
+        // sanity check
+        if (this.initialized) {
+          return;
+        }
+
+        this.initialized = true;
+        this.socket.off("connect", handler);
+        const settings = await this.emit("settings");
+        this.helper = new mobro_helper__WEBPACK_IMPORTED_MODULE_4__["default"](settings);
+        resolve();
+      };
+
+      this.socket.on("connect", handler);
+    });
   },
 
   getSocket() {
