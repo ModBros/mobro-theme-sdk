@@ -81,7 +81,7 @@ export default class Helper {
 
         let value = data.value;
 
-        if (typeOf(value) !== "number" || !fixate) {
+        if (typeof(value) !== "number" || !fixate) {
             return value;
         }
 

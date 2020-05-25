@@ -10,7 +10,9 @@ export default class Socket {
         this.originalSearchParams = window.location.search;
 
         this.url = `${window.location.protocol}//${window.location.hostname}:42100`;
-        this.socket = io(`${window.location.protocol}//${window.location.hostname}:42100${window.location.search}`);
+        this.socket = io(`${window.location.protocol}//${window.location.hostname}:42100${window.location.search}`, {
+            transports: ["websocket"]
+        });
 
         this.on("change:theme", (data) => {
             console.info("Switching theme to", data.theme);
