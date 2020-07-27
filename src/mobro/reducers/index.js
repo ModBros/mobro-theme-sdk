@@ -1,5 +1,8 @@
-import {combineReducers} from "redux";
+import {combineReducers, configureStore} from "@reduxjs/toolkit";
+import layout from "mobro/reducers/layout";
 
-const reducers = combineReducers({});
-
-export default reducers;
+export const store = configureStore({
+    reducer: combineReducers({
+        layout: layout
+    })
+});

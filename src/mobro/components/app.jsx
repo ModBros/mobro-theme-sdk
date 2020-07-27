@@ -1,10 +1,11 @@
 import React from "react";
-import {withWrapperHook} from "mobro/utils/hooks";
 
-function App () {
+function App (props) {
+    console.log(props);
+
     return (
         <h1>We are awesome!</h1>
     )
 }
 
-export default withWrapperHook("app", App);
+export default App;
