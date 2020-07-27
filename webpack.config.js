@@ -38,6 +38,12 @@ module.exports = {
                 }
             }
         }, {
+            test: require.resolve('React'),
+            loader: 'expose-loader',
+            options: {
+                exposes: 'React',
+            },
+        }, {
             test: /\.scss$/,
             use: ["style-loader", "css-loader", "sass-loader"]
         }]

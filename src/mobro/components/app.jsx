@@ -1,4 +1,5 @@
 import React from "react";
+import {withWrapperHook} from "mobro/utils/hooks";
 
 function App () {
     return (
@@ -6,4 +7,4 @@ function App () {
     )
 }
 
-export default App;
+export default withWrapperHook("app", App);
