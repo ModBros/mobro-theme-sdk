@@ -1,15 +1,21 @@
 import {createAction} from "@reduxjs/toolkit";
+import {send} from "mobro/utils/communication";
+import {THEME_LAYOUT} from "mobro/config/api";
 
 export const layoutRequested = createAction("layout:requested");
 export const layoutFetched = createAction("layout:fetched");
 export const layoutFailed = createAction("layout:failed");
 
 export function fetchLayout() {
-    return function(dispatch, getState) {
-        const state = getState();
-
+    return function (dispatch, getState) {
         dispatch(layoutRequested());
 
-
+        send(THEME_LAYOUT)
+            .then((response) => {
+                dispatch(layoutFetched(response));
+            })
+            .catch(() => {
+                dispatch(layoutFailed());
+            });
     }
 }

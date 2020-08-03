@@ -1,4 +1,6 @@
 import {createPublicHook} from "mobro/utils/hooks";
+import {addObjectPropertyByPath} from "mobro/utils/object";
+import {registerPublicEndpoint} from "mobro/utils/public";
 
 export const withWrapper = createPublicHook("hooks.component", hooks => (componentId, WrappedComponent) => {
     return props => {
@@ -13,4 +15,16 @@ export const withWrapper = createPublicHook("hooks.component", hooks => (compone
 
         return (<Component {...props}/>)
     }
-})
+});
+
+const components = {};
+
+export function addComponent(name, Component) {
+    addObjectPropertyByPath(components, name, Component);
+}
+
+export function getComponent(name) {
+    return components[name];
+}
+
+registerPublicEndpoint("hooks.addComponent", addComponent);

@@ -1,3 +1,4 @@
+import io from "socket.io-client";
 import {EVENT_CHANGE_THEME} from "mobro/utils/events";
 
 let originalSearchParams = null;
