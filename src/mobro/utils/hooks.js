@@ -1,124 +1,67 @@
-import {appendToObjectProperty} from "mobro/utils/object";
 import {registerPublicEndpoint} from "mobro/utils/public";
+import {appendToObjectProperty} from "mobro/utils/object";
 
-function withConnectHook(hooks, ignoreDefault = false) {
-    return (hookName, hook) => {
+export function createEventHook(hooks, Event) {
+    return (name, base = null) => {
         return (...args) => {
-            let actions = hooks[hookName];
-            let wrapped = hook(...args);
+            const event = new Event(...args);
+            const hooksToApply = hooks[name];
 
-            if (Array.isArray(actions)) {
-                if (ignoreDefault) {
-                    wrapped = {};
-                }
+            if (base) {
+                base(event);
+            }
 
-                actions.forEach(action => {
-                    wrapped = {...wrapped, ...action(...args)};
+            if (Array.isArray(hooksToApply)) {
+                hooksToApply.forEach(hook => {
+                    hook(event);
                 });
             }
 
-            return wrapped;
+            return event.getData();
         }
     }
 }
 
-/**
- * No Operation Object Hook
- *
- * @returns {{}}
- */
-export const nooohook = () => ({});
+export function createSingleEventHook(hooks, Event) {
+    return (base = null) => {
+        return (...args) => {
+            const event = new Event(...args);
 
-/**
- * No Operation Object Merge Hook
- *
- * @returns {{}}
- */
-export const omhook = (...args) => {
-    let value = {};
+            if (base) {
+                base(event);
+            }
 
-    if (args && args.length) {
-        args.forEach(arg => {
-            value = {...value, ...arg}
-        });
-    }
+            if (Array.isArray(hooks)) {
+                hooks.forEach(hook => {
+                    hook(event);
+                });
+            }
 
-    return value;
-}
-
-/*
- * -----------------------------------------------------
- * Component Hooks
- * -----------------------------------------------------
- */
-
-const wrapComponentHooks = {};
-
-export function withWrapperHook(component, WrappedComponent) {
-    return (props) => {
-        let actions = wrapComponentHooks[component];
-        let Component = WrappedComponent
-
-        if (actions) {
-            actions.forEach(action => {
-                Component = action(Component);
-            });
+            return event.getData();
         }
-
-        console.log(props);
-
-        return (<Component {...props}/>)
     }
 }
 
-export function wrapComponent(component, render) {
-    appendToObjectProperty(wrapComponentHooks, component, render);
+export function createPublicEventHook(endpoint, Event) {
+    return createPublicHook(endpoint, hooks => createEventHook(hooks, Event));
 }
 
-registerPublicEndpoint("hooks.wrapComponent", wrapComponent);
+export function createPublicHook(endpoint, publicHook) {
+    const hooks = {};
 
-/*
- * -----------------------------------------------------
- * Redux Hooks
- * -----------------------------------------------------
- */
+    registerPublicEndpoint(endpoint, (name, hook) => {
+        appendToObjectProperty(hooks, name, hook);
+    });
 
-// -----------------------------------------------------
-// Map State To Props
-
-const mapStateToPropsHooks = {};
-
-export const withMapStateToPropsHook = withConnectHook(mapStateToPropsHooks);
-
-export function wrapMapStateToProps(component, mapStateToProps) {
-    appendToObjectProperty(mapStateToPropsHooks, component, mapStateToProps);
+    return publicHook(hooks);
 }
 
-registerPublicEndpoint("hooks.wrapMapStateToProps", wrapMapStateToProps);
+export function createPublicSingleEventHook(endpoint, Event) {
+    const hooks = [];
 
-// -----------------------------------------------------
-// Map Dispatch To Props
+    registerPublicEndpoint(endpoint, (hook) => {
+        hooks.push(hook);
+    });
 
-const mapDispatchToPropsHooks = {};
-export const withMapDispatchToPropsHook = withConnectHook(mapDispatchToPropsHooks);
-
-export function wrapMapDispatchToProps(component, mapDispatchToProps) {
-    appendToObjectProperty(mapDispatchToPropsHooks, component, mapDispatchToProps);
+    return createSingleEventHook(hooks, Event);
 }
-
-registerPublicEndpoint("hooks.wrapDispatchStateToProps", wrapMapDispatchToProps);
-
-// -----------------------------------------------------
-// Merge Props
-
-const mergePropsHooks = {};
-export const withMergePropsHook = withConnectHook(mergePropsHooks);
-
-export function wrapMergeProps(component, mergeProps) {
-    appendToObjectProperty(mergePropsHooks, component, mergeProps);
-}
-
-registerPublicEndpoint("hooks.wrapDispatchStateToProps", wrapMergeProps);
-
-
-
