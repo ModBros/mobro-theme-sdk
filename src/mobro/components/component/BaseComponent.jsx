@@ -1,8 +1,9 @@
 import React from "react";
+import {extractSize} from "mobro/utils/component";
 
-function BaseComponent({children}) {
+function BaseComponent({config, children}) {
     return (
-        <div className="component">
+        <div className="component" style={extractSize(config)}>
             {children}
         </div>
     );

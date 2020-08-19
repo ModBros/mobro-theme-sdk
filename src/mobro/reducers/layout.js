@@ -9,6 +9,8 @@ import {NOT_ASKED} from "mobro/utils/communication";
 const initialState = {
     layoutFetchingState: NOT_ASKED,
     layout: {
+        width: null,
+        height: null,
         components: []
     }
 };

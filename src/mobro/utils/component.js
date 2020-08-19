@@ -33,8 +33,9 @@ export function extractPosition(config, additionalStyles = {}) {
     };
 }
 
-export function extractSize(config, additionalStyles = {}) {
+export function extractSize(config, additionalStyles = {}, defaults = {}) {
     return {
+        ...defaults,
         width: config.width ? config.width + "px" : null,
         height: config.height ? config.height + "px" : null,
         ...additionalStyles

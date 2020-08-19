@@ -1,4 +1,9 @@
 @import "variables";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
 @import "layout";
 @import "loading";
 @import "component";
+@import "components/background";

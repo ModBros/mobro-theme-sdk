@@ -2,4 +2,9 @@ body {
   height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
+  background-color: $gray-100;
+}
+
+.app {
+  background-color: white;
 }
