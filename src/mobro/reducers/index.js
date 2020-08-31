@@ -17,3 +17,29 @@ export function createStore() {
 
     return store;
 }
+
+/**
+ * @returns {{}}
+ */
+export function getStore() {
+    if (!store) {
+        createStore();
+    }
+
+    return store;
+}
+
+/**
+ * @returns {*}
+ */
+export function getState() {
+    return getStore().getState();
+}
+
+/**
+ * @param args
+ * @returns {*}
+ */
+export function dispatch(...args) {
+    return getStore().dispatch(...args);
+}

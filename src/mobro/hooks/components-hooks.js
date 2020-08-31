@@ -19,12 +19,22 @@ export const withWrapper = createPublicHook("hooks.component", hooks => (compone
 
 const components = {};
 
+/**
+ * @param name
+ * @param Component
+ */
 export function addComponent(name, Component) {
     addObjectPropertyByPath(components, name, Component);
 }
 
+registerPublicEndpoint("hooks.addComponent", addComponent);
+
+/**
+ * @param name
+ * @returns {*}
+ */
 export function getComponent(name) {
     return components[name];
 }
 
-registerPublicEndpoint("hooks.addComponent", addComponent);
+registerPublicEndpoint("hooks.getComponent", getComponent);

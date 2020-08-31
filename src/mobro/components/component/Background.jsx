@@ -1,11 +1,11 @@
 import React from "react";
 import {renderComponents} from "mobro/utils/component";
+import Grid from "mobro/containers/grid/Grid";
 
 function Background({config}) {
-    console.log(config);
     return (
         <div className="background" style={{backgroundImage: `url(${config.url})`}}>
-            {renderComponents(config.components)}
+            <Grid components={config.components}/>
         </div>
     );
 }

@@ -1,9 +1,17 @@
 import {getSocket} from "mobro/utils/socket";
+import {registerPublicEndpoint} from "mobro/utils/public";
 
 export const NOT_ASKED = "not-asked";
+registerPublicEndpoint("utils.communication.NOT_ASKED", NOT_ASKED);
+
 export const FETCHING = "fetching";
+registerPublicEndpoint("utils.communication.FETCHING", FETCHING);
+
 export const SUCCESS = "success";
+registerPublicEndpoint("utils.communication.SUCCESS", SUCCESS);
+
 export const FAILED = "failed";
+registerPublicEndpoint("utils.communication.FAILED", FAILED);
 
 export function notAskedYet(state) {
     return state === NOT_ASKED;
@@ -33,3 +41,4 @@ export function send(url, data = {}) {
         }
     });
 }
+registerPublicEndpoint("utils.communication.send", send);

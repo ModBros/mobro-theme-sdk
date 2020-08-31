@@ -2,7 +2,8 @@ import React from "react";
 import {failed, fetched, notAskedYet} from "mobro/utils/communication";
 import LoadingIndicator from "mobro/containers/shared/LoadingIndicator";
 import AlignCenter from "mobro/containers/shared/layout/AlignCenter";
-import {extractSize, renderComponents} from "mobro/utils/component";
+import {extractSize} from "mobro/utils/component";
+import Entry from "mobro/containers/Entry";
 
 function App({layoutFetchingState, fetchLayout, layout}) {
     if (notAskedYet(layoutFetchingState)) {
@@ -28,8 +29,8 @@ function App({layoutFetchingState, fetchLayout, layout}) {
     }
 
     return (
-        <div className="app d-flex position-relative" style={extractSize(layout, {}, {width: "100%"})}>
-            {renderComponents(layout.components)}
+        <div className="app" style={extractSize(layout)}>
+            <Entry/>
         </div>
     )
 }

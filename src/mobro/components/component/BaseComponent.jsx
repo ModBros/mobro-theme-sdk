@@ -1,10 +1,11 @@
 import React from "react";
-import {extractSize} from "mobro/utils/component";
 
-function BaseComponent({config, children}) {
+function BaseComponent({config, Component}) {
+    // todo check if data component --> listen for changes
+
     return (
-        <div className="component" style={extractSize(config)}>
-            {children}
+        <div className="component">
+            <Component config={config}/>
         </div>
     );
 }
