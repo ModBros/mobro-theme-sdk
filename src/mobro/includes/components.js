@@ -8,3 +8,6 @@ addComponent("image", Image);
 
 import Background from "mobro/containers/component/Background";
 addComponent("background", Background);
+
+import BasicValue from "mobro/containers/component/BasicValue";
+addComponent("basic-value", BasicValue);

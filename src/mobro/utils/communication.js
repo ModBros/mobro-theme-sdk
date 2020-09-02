@@ -1,6 +1,9 @@
 import {getSocket} from "mobro/utils/socket";
 import {registerPublicEndpoint} from "mobro/utils/public";
 
+// ----------------------------------------------
+// communication states
+
 export const NOT_ASKED = "not-asked";
 registerPublicEndpoint("utils.communication.NOT_ASKED", NOT_ASKED);
 
@@ -28,6 +31,9 @@ export function fetched(state) {
 export function failed(state) {
     return state === FAILED;
 }
+
+// ----------------------------------------------
+// send
 
 export function send(url, data = {}) {
     return new Promise(resolve => {

@@ -1,10 +1,12 @@
 import Container from "mobro/lib/component/container";
 import Grid from "mobro/components/grid/Grid";
-import {getLayoutMode} from "mobro/reducers/layout";
-import {fetchLayout, layoutChange} from "mobro/actions/layout";
+import {getLayoutConfig, getLayoutMode} from "mobro/reducers/layout";
+import {layoutChange} from "mobro/actions/layout";
+import dotPropImmutable from "dot-prop-immutable";
 
 const mapStateToProps = event => event.mergeMapStateToProps({
-    layoutMode: getLayoutMode(event.getState())
+    layoutMode: getLayoutMode(event.getState()),
+    rowHeight: dotPropImmutable.get(getLayoutConfig(event.getState()), "rowHeight")
 });
 
 const mapDispatchToProps = event => event.mergeMapDispatchToProps({

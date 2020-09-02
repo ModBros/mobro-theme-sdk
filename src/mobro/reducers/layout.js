@@ -2,10 +2,12 @@ import {createReducer} from "@reduxjs/toolkit";
 import {fetchingAction} from "mobro/utils/redux";
 import {layoutChange, layoutFailed, layoutFetched, layoutMode, layoutRequested} from "mobro/actions/layout";
 import {NOT_ASKED} from "mobro/utils/communication";
-import {LAYOUT_MODE_EDIT} from "mobro/utils/layout";
+import {saveLayout} from "mobro/utils/layout";
+import dotPropImmutable from "dot-prop-immutable";
+import {LAYOUT_MODE_EDIT} from "mobro/enum/layout";
 
 // ----------------------------------------------
-// state reducers
+// initial state
 
 const initialState = {
     layoutFetchingState: NOT_ASKED,
@@ -17,23 +19,24 @@ const initialState = {
     }
 };
 
+// ----------------------------------------------
+// reducer
+
 export default createReducer(initialState, {
-    [layoutMode.type]: (state, {payload}) => ({
-        ...state,
-        layoutMode: payload
-    }),
+    [layoutMode.type]: (state, {payload}) => dotPropImmutable.set(state, "layoutMode", payload),
 
     [layoutChange.type]: (state, {payload}) => {
-        for (let i = 0; i < state.layout.components.length; i++) {
-            if (!state.layout.components[i] || !state.layout.components[i].config || !payload[i]) {
-                continue;
-            }
-
-            state.layout.components[i].config = {
-                ...state.layout.components[i].config,
-                ...payload[i]
-            }
+        if (!Array.isArray(payload)) {
+            return state;
         }
+
+        payload.forEach((item, i) => {
+            state = dotPropImmutable.merge(state, `layout.components.${i}`, item);
+        });
+
+        saveLayout(dotPropImmutable.get(state, "layout"));
+
+        return state;
     },
 
     ...fetchingAction(layoutRequested.type, layoutFetched.type, layoutFailed.type, "layoutFetchingState", payload => ({
@@ -42,10 +45,11 @@ export default createReducer(initialState, {
 });
 
 // ----------------------------------------------
-// state selectors
+// selectors
 
-export const getLayoutState = state => state.layout;
-export const getLayoutFetchingState = state => getLayoutState(state).layoutFetchingState;
-export const getLayout = state => getLayoutState(state).layout;
-export const getLayoutMode = state => getLayoutState(state).layoutMode;
-export const getLayoutComponents = state => getLayout(state).components;
+export const getLayoutState = state => dotPropImmutable.get(state, "layout");
+export const getLayoutFetchingState = state => dotPropImmutable.get(getLayoutState(state), "layoutFetchingState");
+export const getLayout = state => dotPropImmutable.get(getLayoutState(state), "layout");
+export const getLayoutMode = state => dotPropImmutable.get(getLayoutState(state), "layoutMode");
+export const getLayoutConfig = state => dotPropImmutable.get(getLayout(state), "config");
+export const getLayoutComponents = state => dotPropImmutable.get(getLayout(state), "components");

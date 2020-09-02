@@ -4,8 +4,10 @@ function BaseComponent({config, Component}) {
     // todo check if data component --> listen for changes
 
     return (
-        <div className="component">
-            <Component config={config}/>
+        <div className="component card">
+            <div className="component-body card-body">
+                <Component config={config}/>
+            </div>
         </div>
     );
 }

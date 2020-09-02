@@ -1,6 +1,9 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {registerPublicEndpoint} from "mobro/utils/public";
 import {getComponent} from "mobro/hooks/components-hooks";
+import {getSocket} from "mobro/utils/socket";
+import dotPropImmutable from "dot-prop-immutable";
+import {CHANNEL_PREFIX} from "mobro/enum/channel-data";
 
 /**
  * @param {[]} components
@@ -23,18 +26,7 @@ export function renderComponents(components, render) {
     });
 }
 
-/**
- * @param {{}} config
- * @returns {{}}
- */
-export function extractGridConfig(config) {
-    return {
-        x: config.x || 0,
-        y: config.y || 0,
-        w: config.w || 12,
-        h: config.h || 2
-    }
-}
+registerPublicEndpoint("utils.component.renderComponents", renderComponents);
 
 /**
  * @param {{}} config
@@ -82,3 +74,35 @@ export function toPixel(value) {
 }
 
 registerPublicEndpoint("utils.component.toPixel", toPixel);
+
+/**
+ * @param {{}} config
+ * @returns {string}
+ */
+export function extractChannel(config) {
+    return dotPropImmutable.get(config, "channel");
+}
+
+/**
+ * @param {{}} config
+ * @returns {{}}
+ */
+export function useChannelListener(config) {
+    const channel = typeof config === "string" ? config : extractChannel(config);
+
+    const [channelData, setChannelData] = useState(null);
+
+    useEffect(() => {
+        let handler = data => setChannelData(data.payload);
+
+        getSocket().on(`${CHANNEL_PREFIX}${channel}`, handler);
+
+        return () => {
+            getSocket().off(channel, handler);
+        }
+    }, []);
+
+    return channelData;
+}
+
+registerPublicEndpoint("utils.component.useChannelListener", useChannelListener);
