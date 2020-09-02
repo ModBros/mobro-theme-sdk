@@ -83,6 +83,8 @@ export function extractChannel(config) {
     return dotPropImmutable.get(config, "channel");
 }
 
+registerPublicEndpoint("utils.component.extractChannel", extractChannel);
+
 /**
  * @param {{}} config
  * @returns {{}}
@@ -106,3 +108,25 @@ export function useChannelListener(config) {
 }
 
 registerPublicEndpoint("utils.component.useChannelListener", useChannelListener);
+
+/**
+ * @param {string} align
+ * @returns {string}
+ */
+export function extractFlexAlign(align) {
+    switch (align) {
+        case "left":
+            return "justify-content-start";
+
+        case "right":
+            return "justify-content-end";
+
+        case "center":
+            return "justify-content-center";
+
+        default:
+            return "";
+    }
+}
+
+registerPublicEndpoint("utils.component.extractFlexAlign", extractFlexAlign);
