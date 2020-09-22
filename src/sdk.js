@@ -4,6 +4,7 @@ import React from "react";
 import "mobro";
 
 // includes
+import "mobro/includes/icons";
 import "mobro/includes/components";
 
 // provide the whole public api, react inclusive so themes don't have to

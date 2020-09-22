@@ -26,9 +26,9 @@ function Grid({layoutMode, layoutChange, rowHeight, components}) {
                     }
                 }}
             >
-                {renderComponents(components, (Component, config, i) => (
-                    <div key={i} data-grid={extractGridConfig(config)}>
-                        <BaseComponent config={config} Component={Component}/>
+                {renderComponents(components, "", (Component, type, path, config) => (
+                    <div key={path} data-grid={extractGridConfig(config)}>
+                        <BaseComponent type={type} path={path} config={config} Component={Component}/>
                     </div>
                 ))}
             </ResponsiveGridLayout>

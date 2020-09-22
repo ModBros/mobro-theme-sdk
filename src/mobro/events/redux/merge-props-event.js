@@ -1,5 +1,6 @@
 import deepmerge from "deepmerge";
 import AbstractEvent from "mobro/events/abstract-event";
+import dotPropImmutable from "dot-prop-immutable";
 
 export default class MergePropsEvent extends AbstractEvent {
     mapStateToProps = {};
@@ -48,6 +49,10 @@ export default class MergePropsEvent extends AbstractEvent {
 
     getOwnProps() {
         return this.ownProps;
+    }
+
+    getOwnProp(path) {
+        return dotPropImmutable.get(this.getOwnProps(), path);
     }
 
     getData() {

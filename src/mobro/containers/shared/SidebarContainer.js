@@ -1,15 +1,15 @@
 import Container from "mobro/lib/component/container";
-import Entry from "mobro/components/Entry";
-import {getLayout} from "mobro/reducers/layout";
+import {getSidebars} from "mobro/reducers/sidebar";
 import MapStateToPropsEvent from "mobro/events/redux/map-state-to-prop-event";
+import SidebarContainer from "mobro/components/shared/SidebarContainer";
 
 /**
  * @param {MapStateToPropsEvent} event
  */
 const mapStateToProps = event => event.mergeMapStateToProps({
-    layout: getLayout(event.getState())
+    sidebars: getSidebars(event.getState())
 });
 
-export default Container.create("entry", Entry)
+export default Container.create("shared.sidebar-container", SidebarContainer)
     .redux(mapStateToProps)
     .generate();

@@ -3,12 +3,20 @@ import Grid from "mobro/components/grid/Grid";
 import {getLayoutConfig, getLayoutMode} from "mobro/reducers/layout";
 import {layoutChange} from "mobro/actions/layout";
 import dotPropImmutable from "dot-prop-immutable";
+import MapDispatchToPropsEvent from "mobro/events/redux/map-dispatch-to-props-event";
+import MapStateToPropsEvent from "mobro/events/redux/map-state-to-prop-event";
 
+/**
+ * @param {MapStateToPropsEvent} event
+ */
 const mapStateToProps = event => event.mergeMapStateToProps({
     layoutMode: getLayoutMode(event.getState()),
     rowHeight: dotPropImmutable.get(getLayoutConfig(event.getState()), "rowHeight")
 });
 
+/**
+ * @param {MapDispatchToPropsEvent} event
+ */
 const mapDispatchToProps = event => event.mergeMapDispatchToProps({
     layoutChange: (configs) => event.dispatch(layoutChange(configs))
 })

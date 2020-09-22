@@ -4,6 +4,7 @@ import LoadingIndicator from "mobro/containers/shared/LoadingIndicator";
 import AlignCenter from "mobro/containers/shared/layout/AlignCenter";
 import {extractSize} from "mobro/utils/component";
 import Entry from "mobro/containers/Entry";
+import SidebarContainer from "mobro/containers/shared/SidebarContainer";
 
 function App({layoutFetchingState, fetchLayout, layout}) {
     if (notAskedYet(layoutFetchingState)) {
@@ -31,6 +32,8 @@ function App({layoutFetchingState, fetchLayout, layout}) {
     return (
         <div className="app" style={extractSize(layout)}>
             <Entry/>
+
+            <SidebarContainer/>
         </div>
     )
 }

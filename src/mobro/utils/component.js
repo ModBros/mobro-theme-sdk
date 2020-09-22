@@ -1,28 +1,29 @@
 import React, {useState, useEffect} from "react";
 import {registerPublicEndpoint} from "mobro/utils/public";
-import {getComponent} from "mobro/hooks/components-hooks";
+import {getDataComponent} from "mobro/hooks/components-hooks";
 import {getSocket} from "mobro/utils/socket";
 import dotPropImmutable from "dot-prop-immutable";
 import {CHANNEL_PREFIX} from "mobro/enum/channel-data";
 
 /**
  * @param {[]} components
+ * @param {string} path
  * @param {function} render
  * @returns {null|[]}
  */
-export function renderComponents(components, render) {
+export function renderComponents(components, path, render) {
     if (!Array.isArray(components) || !components.length) {
         return null;
     }
 
     return components.map((component, i) => {
-        const Component = getComponent(component.type);
+        const Component = getDataComponent(component.type);
 
         if (!Component) {
             return null;
         }
 
-        return render(Component, component.config, i);
+        return render(Component, component.type, `${path}.components.${i}`, component.config);
     });
 }
 

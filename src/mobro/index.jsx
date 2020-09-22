@@ -2,8 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {Provider} from "react-redux";
 import {createStore} from "mobro/reducers";
-import App from "mobro/containers/app";
 import {registerPublicEndpoint} from "mobro/utils/public";
+import App from "mobro/containers/app";
+
 import "mobro/styles/vendor.scss"
 import "mobro/styles/bootstrap.scss"
 import "mobro/styles/sdk.scss";

@@ -24,5 +24,4 @@ export function fetchLayout() {
 }
 
 export const layoutMode = createAction("layout:mode");
-
 export const layoutChange = createAction("layout:change");

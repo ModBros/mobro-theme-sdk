@@ -1,0 +1,17 @@
+.sidebar {
+  z-index: 70;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-width: 70%;
+  min-width: 20rem;
+
+  .card {
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+  }
+}

@@ -1,15 +1,15 @@
 import Container from "mobro/lib/component/container";
-import Entry from "mobro/components/Entry";
-import {getLayout} from "mobro/reducers/layout";
 import MapStateToPropsEvent from "mobro/events/redux/map-state-to-prop-event";
+import {getLayoutMode} from "mobro/reducers/layout";
+import TriggerEditButton from "mobro/components/edit/TriggerEditButton";
 
 /**
  * @param {MapStateToPropsEvent} event
  */
 const mapStateToProps = event => event.mergeMapStateToProps({
-    layout: getLayout(event.getState())
+    layoutMode: getLayoutMode(event.getState())
 });
 
-export default Container.create("entry", Entry)
+export default Container.create("edit.trigger-edit-button", TriggerEditButton)
     .redux(mapStateToProps)
     .generate();

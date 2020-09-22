@@ -1,13 +1,26 @@
-import {addComponent} from "mobro/hooks/components-hooks";
+import {addDataComponent} from "mobro/hooks/components-hooks";
 
 import Text from "mobro/containers/component/Text";
-addComponent("text", Text);
+addDataComponent("text", Text, {
+    text: {
+        type: "input"
+    },
+
+    align: {
+        type: "select",
+        options: [
+            {label: "Left", value: "left"},
+            {label: "Center", value: "center"},
+            {label: "Right", value: "right"},
+        ]
+    }
+});
 
 import Image from "mobro/containers/component/Image";
-addComponent("image", Image);
+addDataComponent("image", Image);
 
 import Background from "mobro/containers/component/Background";
-addComponent("background", Background);
+addDataComponent("background", Background);
 
 import BasicValue from "mobro/containers/component/BasicValue";
-addComponent("basic-value", BasicValue);
+addDataComponent("basic-value", BasicValue);
