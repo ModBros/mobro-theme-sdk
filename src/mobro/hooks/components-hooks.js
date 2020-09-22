@@ -4,6 +4,7 @@ import {registerPublicEndpoint} from "mobro/utils/public";
 
 const _components = {};
 const _dataComponents = {};
+const _editComponents = {};
 const _dataComponentConfigs = {};
 
 export const withWrapper = createPublicHook("hooks.component", hooks => (componentId, WrappedComponent) => {
@@ -64,3 +65,23 @@ export function getDataComponentConfig(name) {
 }
 
 registerPublicEndpoint("hooks.getDataComponentConfig", getDataComponentConfig);
+
+/**
+ * @param name
+ * @param Component
+ */
+export function addEditComponent(name, Component) {
+    addObjectPropertyByPath(_editComponents, name, Component);
+}
+
+registerPublicEndpoint("hooks.addEditComponent", addEditComponent);
+
+/**
+ * @param name
+ * @returns {*}
+ */
+export function getEditComponent(name) {
+    return _editComponents[name];
+}
+
+registerPublicEndpoint("hooks.getEditComponent", getEditComponent);

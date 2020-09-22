@@ -1,6 +1,6 @@
 import {createReducer} from "@reduxjs/toolkit";
 import {fetchingAction} from "mobro/utils/redux";
-import {layoutChange, layoutFailed, layoutFetched, layoutMode, layoutRequested} from "mobro/actions/layout";
+import {layoutChange, layoutEdit, layoutFailed, layoutFetched, layoutMode, layoutRequested} from "mobro/actions/layout";
 import {NOT_ASKED} from "mobro/utils/communication";
 import {saveLayout} from "mobro/utils/layout";
 import dotPropImmutable from "dot-prop-immutable";
@@ -41,7 +41,13 @@ export default createReducer(initialState, {
 
     ...fetchingAction(layoutRequested.type, layoutFetched.type, layoutFailed.type, "layoutFetchingState", payload => ({
         layout: payload
-    }))
+    })),
+
+    [layoutEdit.type]: (state, {payload}) => {
+        const {path, name, data} = payload;
+
+        return dotPropImmutable.set(state, `layout${path}.config.${name}`, data);
+    }
 });
 
 // ----------------------------------------------

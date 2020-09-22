@@ -1,12 +1,32 @@
 import React from "react";
-import {getDataComponentConfig} from "mobro/hooks/components-hooks";
+import {getDataComponentConfig, getEditComponent} from "mobro/hooks/components-hooks";
 
-function Edit({type, path, config}) {
+function Edit({type, path, config, layoutEdit}) {
     const componentConfig = getDataComponentConfig(type);
+    const fields = Object.entries(componentConfig);
 
-    console.log(type, path, config, componentConfig);
+    if (!fields.length) {
+        return (<h3>Nothing to configure</h3>);
+    }
 
-    return null;
+    return fields.map(([name, fieldConfig]) => {
+        const EditComponent = getEditComponent(fieldConfig.type);
+
+        if(!EditComponent) {
+            return null;
+        }
+
+        return (
+            <EditComponent
+                key={name}
+                name={name}
+                path={path}
+                config={fieldConfig}
+                data={config[name] || null}
+                onChange={(data) => layoutEdit(path, name, data)}
+            />
+        );
+    });
 }
 
 export default Edit;

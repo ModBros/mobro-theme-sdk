@@ -10,11 +10,12 @@ const _sidebars = {};
  * @param name
  * @param title
  * @param content
+ * @param props
  */
-export function withSidebar({name, title, content}) {
+export function withSidebar({name, title, content, ...props}) {
     useEffect(() => {
         addSidebarComponent(name, (
-            <Sidebar name={name} title={title}>
+            <Sidebar name={name} title={title} {...props}>
                 {content}
             </Sidebar>
         ));

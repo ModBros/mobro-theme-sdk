@@ -14,7 +14,7 @@ function TriggerEditButton({layoutMode, type, path, config}) {
         title = "Configure",
         content = (<Edit type={type} path={path} config={config}/>);
 
-    withSidebar({name, title, content});
+    withSidebar({name, title, content, config});
 
     return (
         <Fragment>
