@@ -12,17 +12,19 @@ const _sidebars = {};
  * @param content
  * @param props
  */
-export function withSidebar({name, title, content, ...props}) {
+export function withSidebar({name, title, content, dependencies = []}) {
     useEffect(() => {
+        // on a dependency change re-add the sidebar --> updates hash --> rerender
         addSidebarComponent(name, (
-            <Sidebar name={name} title={title} {...props}>
+            <Sidebar name={name} title={title}>
                 {content}
             </Sidebar>
         ));
+    }, dependencies);
 
-        return () => {
-            removeSidebarComponent(name);
-        }
+    // remove sidebar on unmount
+    useEffect(() => () => {
+        removeSidebarComponent(name)
     }, []);
 }
 
