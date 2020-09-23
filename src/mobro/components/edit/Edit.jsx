@@ -6,7 +6,7 @@ function Edit({type, path, config, layoutEdit}) {
     const fields = Object.entries(componentConfig);
 
     if (!fields.length) {
-        return (<h3>Nothing to configure</h3>);
+        return (<h5>Nothing to configure</h5>);
     }
 
     return fields.map(([name, fieldConfig]) => {

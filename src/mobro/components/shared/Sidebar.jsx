@@ -4,14 +4,14 @@ import {closeSidebarComponent} from "mobro/utils/sidebar";
 
 function Sidebar({title, name, children}) {
     return (
-        <div className="sidebar d-flex">
+        <div className="sidebar d-flex shadow">
             <div className="card w-100">
-                <div className="card-header d-flex align-items-center justify-content-between">
+                <div className="card-header d-flex align-items-center justify-content-between bg-primary text-white">
                     <h5 className="m-0">
                         {title}
                     </h5>
 
-                    <button type="button" className="btn btn-link" onClick={() => closeSidebarComponent(name)}>
+                    <button type="button" className="btn btn-link text-light" onClick={() => closeSidebarComponent(name)}>
                         <FontAwesomeIcon icon="times"/>
                     </button>
                 </div>
