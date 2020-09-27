@@ -81,7 +81,7 @@ registerPublicEndpoint("utils.component.toPixel", toPixel);
  * @returns {string}
  */
 export function extractChannel(config) {
-    return dotPropImmutable.get(config, "channel");
+    return dotPropImmutable.get(config, "channel.name");
 }
 
 registerPublicEndpoint("utils.component.extractChannel", extractChannel);
@@ -103,7 +103,7 @@ export function useChannelListener(config) {
         return () => {
             getSocket().off(channel, handler);
         }
-    }, []);
+    }, [channel]);
 
     return channelData;
 }

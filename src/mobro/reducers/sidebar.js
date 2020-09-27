@@ -2,6 +2,7 @@ import {createReducer} from "@reduxjs/toolkit";
 import dotPropImmutable from "dot-prop-immutable";
 import {addSidebar, closeSidebar, openSidebar, removeSidebar, toggleSidebar} from "mobro/actions/sidebar";
 import {v4} from "uuid";
+import {registerPublicEndpoint} from "mobro/utils/public";
 
 // ----------------------------------------------
 // initial state
@@ -53,5 +54,10 @@ export default createReducer(initialState, {
 // selectors
 
 export const getSidebarState = state => dotPropImmutable.get(state, "sidebar");
+registerPublicEndpoint("reducers.sidebar.getSidebarState", getSidebarState);
+
 export const getSidebars = state => dotPropImmutable.get(getSidebarState(state), "sidebars");
+registerPublicEndpoint("reducers.sidebar.getSidebars", getSidebars);
+
 export const getSidebarHashes = state => dotPropImmutable.get(getSidebarState(state), "sidebarHashes");
+registerPublicEndpoint("reducers.sidebar.getSidebarHashes", getSidebarHashes);

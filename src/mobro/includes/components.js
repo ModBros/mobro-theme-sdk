@@ -23,4 +23,12 @@ import Background from "mobro/containers/component/Background";
 addDataComponent("background", Background);
 
 import BasicValue from "mobro/containers/component/BasicValue";
-addDataComponent("basic-value", BasicValue);
+addDataComponent("basic-value", BasicValue, {
+    showLabel: {
+        type: "checkbox"
+    },
+
+    channel: {
+        type: "channel"
+    }
+});

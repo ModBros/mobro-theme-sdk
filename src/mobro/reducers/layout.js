@@ -5,6 +5,7 @@ import {NOT_ASKED} from "mobro/utils/communication";
 import {saveLayout} from "mobro/utils/layout";
 import dotPropImmutable from "dot-prop-immutable";
 import {LAYOUT_MODE_EDIT} from "mobro/enum/layout";
+import {registerPublicEndpoint} from "mobro/utils/public";
 
 // ----------------------------------------------
 // initial state
@@ -54,8 +55,19 @@ export default createReducer(initialState, {
 // selectors
 
 export const getLayoutState = state => dotPropImmutable.get(state, "layout");
+registerPublicEndpoint("reducers.layout.getLayoutState", getLayoutState);
+
 export const getLayoutFetchingState = state => dotPropImmutable.get(getLayoutState(state), "layoutFetchingState");
+registerPublicEndpoint("reducers.layout.getLayoutFetchingState", getLayoutFetchingState);
+
 export const getLayout = state => dotPropImmutable.get(getLayoutState(state), "layout");
+registerPublicEndpoint("reducers.layout.getLayout", getLayout);
+
 export const getLayoutMode = state => dotPropImmutable.get(getLayoutState(state), "layoutMode");
+registerPublicEndpoint("reducers.layout.getLayoutMode", getLayoutMode);
+
 export const getLayoutConfig = state => dotPropImmutable.get(getLayout(state), "config");
+registerPublicEndpoint("reducers.layout.getLayoutConfig", getLayoutConfig);
+
 export const getLayoutComponents = state => dotPropImmutable.get(getLayout(state), "components");
+registerPublicEndpoint("reducers.layout.getLayoutComponents", getLayoutComponents);

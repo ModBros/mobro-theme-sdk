@@ -3,6 +3,7 @@ import {isEditMode} from "mobro/utils/layout";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {toggleSidebarComponent, withSidebar} from "mobro/utils/sidebar";
 import Edit from "mobro/containers/edit/Edit";
+import {deepValues} from "mobro/utils/object";
 
 function TriggerEditButton({layoutMode, type, path, config}) {
     if (!isEditMode(layoutMode)) {
@@ -14,7 +15,7 @@ function TriggerEditButton({layoutMode, type, path, config}) {
         title = "Configure",
         content = (<Edit type={type} path={path} config={config}/>);
 
-    withSidebar({name, title, content, dependencies: Object.values(config)});
+    withSidebar({name, title, content, dependencies: deepValues(config)});
 
     return (
         <Fragment>

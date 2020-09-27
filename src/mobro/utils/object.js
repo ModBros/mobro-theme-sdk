@@ -29,3 +29,15 @@ export function addObjectPropertyByPath(object, path, value) {
 
     current[lastPart] = value;
 }
+
+export function deepValues(object, values = []) {
+    Object.values(object).forEach((value) => {
+        if (typeof value === "object") {
+            deepValues(value, values);
+        } else {
+            values.push(value);
+        }
+    });
+
+    return values;
+}

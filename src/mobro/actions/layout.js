@@ -1,6 +1,6 @@
 import {createAction} from "@reduxjs/toolkit";
 import {send} from "mobro/utils/communication";
-import {THEME_LAYOUT} from "mobro/config/api";
+import {GET_LAYOUT} from "mobro/enum/endpoints";
 
 /**
  * @function layoutRequested
@@ -13,7 +13,7 @@ export function fetchLayout() {
     return function (dispatch) {
         dispatch(layoutRequested());
 
-        send(THEME_LAYOUT)
+        send(GET_LAYOUT)
             .then((response) => {
                 dispatch(layoutFetched(response));
             })

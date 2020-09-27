@@ -1,7 +1,8 @@
 import {combineReducers, configureStore, createReducer} from "@reduxjs/toolkit";
+import {withReducersHook} from "mobro/hooks/redux/reducers-hook";
 import layout from "mobro/reducers/layout";
 import sidebar from "mobro/reducers/sidebar";
-import {withReducersHook} from "mobro/hooks/redux/reducers-hook";
+import sensors from "mobro/reducers/sensors";
 
 let store = null;
 
@@ -9,7 +10,8 @@ export function createStore() {
     if (!store) {
         const reducers = withReducersHook()(createReducer, combineReducers, {
             layout: layout,
-            sidebar: sidebar
+            sidebar: sidebar,
+            sensors: sensors
         });
 
         store = configureStore({

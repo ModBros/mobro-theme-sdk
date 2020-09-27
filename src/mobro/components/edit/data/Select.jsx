@@ -1,15 +1,10 @@
 import FormGroup from "mobro/containers/shared/form/FormGroup";
+import ReactSelect from "react-select";
 
 function Select({name, config, data, onChange}) {
     return (
         <FormGroup label={name}>
-            <select value={data} onChange={(event) => onChange(event.target.value)} className="form-control">
-                {config.options.map(({label, value}) => (
-                    <option key={value} value={value}>
-                        {label}
-                    </option>
-                ))}
-            </select>
+            <ReactSelect value={config.options.find(value => value.value === data)} options={config.options} onChange={(value) => onChange(value.value)}/>
         </FormGroup>
     );
 }

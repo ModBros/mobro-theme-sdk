@@ -4,6 +4,7 @@ import {withWrapper} from "mobro/hooks/components-hooks";
 import {withMapStateToPropsHook} from "mobro/hooks/redux/map-state-to-props-hooks";
 import {withMapDispatchToPropsHook} from "mobro/hooks/redux/map-dispatch-to-props-hooks";
 import {withMergePropsHook} from "mobro/hooks/redux/merge-props-hook";
+import {registerPublicEndpoint} from "mobro/utils/public";
 
 export default class Container {
     id = null;
@@ -108,3 +109,5 @@ export default class Container {
         return this.component;
     }
 }
+
+registerPublicEndpoint("lib.component.container", Container);

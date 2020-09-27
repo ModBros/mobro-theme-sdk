@@ -1,4 +1,5 @@
 import {FAILED, FETCHING, SUCCESS} from "mobro/utils/communication";
+import {registerPublicEndpoint} from "mobro/utils/public";
 
 export function fetchingAction(requested, fetched, failed, fetchingState, reducer) {
     return {
@@ -19,3 +20,8 @@ export function fetchingAction(requested, fetched, failed, fetchingState, reduce
         })
     }
 }
+
+registerPublicEndpoint("utils.redux.fetchingAction", fetchingAction);
+
+export const getSelectorArgument = (arg) => (state, ...args) => args[arg];
+registerPublicEndpoint("utils.redux.getSelectorArgument", getSelectorArgument);
