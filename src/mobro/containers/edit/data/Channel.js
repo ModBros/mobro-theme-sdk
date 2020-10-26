@@ -2,7 +2,11 @@ import Container from "mobro/lib/component/container";
 import Channel from "mobro/components/edit/data/Channel";
 import MapStateToPropsEvent from "mobro/events/redux/map-state-to-prop-event";
 import MapDispatchToPropsEvent from "mobro/events/redux/map-dispatch-to-props-event";
-import {getSensorDataBySourceAndHardwareType, getSensorDataFetchingState} from "mobro/reducers/sensors";
+import {
+    getHardwareTypesBySource,
+    getSensorDataBySourceAndHardwareType,
+    getSensorDataFetchingState, getSensorSources
+} from "mobro/reducers/sensors";
 import {fetchSensorData} from "mobro/actions/sensors";
 
 /**
@@ -10,7 +14,9 @@ import {fetchSensorData} from "mobro/actions/sensors";
  */
 const mapStateToProps = (event) => event.mergeMapStateToProps({
     sensorDataFetchingState: getSensorDataFetchingState(event.getState()),
-    sensorData: getSensorDataBySourceAndHardwareType()(event.getState(), event.getOwnProp("data.source"), event.getOwnProp("data.hardwaretype"))
+    sources: getSensorSources(event.getState()),
+    hardwareTypes: getHardwareTypesBySource(event.getState(), event.getOwnProp("data.source")),
+    sensors: getSensorDataBySourceAndHardwareType()(event.getState(), event.getOwnProp("data.source"), event.getOwnProp("data.hardwaretype"))
 });
 
 /**

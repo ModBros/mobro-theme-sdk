@@ -3,3 +3,12 @@
     text-transform: uppercase;
   }
 }
+
+.card-clickable {
+  cursor: pointer;
+
+  &:hover {
+    color: white;
+    background-color: $primary;
+  }
+}

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {registerPublicEndpoint} from "mobro/utils/public";
 import {getDataComponent} from "mobro/hooks/components-hooks";
-import {getSocket} from "mobro/utils/socket";
+import {getDeviceUuid, getSocket} from "mobro/utils/socket";
 import dotPropImmutable from "dot-prop-immutable";
 import {CHANNEL_PREFIX} from "mobro/enum/channel-data";
 
@@ -81,7 +81,7 @@ registerPublicEndpoint("utils.component.toPixel", toPixel);
  * @returns {string}
  */
 export function extractChannel(config) {
-    return dotPropImmutable.get(config, "channel.name");
+    return `${getDeviceUuid()}.${config?.id}}`;
 }
 
 registerPublicEndpoint("utils.component.extractChannel", extractChannel);
@@ -131,3 +131,14 @@ export function extractFlexAlign(align) {
 }
 
 registerPublicEndpoint("utils.component.extractFlexAlign", extractFlexAlign);
+
+/**
+ * @param data
+ * @param defaultValue
+ * @returns {*}
+ */
+export function getDataOrDefault(data, defaultValue = null) {
+    return data != null ? data : defaultValue;
+}
+
+registerPublicEndpoint("utils.component.getDataOrDefault", getDataOrDefault);

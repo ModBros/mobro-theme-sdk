@@ -1,6 +1,16 @@
+import debounce from "debounce";
 import {send} from "mobro/utils/communication";
 import {LAYOUT_MODE_DISPLAY, LAYOUT_MODE_EDIT} from "mobro/enum/layout";
 import {SAVE_LAYOUT} from "mobro/enum/endpoints";
+
+export const defaultLayoutConfig = {
+    width: 480,
+    height: 320,
+    config: {
+        rowHeight: 10
+    },
+    components: []
+}
 
 /**
  * @param {string} mode
@@ -51,10 +61,10 @@ export function extractGridConfig(config) {
 /**
  * @param {{}} layout
  */
-export function saveLayout(layout) {
+export const saveLayout = debounce((layout) => {
     if (!layout) {
         return;
     }
 
     send(SAVE_LAYOUT, layout);
-}
+}, 300);

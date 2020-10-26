@@ -1,6 +1,9 @@
 import FormGroup from "mobro/containers/shared/form/FormGroup";
+import {getDataOrDefault} from "mobro/utils/component";
 
 function Input({name, data, onChange}) {
+    data = getDataOrDefault(data, "");
+
     return (
         <FormGroup label={name}>
             <input

@@ -1,6 +1,8 @@
 import {createAction} from "@reduxjs/toolkit";
 import {send} from "mobro/utils/communication";
 import {GET_LAYOUT} from "mobro/enum/endpoints";
+import {defaultLayoutConfig} from "mobro/utils/layout";
+import {isEmpty} from "mobro/utils/object";
 
 /**
  * @function layoutRequested
@@ -15,6 +17,10 @@ export function fetchLayout() {
 
         send(GET_LAYOUT)
             .then((response) => {
+                if (!response || isEmpty(response)) {
+                    response = defaultLayoutConfig;
+                }
+
                 dispatch(layoutFetched(response));
             })
             .catch(() => {
@@ -26,3 +32,4 @@ export function fetchLayout() {
 export const layoutMode = createAction("layout:mode");
 export const layoutChange = createAction("layout:change");
 export const layoutEdit = createAction("layout:edit");
+export const addComponent = createAction("layout:component:add");

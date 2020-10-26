@@ -1,40 +1,67 @@
-import React, {Fragment, useState} from "react";
-import {FETCHING} from "mobro/utils/communication";
-import LoadingIndicator from "mobro/containers/shared/LoadingIndicator";
-import AlignCenter from "mobro/containers/shared/layout/AlignCenter";
+import React from "react";
 import FormGroup from "mobro/containers/shared/form/FormGroup";
-import Select from "react-select";
-import {extractRawUnit, extractValue} from "mobro/utils/channel-data";
+import SourceSelect from "mobro/containers/edit/data/channel/SourceSelect";
+import HardwareSelect from "mobro/containers/edit/data/channel/HardwareSelect";
+import SensorSelect from "mobro/components/edit/data/channel/SensorSelect";
+import {withFetchingIndicator} from "mobro/utils/component/fetching";
 
-/*
-"name": "general_processor_usage",
-"source": "openhardwaremonitor",
-"hardwaretype": "Processor",
-"id": "/intelcpu/0/intelcpu/0/load/0"
-*/
+function Channel({data, name, sensorDataFetchingState, fetchSensorData, sources, hardwareTypes, sensors, onChange}) {
+    const fetching = withFetchingIndicator(fetchSensorData, sensorDataFetchingState);
 
-function Channel({data, name, sensorDataFetchingState, sensorData = [], fetchSensorData, onChange}) {
-    const [init, setInit] = useState(false);
-
-    if (!init) {
-        fetchSensorData();
-        setInit(true);
+    if (fetching) {
+        return fetching;
     }
 
-    if (sensorDataFetchingState === FETCHING) {
-        return (<AlignCenter><LoadingIndicator className="small"/></AlignCenter>);
+    const children = [(
+        <SourceSelect
+            key="source"
+            sources={sources}
+            value={data?.source}
+            onChange={value => onChange({
+                source: value.value,
+                hardwaretype: null,
+                id: null
+            })}
+        />
+    )];
+
+    if (data?.source) {
+        children.push((
+            <HardwareSelect
+                key="hardware"
+                className="mt-1"
+                hardwareTypes={hardwareTypes}
+                value={data?.hardwaretype}
+                onChange={value => onChange({
+                    source: data?.source,
+                    hardwaretype: value.value,
+                    id: null
+                })}
+            />
+        ));
     }
 
-    const options = sensorData.map((sensor) => ({
-        value: sensor.hardwareid + sensor.id,
-        label: (<div className="d-flex justify-content-between align-items-center"><span>{sensor.label}</span> <small className="text-muted ml-3">{extractValue(sensor)}{extractRawUnit(sensor)}</small></div>)
-    }));
+    if (data?.hardwaretype) {
+        children.push((
+            <SensorSelect
+                key="sensor"
+                className="mt-1"
+                sensors={sensors}
+                value={data?.id}
+                onChange={value => onChange({
+                    source: data?.source,
+                    hardwaretype: data?.hardwaretype,
+                    id: value.value
+                })}
+            />
+            ));
+    }
 
     return (
         <div className="card">
-            <div className="card-body">
+            <div className="card-body p-2">
                 <FormGroup label={name}>
-                    <Select options={options} value={options.find(value => value.value === data.id)} onChange={(value) => onChange({...data, id: value.value})}/>
+                    {children}
                 </FormGroup>
             </div>
         </div>

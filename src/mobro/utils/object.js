@@ -32,7 +32,7 @@ export function addObjectPropertyByPath(object, path, value) {
 
 export function deepValues(object, values = []) {
     Object.values(object).forEach((value) => {
-        if (typeof value === "object") {
+        if (value && typeof value === "object") {
             deepValues(value, values);
         } else {
             values.push(value);
@@ -40,4 +40,8 @@ export function deepValues(object, values = []) {
     });
 
     return values;
+}
+
+export function isEmpty(object) {
+    return Object.keys(object).length === 0;
 }

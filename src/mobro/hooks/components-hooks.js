@@ -1,11 +1,14 @@
 import {createPublicHook} from "mobro/utils/hooks";
 import {addObjectPropertyByPath} from "mobro/utils/object";
 import {registerPublicEndpoint} from "mobro/utils/public";
+import {getDataOrDefault} from "mobro/utils/component";
 
 const _components = {};
 const _dataComponents = {};
-const _editComponents = {};
 const _dataComponentConfigs = {};
+const _dataComponentDefaultValues = {};
+const _editComponents = {};
+const _editComponentDefaultValues = {};
 
 export const withWrapper = createPublicHook("hooks.component", hooks => (componentId, WrappedComponent) => {
     addObjectPropertyByPath(_components, componentId, WrappedComponent);
@@ -38,10 +41,20 @@ registerPublicEndpoint("hooks.getComponent");
  * @param name
  * @param Component
  * @param config
+ * @param defaultValue
  */
-export function addDataComponent(name, Component, config = {}) {
+export function addDataComponent(name, Component, config = {}, defaultValue = {}) {
+    const allDefaultValues = defaultValue;
+
+    Object.entries(config).forEach(([key, config]) => {
+        if (allDefaultValues[key] === undefined) {
+            allDefaultValues[key] = getEditComponentDefaultValue(config.type);
+        }
+    });
+
     addObjectPropertyByPath(_dataComponents, name, Component);
     addObjectPropertyByPath(_dataComponentConfigs, name, config);
+    addObjectPropertyByPath(_dataComponentDefaultValues, name, allDefaultValues);
 }
 
 registerPublicEndpoint("hooks.addDataComponent", addDataComponent);
@@ -57,6 +70,15 @@ export function getDataComponent(name) {
 registerPublicEndpoint("hooks.getDataComponent", getDataComponent);
 
 /**
+ * @returns {{}}
+ */
+export function getDataComponents() {
+    return _dataComponents;
+}
+
+registerPublicEndpoint("hooks.getDataComponents", getDataComponents);
+
+/**
  * @param name
  * @returns {*}
  */
@@ -68,13 +90,35 @@ registerPublicEndpoint("hooks.getDataComponentConfig", getDataComponentConfig);
 
 /**
  * @param name
- * @param Component
+ * @returns {{}}
  */
-export function addEditComponent(name, Component) {
+export function getDataComponentDefaultValue(name) {
+    return getDataOrDefault(_dataComponentDefaultValues[name], {});
+}
+
+registerPublicEndpoint("hooks.getDataComponentDefaultValue", getDataComponentDefaultValue);
+
+/**
+ * @param name
+ * @param Component
+ * @param defaultValue
+ */
+export function addEditComponent(name, Component, defaultValue = null) {
     addObjectPropertyByPath(_editComponents, name, Component);
+    addObjectPropertyByPath(_editComponentDefaultValues, name, defaultValue);
 }
 
 registerPublicEndpoint("hooks.addEditComponent", addEditComponent);
+
+/**
+ * @param name
+ * @returns {*}
+ */
+export function getEditComponentDefaultValue(name) {
+    return _editComponentDefaultValues[name];
+}
+
+registerPublicEndpoint("hooks.getEditComponentDefaultValue", getEditComponentDefaultValue);
 
 /**
  * @param name

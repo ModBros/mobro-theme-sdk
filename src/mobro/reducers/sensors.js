@@ -45,17 +45,17 @@ registerPublicEndpoint("reducers.sensors.getSensorDataModified", getSensorDataMo
 export const getSensorSources = state => Object.keys(getSensorData(state));
 registerPublicEndpoint("reducers.sensors.getSensorSources", getSensorSources);
 
-export const getInformationBySource = (state, source) => dotPropImmutable.get(getSensorData(state), source);
+export const getInformationBySource = (state, source) => dotPropImmutable.get(getSensorData(state), source, []);
 registerPublicEndpoint("reducers.sensors.getInformationBySource", getInformationBySource);
 
-export const getHardwareTypesBySource = (state, source) => dotPropImmutable.get(getInformationBySource(state, source), "includedhardwaretypes");
+export const getHardwareTypesBySource = (state, source) => source ? dotPropImmutable.get(getInformationBySource(state, source), "includedhardwaretypes", []) : [];
 registerPublicEndpoint("reducers.sensors.getHardwareTypesBySource", getHardwareTypesBySource);
 
-export const getSensorTypesBySourceAndHardwareType = (state, source, hardwareType) => dotPropImmutable.get(getInformationBySource(state, source), `includedsensortypes.${hardwareType.toLowerCase()}`);
+export const getSensorTypesBySourceAndHardwareType = (state, source, hardwareType) => source && hardwareType ? dotPropImmutable.get(getInformationBySource(state, source), `includedsensortypes.${hardwareType.toLowerCase()}`, []) : [];
 registerPublicEndpoint("reducers.sensors.getSensorTypesBySourceAndHardwareType", getSensorTypesBySourceAndHardwareType);
 
 export const getSensorDataBySource = (state, source) => {
-    return dotPropImmutable.get(getInformationBySource(state, source), "data", []);
+    return source ? dotPropImmutable.get(getInformationBySource(state, source), "data", []) : [];
 }
 registerPublicEndpoint("reducers.sensors.getSensorDataBySource", getSensorDataBySource);
 

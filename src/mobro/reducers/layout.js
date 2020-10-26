@@ -1,11 +1,20 @@
 import {createReducer} from "@reduxjs/toolkit";
 import {fetchingAction} from "mobro/utils/redux";
-import {layoutChange, layoutEdit, layoutFailed, layoutFetched, layoutMode, layoutRequested} from "mobro/actions/layout";
+import {
+    addComponent,
+    layoutChange,
+    layoutEdit,
+    layoutFailed,
+    layoutFetched,
+    layoutMode,
+    layoutRequested
+} from "mobro/actions/layout";
 import {NOT_ASKED} from "mobro/utils/communication";
 import {saveLayout} from "mobro/utils/layout";
 import dotPropImmutable from "dot-prop-immutable";
 import {LAYOUT_MODE_EDIT} from "mobro/enum/layout";
 import {registerPublicEndpoint} from "mobro/utils/public";
+import {getDataComponentDefaultValue} from "mobro/hooks/components-hooks";
 
 // ----------------------------------------------
 // initial state
@@ -32,7 +41,7 @@ export default createReducer(initialState, {
         }
 
         payload.forEach((item, i) => {
-            state = dotPropImmutable.merge(state, `layout.components.${i}`, item);
+            state = dotPropImmutable.merge(state, `layout.components.${i}.config`, item);
         });
 
         saveLayout(dotPropImmutable.get(state, "layout"));
@@ -47,7 +56,17 @@ export default createReducer(initialState, {
     [layoutEdit.type]: (state, {payload}) => {
         const {path, name, data} = payload;
 
-        return dotPropImmutable.set(state, `layout${path}.config.${name}`, data);
+        state = dotPropImmutable.set(state, `layout${path}.config.${name}`, data);
+        saveLayout(dotPropImmutable.get(state, "layout"));
+
+        return state;
+    },
+
+    [addComponent.type]: (state, {payload}) => {
+        return dotPropImmutable.merge(state, "layout.components", {
+            type: payload,
+            config: getDataComponentDefaultValue(payload)
+        });
     }
 });
 

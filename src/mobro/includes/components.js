@@ -14,13 +14,12 @@ addDataComponent("text", Text, {
             {label: "Right", value: "right"},
         ]
     }
+}, {
+    align: "left"
 });
 
 import Image from "mobro/containers/component/Image";
 addDataComponent("image", Image);
-
-import Background from "mobro/containers/component/Background";
-addDataComponent("background", Background);
 
 import BasicValue from "mobro/containers/component/BasicValue";
 addDataComponent("basic-value", BasicValue, {
@@ -31,4 +30,6 @@ addDataComponent("basic-value", BasicValue, {
     channel: {
         type: "channel"
     }
+}, {
+    showLabel: true
 });

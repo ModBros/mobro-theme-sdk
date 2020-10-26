@@ -1,7 +1,9 @@
 import io from "socket.io-client";
 import {EVENT_CHANGE_THEME} from "mobro/enum/events";
+import {registerPublicEndpoint} from "mobro/utils/public";
 
 let originalSearchParams = null;
+let originalParams = null;
 let url = null;
 let socket = null;
 
@@ -13,8 +15,12 @@ export function getSocket() {
     return socket;
 }
 
+registerPublicEndpoint("utils.socket.getSocket", getSocket);
+
 function init() {
     originalSearchParams = window.location.search;
+    originalParams = new URLSearchParams(originalSearchParams);
+
     url = `${window.location.protocol}//${window.location.hostname}:42100`;
     socket = io(`${window.location.protocol}//${window.location.hostname}:42100${window.location.search}`, {
         transports: ["websocket"]
@@ -33,3 +39,15 @@ function init() {
             });
     });
 }
+
+export function getDeviceName() {
+    return originalParams ? originalParams.get("name") : "Local Device";
+}
+
+registerPublicEndpoint("utils.socket.getDeviceName", getDeviceName);
+
+export function getDeviceUuid() {
+    return originalParams ? originalParams.get("uuid") : "default";
+}
+
+registerPublicEndpoint("utils.socket.getDeviceUuid", getDeviceUuid);
