@@ -19,7 +19,7 @@ function Channel({data, name, sensorDataFetchingState, fetchSensorData, sources,
             value={data?.source}
             onChange={value => onChange({
                 source: value.value,
-                hardwaretype: null,
+                hardwaretype: data?.hardwaretype,
                 id: null
             })}
         />
