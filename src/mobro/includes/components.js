@@ -19,7 +19,11 @@ addDataComponent("text", Text, {
 });
 
 import Image from "mobro/containers/component/Image";
-addDataComponent("image", Image);
+addDataComponent("image", Image, {
+    image: {
+        type: "single-image"
+    }
+});
 
 import BasicValue from "mobro/containers/component/BasicValue";
 addDataComponent("basic-value", BasicValue, {

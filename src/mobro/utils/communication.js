@@ -36,7 +36,7 @@ export function failed(state) {
 // send
 
 export function send(url, data = {}) {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
         try {
             getSocket().emit(url, data, response => {
                 resolve(response);
@@ -44,6 +44,8 @@ export function send(url, data = {}) {
         } catch(exception) {
             console.error("Could not send via socket");
             console.error(exception);
+
+            reject(exception);
         }
     });
 }

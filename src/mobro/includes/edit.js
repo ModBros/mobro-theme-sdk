@@ -15,3 +15,6 @@ addEditComponent("channel", Channel, {
     hardwaretype: null,
     id: null
 });
+
+import SingleImage from "mobro/containers/edit/data/SingleImage";
+addEditComponent("single-image", SingleImage, null)

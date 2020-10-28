@@ -5,7 +5,11 @@ import dotPropImmutable from "dot-prop-immutable";
 import LoadingIndicator from "mobro/containers/shared/LoadingIndicator";
 import AlignCenter from "mobro/containers/shared/layout/AlignCenter";
 
-function BasicValue({config}) {
+function BasicValue(props) {
+    const {
+        config
+    } = props;
+
     let channelData = useChannelListener(config);
 
     if(!channelData) {

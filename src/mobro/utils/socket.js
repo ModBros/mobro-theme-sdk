@@ -40,6 +40,18 @@ function init() {
     });
 }
 
+export function getUrl() {
+    return url;
+}
+
+export function getPublicUrl(asset) {
+    if(!asset) {
+        return null;
+    }
+
+    return url + "/" + asset.replace(/^\/+/, "");
+}
+
 export function getDeviceName() {
     return originalParams ? originalParams.get("name") : "Local Device";
 }

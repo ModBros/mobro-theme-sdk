@@ -1,9 +1,14 @@
 import React from "react";
+import {getPublicUrl} from "mobro/utils/socket";
 
-function Image({config}) {
+function Image(props) {
+    const {
+        config
+    } = props;
+
     return (
-        <div className="w-100 d-flex align-items-center">
-            <img className="w-100" src={config.url}/>
+        <div className="d-flex align-items-center negate-component-padding">
+            <img className="w-100" src={getPublicUrl(config.image?.url)}/>
         </div>
     );
 }

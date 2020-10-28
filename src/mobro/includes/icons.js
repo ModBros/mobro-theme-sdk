@@ -1,8 +1,9 @@
 import {library} from "@fortawesome/fontawesome-svg-core";
-import {faCog, faPlus, faTimes} from "@fortawesome/free-solid-svg-icons";
+import * as icons from "@fortawesome/free-solid-svg-icons";
 
-library.add(
-    faCog,
-    faTimes,
-    faPlus
-);
+const iconList = Object
+    .keys(icons)
+    .filter(key => key !== "fas" && key !== "prefix")
+    .map(icon => icons[icon]);
+
+library.add(...iconList);
