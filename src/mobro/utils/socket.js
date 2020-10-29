@@ -1,6 +1,7 @@
 import io from "socket.io-client";
 import {EVENT_CHANGE_THEME} from "mobro/enum/events";
 import {registerPublicEndpoint} from "mobro/utils/public";
+import {DEFAULT_UUID} from "mobro/enum/channel-data";
 
 let originalSearchParams = null;
 let originalParams = null;
@@ -59,7 +60,11 @@ export function getDeviceName() {
 registerPublicEndpoint("utils.socket.getDeviceName", getDeviceName);
 
 export function getDeviceUuid() {
-    return originalParams ? originalParams.get("uuid") : "default";
+    if(originalParams && originalParams.get("uuid")) {
+        return originalParams.get("uuid");
+    }
+
+    return DEFAULT_UUID;
 }
 
 registerPublicEndpoint("utils.socket.getDeviceUuid", getDeviceUuid);

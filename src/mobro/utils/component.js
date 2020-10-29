@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {registerPublicEndpoint} from "mobro/utils/public";
 import {getDataComponent} from "mobro/hooks/components-hooks";
 import {getDeviceUuid, getSocket} from "mobro/utils/socket";
-import dotPropImmutable from "dot-prop-immutable";
 import {CHANNEL_PREFIX} from "mobro/enum/channel-data";
+import {addChannel, removeChannel} from "mobro/utils/channel-data";
 
 /**
  * @param {[]} components
@@ -81,10 +81,21 @@ registerPublicEndpoint("utils.component.toPixel", toPixel);
  * @returns {string}
  */
 export function extractChannel(config) {
-    return `${getDeviceUuid()}.${config?.id}}`;
+    return `${getDeviceUuid()}.${extractChannelId(config)}`;
 }
 
 registerPublicEndpoint("utils.component.extractChannel", extractChannel);
+
+/**
+ * @param {{}} config
+ * @returns {string}
+ */
+export function extractChannelId(config) {
+    return config?.id;
+}
+
+registerPublicEndpoint("utils.component.extractChannelId", extractChannelId);
+
 
 /**
  * @param {{}} config
@@ -96,12 +107,16 @@ export function useChannelListener(config) {
     const [channelData, setChannelData] = useState(null);
 
     useEffect(() => {
-        let handler = data => setChannelData(data.payload);
+        const id = extractChannelId(config);
+        addChannel({id});
+
+        const handler = data => setChannelData(data.payload);
 
         getSocket().on(`${CHANNEL_PREFIX}${channel}`, handler);
 
         return () => {
             getSocket().off(channel, handler);
+            removeChannel({id});
         }
     }, [channel]);
 

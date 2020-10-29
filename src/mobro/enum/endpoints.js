@@ -11,3 +11,9 @@ registerPublicEndpoint("enum.endpoints.GET_ALL_SENSOR_DATA", GET_ALL_SENSOR_DATA
 
 export const UPLOAD_FILE = "theme:upload:file";
 registerPublicEndpoint("enum.endpoints.UPLOAD_FILE", UPLOAD_FILE);
+
+export const ADD_CHANNEL = "theme:channel:add";
+registerPublicEndpoint("enum.endpoints.ADD_CHANNEL", ADD_CHANNEL);
+
+export const REMOVE_CHANNEL = "theme:channel:remove";
+registerPublicEndpoint("enum.endpoints.REMOVE_CHANNEL", REMOVE_CHANNEL);

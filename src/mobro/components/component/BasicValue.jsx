@@ -10,7 +10,7 @@ function BasicValue(props) {
         config
     } = props;
 
-    let channelData = useChannelListener(config);
+    let channelData = useChannelListener(config?.channel);
 
     if(!channelData) {
         return (<AlignCenter><LoadingIndicator className="small"/></AlignCenter>);
