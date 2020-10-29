@@ -4,6 +4,7 @@ import {getDataComponent} from "mobro/hooks/components-hooks";
 import {getDeviceUuid, getSocket} from "mobro/utils/socket";
 import {CHANNEL_PREFIX} from "mobro/enum/channel-data";
 import {addChannel, removeChannel} from "mobro/utils/channel-data";
+import {noop} from "mobro/utils/helper";
 
 /**
  * @param {[]} components
@@ -96,21 +97,19 @@ export function extractChannelId(config) {
 
 registerPublicEndpoint("utils.component.extractChannelId", extractChannelId);
 
-
 /**
  * @param {{}} config
+ * @param onData
  * @returns {{}}
  */
-export function useChannelListener(config) {
-    const channel = typeof config === "string" ? config : extractChannel(config);
-
-    const [channelData, setChannelData] = useState(null);
+export function useChannelListener(config, onData = noop) {
+    const id = extractChannelId(config);
+    const channel = extractChannel(config);
 
     useEffect(() => {
-        const id = extractChannelId(config);
         addChannel({id});
 
-        const handler = data => setChannelData(data.payload);
+        const handler = data => onData(data.payload);
 
         getSocket().on(`${CHANNEL_PREFIX}${channel}`, handler);
 
@@ -119,11 +118,46 @@ export function useChannelListener(config) {
             removeChannel({id});
         }
     }, [channel]);
+}
+
+registerPublicEndpoint("utils.component.useChannelListener", useChannelListener);
+
+/**
+ * @param config
+ * @returns {{}}
+ */
+export function useBasicChannelListener(config) {
+    const [channelData, setChannelData] = useState(null);
+
+    useChannelListener(config, setChannelData);
 
     return channelData;
 }
 
-registerPublicEndpoint("utils.component.useChannelListener", useChannelListener);
+registerPublicEndpoint("utils.component.useBasicChannelListener", useBasicChannelListener);
+
+/**
+ * @param config
+ * @param limit
+ * @returns {[]}
+ */
+export function useHistoryChannelListener(config, limit = 10) {
+    const [historyData, setHistoryData] = useState([]);
+
+    useChannelListener(config, (data) => {
+        historyData.push(data);
+
+        if (historyData.length > limit) {
+            historyData.shift();
+        }
+
+        setHistoryData([...historyData]);
+    });
+
+    return historyData;
+}
+
+registerPublicEndpoint("utils.component.useHistoryChannelListener", useHistoryChannelListener);
 
 /**
  * @param {string} align

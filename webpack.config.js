@@ -22,7 +22,8 @@ module.exports = {
         extensions: ["*", ".js", ".jsx"],
 
         alias: {
-            mobro: path.resolve(__dirname, "src/mobro/")
+            mobro: path.resolve(__dirname, "src/mobro/"),
+            "core-js/es6": "core-js/es"
         }
     },
 
@@ -34,7 +35,7 @@ module.exports = {
                 loader: "babel-loader",
                 options: {
                     plugins: ['@babel/plugin-transform-runtime', '@babel/plugin-proposal-class-properties'],
-                    presets: ["@babel/preset-env", "@babel/react"]
+                    presets: ["@babel/react", "@babel/preset-env"]
                 }
             }
         }, {

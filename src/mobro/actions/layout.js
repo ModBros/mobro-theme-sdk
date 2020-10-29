@@ -2,7 +2,7 @@ import {createAction} from "@reduxjs/toolkit";
 import {send} from "mobro/utils/communication";
 import {GET_LAYOUT} from "mobro/enum/endpoints";
 import {defaultLayoutConfig} from "mobro/utils/layout";
-import {isEmpty} from "mobro/utils/object";
+import {empty} from "mobro/utils/helper";
 
 /**
  * @function layoutRequested
@@ -17,7 +17,7 @@ export function fetchLayout() {
 
         send(GET_LAYOUT)
             .then((response) => {
-                if (!response || isEmpty(response)) {
+                if (!response || empty(response)) {
                     response = defaultLayoutConfig;
                 }
 

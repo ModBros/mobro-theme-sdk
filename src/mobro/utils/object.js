@@ -41,7 +41,3 @@ export function deepValues(object, values = []) {
 
     return values;
 }
-
-export function isEmpty(object) {
-    return Object.keys(object).length === 0;
-}

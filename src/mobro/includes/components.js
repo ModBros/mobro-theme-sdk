@@ -37,3 +37,18 @@ addDataComponent("basic-value", BasicValue, {
 }, {
     showLabel: true
 });
+
+import BasicChart from "mobro/containers/component/BasicChart";
+addDataComponent("basic-chart", BasicChart, {
+    displayType: {
+        type: "select",
+        options: [
+            {label: "Line", value: "line"},
+            {label: "Area", value: "area"},
+            {label: "Pie", value: "pie"}
+        ]
+    },
+    channel: {
+        type: "channel"
+    }
+});

@@ -1,5 +1,5 @@
 import React from "react";
-import {useChannelListener} from "mobro/utils/component";
+import {useBasicChannelListener} from "mobro/utils/component";
 import {extractLabel, extractRawUnit, extractValue} from "mobro/utils/channel-data";
 import dotPropImmutable from "dot-prop-immutable";
 import LoadingIndicator from "mobro/containers/shared/LoadingIndicator";
@@ -10,9 +10,9 @@ function BasicValue(props) {
         config
     } = props;
 
-    let channelData = useChannelListener(config?.channel);
+    const channelData = useBasicChannelListener(config?.channel);
 
-    if(!channelData) {
+    if (!channelData) {
         return (<AlignCenter><LoadingIndicator className="small"/></AlignCenter>);
     }
 
