@@ -34,7 +34,7 @@ export function map(value, callback) {
 
     if (typeof value === "object") {
         return Object.entries(value).map(([key, value]) => {
-            callback(value, key);
+            return callback(value, key);
         });
     }
 

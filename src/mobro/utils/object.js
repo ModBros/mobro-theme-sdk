@@ -31,6 +31,10 @@ export function addObjectPropertyByPath(object, path, value) {
 }
 
 export function deepValues(object, values = []) {
+    if (!object || typeof object !== "object") {
+        return object;
+    }
+
     Object.values(object).forEach((value) => {
         if (value && typeof value === "object") {
             deepValues(value, values);
