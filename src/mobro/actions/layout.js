@@ -31,5 +31,7 @@ export function fetchLayout() {
 
 export const layoutMode = createAction("layout:mode");
 export const layoutChange = createAction("layout:change");
+export const layoutDirectEdit = createAction("layout:direct:edit");
 export const layoutEdit = createAction("layout:edit");
 export const addComponent = createAction("layout:component:add");
+export const removeComponent = createAction("layout:component:remove");

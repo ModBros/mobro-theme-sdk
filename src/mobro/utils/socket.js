@@ -7,6 +7,7 @@ let originalSearchParams = null;
 let originalParams = null;
 let url = null;
 let socket = null;
+let theme = "default";
 
 export function getSocket() {
     if (!socket) {
@@ -46,7 +47,15 @@ export function getUrl() {
 }
 
 export function getPublicUrl(asset) {
-    if(!asset) {
+    if (!asset) {
+        return null;
+    }
+
+    return url + "/" + theme + "/".asset.replace(/^\/+/, "");
+}
+
+export function getPublicUploadUrl(asset) {
+    if (!asset) {
         return null;
     }
 
@@ -60,7 +69,7 @@ export function getDeviceName() {
 registerPublicEndpoint("utils.socket.getDeviceName", getDeviceName);
 
 export function getDeviceUuid() {
-    if(originalParams && originalParams.get("uuid")) {
+    if (originalParams && originalParams.get("uuid")) {
         return originalParams.get("uuid");
     }
 

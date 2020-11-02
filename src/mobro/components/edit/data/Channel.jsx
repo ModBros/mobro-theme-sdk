@@ -58,13 +58,13 @@ function Channel({data, name, sensorDataFetchingState, fetchSensorData, sources,
     }
 
     return (
-        <div className="card">
-            <div className="card-body p-2">
-                <FormGroup label={name}>
+        <FormGroup label={name}>
+            <div className="card">
+                <div className="card-body p-2">
                     {children}
-                </FormGroup>
+                </div>
             </div>
-        </div>
+        </FormGroup>
     );
 }
 

@@ -3,14 +3,16 @@ import {fetchingAction} from "mobro/utils/redux";
 import {
     addComponent,
     layoutChange,
+    layoutDirectEdit,
     layoutEdit,
     layoutFailed,
     layoutFetched,
     layoutMode,
-    layoutRequested
+    layoutRequested,
+    removeComponent
 } from "mobro/actions/layout";
 import {NOT_ASKED} from "mobro/utils/communication";
-import {saveLayout} from "mobro/utils/layout";
+import {defaultLayoutConfig, saveLayout} from "mobro/utils/layout";
 import dotPropImmutable from "dot-prop-immutable";
 import {LAYOUT_MODE_EDIT} from "mobro/enum/layout";
 import {registerPublicEndpoint} from "mobro/utils/public";
@@ -22,11 +24,7 @@ import {getDataComponentDefaultValue} from "mobro/hooks/components-hooks";
 const initialState = {
     layoutFetchingState: NOT_ASKED,
     layoutMode: LAYOUT_MODE_EDIT,
-    layout: {
-        width: null,
-        height: null,
-        components: []
-    }
+    layout: defaultLayoutConfig
 };
 
 // ----------------------------------------------
@@ -53,6 +51,15 @@ export default createReducer(initialState, {
         layout: payload
     })),
 
+    [layoutDirectEdit.type]: (state, {payload}) => {
+        const {name, data} = payload;
+
+        state = dotPropImmutable.set(state, `layout.${name}`, data);
+        saveLayout(dotPropImmutable.get(state, "layout"));
+
+        return state;
+    },
+
     [layoutEdit.type]: (state, {payload}) => {
         const {path, name, data} = payload;
 
@@ -67,6 +74,12 @@ export default createReducer(initialState, {
             type: payload,
             config: getDataComponentDefaultValue(payload)
         });
+    },
+
+    [removeComponent.type]: (state, {payload}) => {
+        const {path} = payload;
+
+        return dotPropImmutable.delete(state, `layout${path}`);
     }
 });
 

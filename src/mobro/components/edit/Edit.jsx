@@ -18,8 +18,8 @@ function Edit({type, path, config, layoutEdit}) {
                 name={name}
                 path={path}
                 config={fieldConfig}
-                data={config[name] || null}
-                onChange={(data) => layoutEdit(path, name, data)}
+                data={config?.[name] ? config[name] : null}
+                onChange={(data) => layoutEdit({path, name, data})}
             />
         );
     });

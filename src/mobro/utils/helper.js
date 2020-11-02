@@ -7,7 +7,7 @@ registerPublicEndpoint("utils.helper.noop", noop);
 
 export function empty(value) {
     if (!value) {
-        return false;
+        return true;
     }
 
     if (Array.isArray(value)) {
@@ -42,3 +42,13 @@ export function map(value, callback) {
 }
 
 registerPublicEndpoint("utils.helper.map", map);
+
+export function first(value) {
+    if (Array.isArray(value)) {
+        return value[0];
+    }
+
+    return value;
+}
+
+registerPublicEndpoint("utils.helper.first", first);

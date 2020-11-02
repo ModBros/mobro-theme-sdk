@@ -12,11 +12,11 @@ const _sidebars = {};
  * @param content
  * @param props
  */
-export function withSidebar({name, title, content, dependencies = []}) {
+export function withSidebar({name, title, content, footer = null, dependencies = []}) {
     useEffect(() => {
         // on a dependency change re-add the sidebar --> updates hash --> rerender
         addSidebarComponent(name, (
-            <Sidebar name={name} title={title}>
+            <Sidebar name={name} title={title} footer={footer}>
                 {content}
             </Sidebar>
         ));

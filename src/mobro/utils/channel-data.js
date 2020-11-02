@@ -39,19 +39,19 @@ export function removeChannel({id}) {
 registerPublicEndpoint("utils.channelData.removeChannel", removeChannel);
 
 export function extractLabel(data) {
-    return dotPropImmutable.get(data, "label");
+    return data?.label;
 }
 
 registerPublicEndpoint("utils.channelData.extractLabel", extractLabel);
 
 export function extractRawValue(data) {
-    return dotPropImmutable.get(data, "value");
+    return data?.value;
 }
 
 registerPublicEndpoint("utils.channelData.extractRawValue", extractRawValue);
 
 export function extractRawUnit(data) {
-    return dotPropImmutable.get(data, "unit")
+    return data?.unit;
 }
 
 registerPublicEndpoint("utils.channelData.extractRawUnit", extractRawUnit);

@@ -40,6 +40,12 @@ addDataComponent("basic-value", BasicValue, {
 
 import BasicChart from "mobro/containers/component/BasicChart";
 addDataComponent("basic-chart", BasicChart, {
+    showLabel: {
+        type: "checkbox"
+    },
+    customLabel: {
+        type: "input"
+    },
     displayType: {
         type: "select",
         options: [

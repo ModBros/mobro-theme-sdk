@@ -6,6 +6,8 @@ import Edit from "mobro/containers/edit/Edit";
 import {getDataComponentConfig} from "mobro/hooks/components-hooks";
 import {empty, map} from "mobro/utils/helper";
 import {deepValues} from "mobro/utils/object";
+import Footer from "mobro/containers/edit/Footer";
+import IconButton from "mobro/containers/shared/button/IconButton";
 
 function TriggerEditButton({layoutMode, type, path, config}) {
     if (!isEditMode(layoutMode)) {
@@ -27,17 +29,18 @@ function TriggerEditButton({layoutMode, type, path, config}) {
     const
         name = `edit_component_${path}`,
         title = "Configure",
-        content = (<Edit type={type} path={path} config={config}/>);
+        content = (<Edit type={type} path={path} config={config}/>),
+        footer = (<Footer path={path}/>);
 
-    withSidebar({name, title, content, dependencies});
+    withSidebar({name, title, content, footer, dependencies});
 
     return (
-        <Fragment>
-            <button type="button" className="btn btn-link btn-sm trigger-edit-button"
-                    onClick={() => toggleSidebarComponent(name)}>
-                <FontAwesomeIcon icon="cog"/>
-            </button>
-        </Fragment>
+        <IconButton
+            icon={"cog"}
+            variant={"link"}
+            className={"btn-sm trigger-edit-button"}
+            onClick={() => toggleSidebarComponent(name)}
+        />
     );
 }
 

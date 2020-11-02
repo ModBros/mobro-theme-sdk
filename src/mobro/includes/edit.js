@@ -3,6 +3,9 @@ import {addEditComponent} from "mobro/hooks/components-hooks";
 import Input from "mobro/containers/edit/data/Input";
 addEditComponent("input", Input, "");
 
+import Numeric from "mobro/containers/edit/data/Numeric";
+addEditComponent("numeric", Numeric, "");
+
 import Select from "mobro/containers/edit/data/Select";
 addEditComponent("select", Select, null);
 

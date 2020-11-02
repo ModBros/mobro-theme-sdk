@@ -6,8 +6,6 @@ function Text(props) {
         config
     } = props;
 
-    console.log(config);
-
     return (
         <span className={`w-100 d-flex align-items-center ${extractFlexAlign(dotPropImmutable.get(config, "align"))}`}>
             {config.text}

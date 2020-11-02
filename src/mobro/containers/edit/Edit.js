@@ -7,7 +7,7 @@ import {layoutEdit} from "mobro/actions/layout";
  * @param {MapDispatchToPropsEvent} event
  */
 const mapDispatchToProps = event => event.mergeMapDispatchToProps({
-    layoutEdit: (path, name, data) => event.dispatch(layoutEdit({path, name, data}))
+    layoutEdit: (payload) => event.dispatch(layoutEdit(payload))
 });
 
 export default Container.create("edit.edit", Edit)

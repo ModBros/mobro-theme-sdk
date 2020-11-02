@@ -2,7 +2,7 @@ import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {closeSidebarComponent} from "mobro/utils/sidebar";
 
-function Sidebar({title, name, children}) {
+function Sidebar({title, name, children, footer = null}) {
     return (
         <div className="sidebar d-flex shadow">
             <div className="card w-100">
@@ -19,6 +19,12 @@ function Sidebar({title, name, children}) {
                 <div className="card-body">
                     {children}
                 </div>
+
+                {!!footer && (
+                    <div className={"card-footer"}>
+                        {footer}
+                    </div>
+                )}
             </div>
         </div>
     );

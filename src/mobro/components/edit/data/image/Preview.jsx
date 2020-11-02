@@ -1,4 +1,4 @@
-import {getPublicUrl} from "mobro/utils/socket";
+import {getPublicUploadUrl} from "mobro/utils/socket";
 
 function Preview(props) {
     const {
@@ -11,7 +11,7 @@ function Preview(props) {
 
     return (
         <div>
-            <img className={"img-fluid mw-20"} src={getPublicUrl(url)}/>
+            <img className={"img-fluid mw-20"} src={getPublicUploadUrl(url)}/>
         </div>
     )
 }
