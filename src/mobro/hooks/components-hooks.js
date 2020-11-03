@@ -1,7 +1,7 @@
 import {createPublicHook} from "mobro/utils/hooks";
 import {addObjectPropertyByPath} from "mobro/utils/object";
 import {registerPublicEndpoint} from "mobro/utils/public";
-import {getDataOrDefault} from "mobro/utils/component";
+import {getDataOrDefault, getEditDefaultValues} from "mobro/utils/component";
 
 const _components = {};
 const _dataComponents = {};
@@ -44,13 +44,7 @@ registerPublicEndpoint("hooks.getComponent");
  * @param defaultValue
  */
 export function addDataComponent(name, Component, config = {}, defaultValue = {}) {
-    const allDefaultValues = defaultValue;
-
-    Object.entries(config).forEach(([key, config]) => {
-        if (allDefaultValues[key] === undefined) {
-            allDefaultValues[key] = getEditComponentDefaultValue(config.type);
-        }
-    });
+    const allDefaultValues = getEditDefaultValues(config, defaultValue);
 
     addObjectPropertyByPath(_dataComponents, name, Component);
     addObjectPropertyByPath(_dataComponentConfigs, name, config);

@@ -38,6 +38,18 @@ addDataComponent("basic-value", BasicValue, {
     showLabel: true
 });
 
+import ValueTable from "mobro/containers/component/ValueTable";
+addDataComponent("value-table", ValueTable, {
+    values: {
+        type: "repeat",
+        fields: {
+            channel: {
+                type: "channel"
+            }
+        }
+    }
+})
+
 import BasicChart from "mobro/containers/component/BasicChart";
 addDataComponent("basic-chart", BasicChart, {
     showLabel: {

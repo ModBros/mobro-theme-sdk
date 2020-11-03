@@ -21,3 +21,6 @@ addEditComponent("channel", Channel, {
 
 import SingleImage from "mobro/containers/edit/data/SingleImage";
 addEditComponent("single-image", SingleImage, null)
+
+import Repeat from "mobro/containers/edit/data/Repeat";
+addEditComponent("repeat", Repeat, []);

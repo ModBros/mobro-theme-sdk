@@ -15,7 +15,7 @@ const mapStateToProps = event => event.mergeMapStateToProps({
  * @param {MapDispatchToPropsEvent} event
  */
 const mapDispatchToProps = event => event.mergeMapDispatchToProps({
-    addComponent: (type) => event.dispatch(addComponent(type))
+    addComponent: (type) => event.dispatch(addComponent({type}))
 })
 
 export default Container.create("edit.trigger-edit-button", AddComponentButton)

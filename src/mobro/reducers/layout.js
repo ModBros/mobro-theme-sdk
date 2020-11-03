@@ -61,9 +61,11 @@ export default createReducer(initialState, {
     },
 
     [addComponent.type]: (state, {payload}) => {
-        return dotPropImmutable.merge(state, "layout.components", {
-            type: payload,
-            config: getDataComponentDefaultValue(payload)
+        const {path = "", type} = payload;
+
+        return dotPropImmutable.merge(state, `layout${path}.components`, {
+            type: type,
+            config: getDataComponentDefaultValue(type)
         });
     },
 
