@@ -1,9 +1,11 @@
 import IconButton from "mobro/containers/shared/button/IconButton";
 import {toggleSidebarComponent, withSidebar} from "mobro/utils/sidebar";
-import GlobalConfig from "mobro/containers/edit/GlobalConfig";
-import {isEditMode} from "mobro/utils/layout";
+import {defaultLayoutEditConfig, isEditMode} from "mobro/utils/layout";
 import {map} from "mobro/utils/helper";
 import {deepValues} from "mobro/utils/object";
+import Edit from "mobro/containers/edit/Edit";
+import {withGlobalConfigHook} from "mobro/hooks/global-config-hook";
+import React from "react";
 
 function TriggerGlobalConfigButton(props) {
     const {
@@ -15,13 +17,15 @@ function TriggerGlobalConfigButton(props) {
         return null;
     }
 
+    const editConfig = withGlobalConfigHook()(defaultLayoutEditConfig);
+
     const
         name = "global_config",
         title = "Global Configuration",
-        content = (<GlobalConfig/>),
-        dependencies = map(data, (field) => {
-            return deepValues(field);
-        });
+        content = (<Edit fields={editConfig} path={""} config={data}/>),
+        dependencies = map(editConfig, (field, name) => {
+            return deepValues(data[name] || null);
+        }).flat();
 
     withSidebar({name, title, content, dependencies});
 

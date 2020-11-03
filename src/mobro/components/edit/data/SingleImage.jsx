@@ -32,6 +32,8 @@ function SingleImage({name, data, onChange}) {
 
                     uploadFile(file.base64)
                         .then((url) => {
+                            console.log(arguments);
+
                             if(!url) {
                                 Promise.reject();
                             }

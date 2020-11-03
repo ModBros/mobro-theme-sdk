@@ -5,8 +5,9 @@ import AlignCenter from "mobro/containers/shared/layout/AlignCenter";
 import {extractSize} from "mobro/utils/component";
 import Entry from "mobro/containers/Entry";
 import SidebarContainer from "mobro/containers/shared/SidebarContainer";
+import {getPublicUploadUrl} from "mobro/utils/socket";
 
-function App({layoutFetchingState, fetchLayout, layout}) {
+function App({layoutFetchingState, fetchLayout, layout, config}) {
     if (notAskedYet(layoutFetchingState)) {
         fetchLayout();
     }
@@ -29,8 +30,15 @@ function App({layoutFetchingState, fetchLayout, layout}) {
         );
     }
 
+    const style = extractSize(config);
+    const background = config?.background?.url;
+
+    if(background) {
+        style.backgroundImage = `url(${getPublicUploadUrl(background)})`;
+    }
+
     return (
-        <div className="app" style={extractSize(layout)}>
+        <div className="app" style={style}>
             <Entry/>
 
             <SidebarContainer/>

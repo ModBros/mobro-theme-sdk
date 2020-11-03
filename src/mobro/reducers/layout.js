@@ -3,7 +3,6 @@ import {fetchingAction} from "mobro/utils/redux";
 import {
     addComponent,
     layoutChange,
-    layoutDirectEdit,
     layoutEdit,
     layoutFailed,
     layoutFetched,
@@ -50,15 +49,6 @@ export default createReducer(initialState, {
     ...fetchingAction(layoutRequested.type, layoutFetched.type, layoutFailed.type, "layoutFetchingState", payload => ({
         layout: payload
     })),
-
-    [layoutDirectEdit.type]: (state, {payload}) => {
-        const {name, data} = payload;
-
-        state = dotPropImmutable.set(state, `layout.${name}`, data);
-        saveLayout(dotPropImmutable.get(state, "layout"));
-
-        return state;
-    },
 
     [layoutEdit.type]: (state, {payload}) => {
         const {path, name, data} = payload;

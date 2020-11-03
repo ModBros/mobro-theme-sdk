@@ -2,13 +2,15 @@ import React from "react";
 import {getDataComponentConfig, getEditComponent} from "mobro/hooks/components-hooks";
 import {map} from "mobro/utils/helper";
 
-function Edit({type, path, config, layoutEdit}) {
-    const componentConfig = getDataComponentConfig(type);
+function Edit({type, fields = null, path, config, layoutEdit}) {
+    if (!fields) {
+        fields = getDataComponentConfig(type);
+    }
 
-    return map(componentConfig, (fieldConfig, name) => {
+    return map(fields, (fieldConfig, name) => {
         const EditComponent = getEditComponent(fieldConfig.type);
 
-        if(!EditComponent) {
+        if (!EditComponent) {
             return null;
         }
 

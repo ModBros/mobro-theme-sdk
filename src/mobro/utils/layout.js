@@ -4,12 +4,27 @@ import {LAYOUT_MODE_DISPLAY, LAYOUT_MODE_EDIT} from "mobro/enum/layout";
 import {SAVE_LAYOUT} from "mobro/enum/endpoints";
 
 export const defaultLayoutConfig = {
-    width: 480,
-    height: 320,
     config: {
+        width: 480,
+        height: 320,
         rowHeight: 10
     },
     components: []
+}
+
+export const defaultLayoutEditConfig = {
+    width: {
+        type: "numeric"
+    },
+    height: {
+        type: "numeric"
+    },
+    rowHeight: {
+        type: "numeric"
+    },
+    background: {
+        type: "single-image"
+    }
 }
 
 /**
