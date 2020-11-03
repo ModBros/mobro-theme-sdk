@@ -1,12 +1,14 @@
 import React from "react";
 import TriggerEditButton from "mobro/containers/edit/TriggerEditButton";
+import {noop} from "mobro/utils/helper";
 
 function BaseComponent(props) {
     const {
         type,
         path,
         config,
-        Component
+        Component,
+        pasteComponent = noop
     } = props;
 
     return (

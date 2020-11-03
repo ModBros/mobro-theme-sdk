@@ -1,13 +1,13 @@
 import {createReducer} from "@reduxjs/toolkit";
 import {fetchingAction} from "mobro/utils/redux";
 import {
-    addComponent,
+    addComponent, copyComponent,
     layoutChange,
     layoutEdit,
     layoutFailed,
     layoutFetched,
     layoutMode,
-    layoutRequested,
+    layoutRequested, pasteComponent,
     removeComponent
 } from "mobro/actions/layout";
 import {NOT_ASKED} from "mobro/utils/communication";
@@ -23,7 +23,8 @@ import {getDataComponentDefaultValue} from "mobro/hooks/components-hooks";
 const initialState = {
     layoutFetchingState: NOT_ASKED,
     layoutMode: LAYOUT_MODE_EDIT,
-    layout: defaultLayoutConfig
+    layout: defaultLayoutConfig,
+    componentTemporaryStorage: null
 };
 
 // ----------------------------------------------
@@ -70,6 +71,18 @@ export default createReducer(initialState, {
         const {path} = payload;
 
         return dotPropImmutable.delete(state, `layout${path}`);
+    },
+
+    [copyComponent.type]: (state, {payload}) => {
+        const {type, config} = payload;
+
+        return dotPropImmutable.set(state, "componentTemporaryStorage", {type, config});
+    },
+
+    [pasteComponent.type]: (state) => {
+        const {type, config} = state.componentTemporaryStorage;
+
+        return dotPropImmutable.merge(state, "layout.components", {type, config});
     }
 });
 
@@ -93,3 +106,6 @@ registerPublicEndpoint("reducers.layout.getLayoutConfig", getLayoutConfig);
 
 export const getLayoutComponents = state => dotPropImmutable.get(getLayout(state), "components");
 registerPublicEndpoint("reducers.layout.getLayoutComponents", getLayoutComponents);
+
+export const getLayoutComponentTemporaryStorage = state => dotPropImmutable.get(getLayoutState(state), "componentTemporaryStorate");
+registerPublicEndpoint("reducers.layout.getLayoutComponentTemporaryStorage", getLayoutComponentTemporaryStorage);
