@@ -4,14 +4,18 @@
   top: 0;
   right: 0;
   height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
   max-width: 70%;
   min-width: 20rem;
 
-  .card {
+  .sidebar-card {
     border-top: none;
     border-bottom: none;
     border-right: none;
+  }
+
+  .sidebar-body {
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 }

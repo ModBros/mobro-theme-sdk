@@ -5,7 +5,7 @@ import {closeSidebarComponent} from "mobro/utils/sidebar";
 function Sidebar({title, name, children, footer = null}) {
     return (
         <div className="sidebar d-flex shadow">
-            <div className="card w-100">
+            <div className="card sidebar-card w-100">
                 <div className="card-header d-flex align-items-center justify-content-between bg-primary text-white">
                     <h5 className="m-0">
                         {title}
@@ -16,12 +16,12 @@ function Sidebar({title, name, children, footer = null}) {
                     </button>
                 </div>
 
-                <div className="card-body">
+                <div className="card-body sidebar-body">
                     {children}
                 </div>
 
                 {!!footer && (
-                    <div className={"card-footer"}>
+                    <div className={"card-footer sidebar-footer"}>
                         {footer}
                     </div>
                 )}

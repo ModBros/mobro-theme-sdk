@@ -44,6 +44,8 @@ function Repeat(props) {
                                 />
                             );
                         })}
+
+                        <hr/>
                     </div>
                 );
             })}
