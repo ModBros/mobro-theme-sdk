@@ -1,6 +1,7 @@
 import {addDataComponent} from "mobro/hooks/components-hooks";
 
 import Text from "mobro/containers/component/Text";
+
 addDataComponent("text", Text, {
     text: {
         type: "input"
@@ -19,6 +20,7 @@ addDataComponent("text", Text, {
 });
 
 import Image from "mobro/containers/component/Image";
+
 addDataComponent("image", Image, {
     image: {
         type: "single-image"
@@ -26,6 +28,7 @@ addDataComponent("image", Image, {
 });
 
 import BasicValue from "mobro/containers/component/BasicValue";
+
 addDataComponent("basic-value", BasicValue, {
     showLabel: {
         type: "checkbox"
@@ -39,6 +42,7 @@ addDataComponent("basic-value", BasicValue, {
 });
 
 import ValueTable from "mobro/containers/component/ValueTable";
+
 addDataComponent("value-table", ValueTable, {
     values: {
         type: "repeat",
@@ -48,9 +52,10 @@ addDataComponent("value-table", ValueTable, {
             }
         }
     }
-})
+});
 
 import BasicChart from "mobro/containers/component/BasicChart";
+
 addDataComponent("basic-chart", BasicChart, {
     showLabel: {
         type: "checkbox"
@@ -70,3 +75,9 @@ addDataComponent("basic-chart", BasicChart, {
         type: "channel"
     }
 });
+
+import Spacer from "mobro/containers/component/Spacer";
+
+addDataComponent("spacer", Spacer, {}, {}, {
+    ignoreBaseClassNames: true
+})

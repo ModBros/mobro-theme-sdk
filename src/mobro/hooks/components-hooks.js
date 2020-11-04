@@ -4,9 +4,12 @@ import {registerPublicEndpoint} from "mobro/utils/public";
 import {getDataOrDefault, getEditDefaultValues} from "mobro/utils/component";
 
 const _components = {};
+
 const _dataComponents = {};
 const _dataComponentConfigs = {};
 const _dataComponentDefaultValues = {};
+const _dataComponentRenderConfigs = {};
+
 const _editComponents = {};
 const _editComponentDefaultValues = {};
 
@@ -42,13 +45,15 @@ registerPublicEndpoint("hooks.getComponent");
  * @param Component
  * @param config
  * @param defaultValue
+ * @param renderConfig
  */
-export function addDataComponent(name, Component, config = {}, defaultValue = {}) {
+export function addDataComponent(name, Component, config = {}, defaultValue = {}, renderConfig = {}) {
     const allDefaultValues = getEditDefaultValues(config, defaultValue);
 
     addObjectPropertyByPath(_dataComponents, name, Component);
     addObjectPropertyByPath(_dataComponentConfigs, name, config);
     addObjectPropertyByPath(_dataComponentDefaultValues, name, allDefaultValues);
+    addObjectPropertyByPath(_dataComponentRenderConfigs, name, renderConfig);
 }
 
 registerPublicEndpoint("hooks.addDataComponent", addDataComponent);
@@ -91,6 +96,16 @@ export function getDataComponentDefaultValue(name) {
 }
 
 registerPublicEndpoint("hooks.getDataComponentDefaultValue", getDataComponentDefaultValue);
+
+/**
+ * @param name
+ * @returns {{}}
+ */
+export function getDataComponentRenderConfig(name) {
+    return getDataOrDefault(_dataComponentRenderConfigs[name], {});
+}
+
+registerPublicEndpoint("hooks.getDataComponentRenderConfig", getDataComponentRenderConfig);
 
 /**
  * @param name

@@ -1,6 +1,7 @@
 import React from "react";
 import TriggerEditButton from "mobro/containers/edit/TriggerEditButton";
 import {noop} from "mobro/utils/helper";
+import {getDataComponentRenderConfig} from "mobro/hooks/components-hooks";
 
 function BaseComponent(props) {
     const {
@@ -11,8 +12,11 @@ function BaseComponent(props) {
         pasteComponent = noop
     } = props;
 
+    const renderConfig = getDataComponentRenderConfig(type);
+    const baseClassNames = !renderConfig?.ignoreBaseClassNames ? "component card" : "";
+
     return (
-        <div className="component card">
+        <div className={`${baseClassNames} ${renderConfig?.baseClassNames}`}>
             <TriggerEditButton type={type} path={path} config={config}/>
 
             <div className="component-body card-body">
