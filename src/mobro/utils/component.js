@@ -114,7 +114,7 @@ export function useChannelListener(config, onData = noop) {
         getSocket().on(`${CHANNEL_PREFIX}${channel}`, handler);
 
         return () => {
-            getSocket().off(channel, handler);
+            getSocket().off(`${CHANNEL_PREFIX}${channel}`, handler);
             removeChannel({id});
         }
     }, [channel]);

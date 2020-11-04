@@ -13,7 +13,7 @@ export function addChannel({id}) {
 
     // increment channel listener count
     _channelListeners[id] = _channelListeners[id] ? _channelListeners[id] + 1 : 1;
-    send(ADD_CHANNEL, {id})
+    send(ADD_CHANNEL, {id});
 
     return true;
 }

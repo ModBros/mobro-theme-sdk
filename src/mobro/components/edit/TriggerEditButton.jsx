@@ -16,11 +16,6 @@ function TriggerEditButton({layoutMode, type, path, config}) {
 
     const componentConfig = getDataComponentConfig(type);
 
-    // nothing to configure
-    if (empty(componentConfig)) {
-        return null;
-    }
-
     // extract necessary values for sidebar dependencies
     const dependencies = map(componentConfig, (field, name) => {
         return deepValues(config[name] || null);
