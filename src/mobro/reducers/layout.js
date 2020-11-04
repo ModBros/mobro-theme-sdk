@@ -1,19 +1,21 @@
 import {createReducer} from "@reduxjs/toolkit";
 import {fetchingAction} from "mobro/utils/redux";
 import {
-    addComponent, copyComponent,
+    addComponent,
+    copyComponent,
     layoutChange,
     layoutEdit,
     layoutFailed,
     layoutFetched,
     layoutMode,
-    layoutRequested, pasteComponent,
+    layoutRequested,
+    pasteComponent,
     removeComponent
 } from "mobro/actions/layout";
 import {NOT_ASKED} from "mobro/utils/communication";
 import {defaultLayoutConfig, saveLayout} from "mobro/utils/layout";
 import dotPropImmutable from "dot-prop-immutable";
-import {LAYOUT_MODE_EDIT} from "mobro/enum/layout";
+import {LAYOUT_MODE_DISPLAY} from "mobro/enum/layout";
 import {registerPublicEndpoint} from "mobro/utils/public";
 import {getDataComponentDefaultValue} from "mobro/hooks/components-hooks";
 
@@ -22,7 +24,7 @@ import {getDataComponentDefaultValue} from "mobro/hooks/components-hooks";
 
 const initialState = {
     layoutFetchingState: NOT_ASKED,
-    layoutMode: LAYOUT_MODE_EDIT,
+    layoutMode: LAYOUT_MODE_DISPLAY,
     layout: defaultLayoutConfig,
     componentTemporaryStorage: null
 };

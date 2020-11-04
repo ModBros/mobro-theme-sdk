@@ -1,4 +1,4 @@
-import {fetchLayout} from "mobro/actions/layout";
+import {fetchLayout, layoutMode} from "mobro/actions/layout";
 import {getLayout, getLayoutConfig, getLayoutFetchingState} from "mobro/reducers/layout";
 import App from "mobro/components/App";
 import Container from "mobro/lib/component/container";
@@ -18,7 +18,8 @@ const mapStateToProps = event => event.mergeMapStateToProps({
  * @param {MapDispatchToPropsEvent} event
  */
 const mapDispatchToProps = event => event.mergeMapDispatchToProps({
-    fetchLayout: () => event.dispatch(fetchLayout())
+    fetchLayout: () => event.dispatch(fetchLayout()),
+    setLayoutMode: (mode) => event.dispatch(layoutMode(mode))
 });
 
 export default Container.create("app", App)

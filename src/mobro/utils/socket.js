@@ -76,4 +76,8 @@ export function getDeviceUuid() {
     return DEFAULT_UUID;
 }
 
+export function hasEditmodeParam() {
+    return originalParams ? !!originalParams.get("editmode") : false;
+}
+
 registerPublicEndpoint("utils.socket.getDeviceUuid", getDeviceUuid);

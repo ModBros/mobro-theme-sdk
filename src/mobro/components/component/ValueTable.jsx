@@ -48,8 +48,8 @@ function ValueTable(props) {
     return (
         <table className={"table w-100"}>
             <tbody>
-            {map(values, (value) => (
-                <ValueRow config={value}/>
+            {map(values, (value, i) => (
+                <ValueRow key={i} config={value}/>
             ))}
             </tbody>
         </table>

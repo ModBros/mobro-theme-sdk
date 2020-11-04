@@ -1,13 +1,18 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {failed, fetched, notAskedYet} from "mobro/utils/communication";
 import LoadingIndicator from "mobro/containers/shared/LoadingIndicator";
 import AlignCenter from "mobro/containers/shared/layout/AlignCenter";
 import {extractSize} from "mobro/utils/component";
 import Entry from "mobro/containers/Entry";
 import SidebarContainer from "mobro/containers/shared/SidebarContainer";
-import {getPublicUploadUrl} from "mobro/utils/socket";
+import {getPublicUploadUrl, hasEditmodeParam} from "mobro/utils/socket";
+import {LAYOUT_MODE_DISPLAY, LAYOUT_MODE_EDIT} from "mobro/enum/layout";
 
-function App({layoutFetchingState, fetchLayout, layout, config}) {
+function App({layoutFetchingState, fetchLayout, setLayoutMode, config}) {
+    useEffect(() => {
+        setLayoutMode(hasEditmodeParam() ? LAYOUT_MODE_EDIT : LAYOUT_MODE_DISPLAY);
+    }, []);
+
     if (notAskedYet(layoutFetchingState)) {
         fetchLayout();
     }
