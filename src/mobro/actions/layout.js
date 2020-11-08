@@ -29,6 +29,7 @@ export function fetchLayout() {
     }
 }
 
+export const selectComponent = createAction("layout:component:select");
 export const layoutMode = createAction("layout:mode");
 export const layoutChange = createAction("layout:change");
 export const layoutEdit = createAction("layout:edit");

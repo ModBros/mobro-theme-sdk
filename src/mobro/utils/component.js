@@ -6,6 +6,12 @@ import {CHANNEL_PREFIX} from "mobro/enum/channel-data";
 import {addChannel, removeChannel} from "mobro/utils/channel-data";
 import {noop} from "mobro/utils/helper";
 
+export function getComponentPath(path = "", index) {
+    return `${path}.components.${index}`
+}
+
+registerPublicEndpoint("utils.component.getComponentPath", getComponentPath);
+
 /**
  * @param {[]} components
  * @param {string} path
@@ -24,7 +30,7 @@ export function renderComponents(components, path, render) {
             return null;
         }
 
-        return render(Component, component.type, `${path}.components.${i}`, component.config);
+        return render(Component, component.type, getComponentPath(path, i), component.config);
     });
 }
 
@@ -72,7 +78,9 @@ registerPublicEndpoint("utils.component.extractWidth", extractWidth);
  * @returns {string|null}
  */
 export function toPixel(value) {
-    return value ? `${value}px` : null;
+    let intValue = parseInt(value);
+
+    return intValue == value ? `${value}px` : value;
 }
 
 registerPublicEndpoint("utils.component.toPixel", toPixel);

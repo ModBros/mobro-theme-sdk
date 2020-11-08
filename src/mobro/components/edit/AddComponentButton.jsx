@@ -1,8 +1,9 @@
 import React from "react"
 import {isEditMode} from "mobro/utils/layout";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {toggleSidebarComponent, withSidebar} from "mobro/utils/sidebar";
+import {closeSidebarComponent, toggleSidebarComponent, withSidebar} from "mobro/utils/sidebar";
 import ComponentSelection from "mobro/containers/edit/ComponentSelection";
+import IconButton from "mobro/containers/shared/button/IconButton";
 
 function AddComponentButton({layoutMode, addComponent}) {
     if (!isEditMode(layoutMode)) {
@@ -12,14 +13,17 @@ function AddComponentButton({layoutMode, addComponent}) {
     const
         name = `add_component`,
         title = "Add Component",
-        content = (<ComponentSelection onSelect={addComponent}/>);
+        content = (<ComponentSelection onSelect={(...args) => {
+            addComponent(...args);
+            closeSidebarComponent(name);
+        }}/>);
 
     withSidebar({name, title, content});
 
     return (
-        <button type="button" className="btn btn-sm btn-round btn-primary" onClick={() => toggleSidebarComponent(name)}>
-            <FontAwesomeIcon icon="plus"/>
-        </button>
+        <IconButton icon={"plus"} className={"w-100"} onClick={() => toggleSidebarComponent(name)}>
+            Add Component
+        </IconButton>
     );
 }
 

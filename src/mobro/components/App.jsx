@@ -7,8 +7,10 @@ import Entry from "mobro/containers/Entry";
 import SidebarContainer from "mobro/containers/shared/SidebarContainer";
 import {getPublicUploadUrl, hasEditmodeParam} from "mobro/utils/socket";
 import {LAYOUT_MODE_DISPLAY, LAYOUT_MODE_EDIT} from "mobro/enum/layout";
+import {isEditMode} from "mobro/utils/layout";
+import Editmode from "mobro/containers/edit/Editmode";
 
-function App({layoutFetchingState, fetchLayout, setLayoutMode, config}) {
+function App({layoutFetchingState, fetchLayout, setLayoutMode, config, layoutMode}) {
     useEffect(() => {
         setLayoutMode(hasEditmodeParam() ? LAYOUT_MODE_EDIT : LAYOUT_MODE_DISPLAY);
     }, []);
@@ -35,20 +37,37 @@ function App({layoutFetchingState, fetchLayout, setLayoutMode, config}) {
         );
     }
 
-    const style = extractSize(config);
+    let style = extractSize(config);
     const background = config?.background?.url;
+
+    if(isEditMode(layoutMode)) {
+        style = {
+            maxWidth: style.width,
+            maxHeight: style.height
+        }
+    }
 
     if(background) {
         style.backgroundImage = `url(${getPublicUploadUrl(background)})`;
     }
 
-    return (
+    let content = (
         <div className="app" style={style}>
             <Entry/>
 
             <SidebarContainer/>
         </div>
-    )
+    );
+
+    if(isEditMode(layoutMode)) {
+        content = (
+            <Editmode>
+                {content}
+            </Editmode>
+        );
+    }
+
+    return content
 }
 
 export default App;

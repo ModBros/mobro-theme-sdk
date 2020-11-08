@@ -14,10 +14,10 @@ export const defaultLayoutConfig = {
 
 export const defaultLayoutEditConfig = {
     width: {
-        type: "numeric"
+        type: "input"
     },
     height: {
-        type: "numeric"
+        type: "input"
     },
     rowHeight: {
         type: "numeric"

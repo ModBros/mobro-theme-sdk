@@ -1,11 +1,8 @@
 import React from "react";
 import {Responsive, WidthProvider} from "react-grid-layout";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {extractGridConfig, extractLayoutFromGrid, isEditMode} from "mobro/utils/layout";
 import BaseComponent from "mobro/containers/component/BaseComponent";
 import {renderComponents} from "mobro/utils/component";
-import AddComponentButton from "mobro/containers/edit/AddComponentButton";
-import TriggerGlobalConfigButton from "mobro/containers/edit/TriggerGlobalConfigButton";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -31,14 +28,6 @@ function Grid({layoutMode, layoutChange, rowHeight, components}) {
                     </div>
                 ))}
             </ResponsiveGridLayout>
-
-            {isEditMode(layoutMode) && (
-                <div className="absolute-container">
-                    <AddComponentButton/>
-                    <span className={"pl-1"}/>
-                    <TriggerGlobalConfigButton/>
-                </div>
-            )}
         </div>
     );
 }

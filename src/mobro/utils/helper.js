@@ -25,7 +25,7 @@ registerPublicEndpoint("utils.helper.empty", empty);
 
 export function map(value, callback) {
     if (!value) {
-        return value;
+        return [];
     }
 
     if (Array.isArray(value)) {
@@ -38,7 +38,7 @@ export function map(value, callback) {
         });
     }
 
-    return value;
+    return [value];
 }
 
 registerPublicEndpoint("utils.helper.map", map);

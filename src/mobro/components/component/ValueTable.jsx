@@ -28,7 +28,9 @@ function ValueRow(props) {
             </td>
 
             <td className={"text-right"}>
-                {extractValue(channelData)}{extractRawUnit(channelData)}
+                <strong>
+                    {extractValue(channelData)}{extractRawUnit(channelData)}
+                </strong>
             </td>
         </tr>
     );

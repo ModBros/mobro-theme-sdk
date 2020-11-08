@@ -19,3 +19,25 @@ body {
   width: 100%;
   height: auto !important;
 }
+
+.editmode {
+  max-height: 100%;
+  overflow: hidden;
+}
+
+.editmode-header {
+  background: $gray-100;
+  border-bottom: 1px solid $gray-400;
+}
+
+.editmode-sidebar {
+  min-width: 20rem;
+  background: white;
+  border-left: 1px solid $gray-400;
+}
+
+.editmode-sidebar-body {
+  max-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

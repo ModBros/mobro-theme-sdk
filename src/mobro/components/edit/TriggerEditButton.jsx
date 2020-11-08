@@ -33,7 +33,7 @@ function TriggerEditButton({layoutMode, type, path, config}) {
         <IconButton
             icon={"cog"}
             variant={"link"}
-            className={"btn-sm trigger-edit-button"}
+            className={"btn-sm"}
             onClick={() => toggleSidebarComponent(name)}
         />
     );

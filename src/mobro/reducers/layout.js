@@ -10,7 +10,7 @@ import {
     layoutMode,
     layoutRequested,
     pasteComponent,
-    removeComponent
+    removeComponent, selectComponent
 } from "mobro/actions/layout";
 import {NOT_ASKED} from "mobro/utils/communication";
 import {defaultLayoutConfig, saveLayout} from "mobro/utils/layout";
@@ -26,6 +26,7 @@ const initialState = {
     layoutFetchingState: NOT_ASKED,
     layoutMode: LAYOUT_MODE_DISPLAY,
     layout: defaultLayoutConfig,
+    selectedComponent: null,
     componentTemporaryStorage: null
 };
 
@@ -60,6 +61,12 @@ export default createReducer(initialState, {
         saveLayout(dotPropImmutable.get(state, "layout"));
 
         return state;
+    },
+
+    [selectComponent.type]: (state, {payload}) => {
+        const {path} = payload;
+
+        return dotPropImmutable.set(state, `selectedComponent`, path !== state.selectedComponent ? path : null);
     },
 
     [addComponent.type]: (state, {payload}) => {
@@ -107,6 +114,9 @@ registerPublicEndpoint("reducers.layout.getLayoutMode", getLayoutMode);
 
 export const getLayoutConfig = state => dotPropImmutable.get(getLayout(state), "config");
 registerPublicEndpoint("reducers.layout.getLayoutConfig", getLayoutConfig);
+
+export const getSelectedComponent = state => dotPropImmutable.get(getLayoutState(state), "selectedComponent");
+registerPublicEndpoint("reducers.layout.getSelectedComponent", getSelectedComponent);
 
 export const getLayoutComponents = state => dotPropImmutable.get(getLayout(state), "components");
 registerPublicEndpoint("reducers.layout.getLayoutComponents", getLayoutComponents);
