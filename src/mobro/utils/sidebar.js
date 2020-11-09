@@ -35,7 +35,11 @@ registerPublicEndpoint("utils.sidebar.withSidebar", withSidebar);
  * @returns {string}
  */
 function sanitizeName(name) {
-    return name.replaceAll(".", "_");
+    if (!name) {
+        return name;
+    }
+
+    return name.replace(/\./g, "_");
 }
 
 /**

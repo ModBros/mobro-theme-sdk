@@ -5,6 +5,8 @@ test/
 
 dist/sdk.js
 dist/sdk.js.map
+dist/sdk-v2.js
+dist/sdk-v2.js.map
 
 dist/theme.js
 dist/theme.js.map
