@@ -52,7 +52,7 @@ function App({layoutFetchingState, fetchLayout, setLayoutMode, config, layoutMod
     }
 
     let content = (
-        <div className={"d-flex w-100"} style={{marginTop: editmode.headerHeight, maxWidth: window.innerWidth - editmode.sidebarWidth}}>
+        <div className={"d-flex w-100 align-items-center justify-content-center"} style={{marginTop: editmode.headerHeight, maxWidth: window.innerWidth - editmode.sidebarWidth}}>
             <div className="app" style={style}>
                 <Entry/>
             </div>
