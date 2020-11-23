@@ -1,5 +1,5 @@
 import {noop} from "mobro/utils/helper";
-import IconButton from "mobro/containers/shared/button/IconButton";
+import IconButton from "mobro/containers/edit/button/IconButton";
 
 function Footer(props) {
     const {

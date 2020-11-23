@@ -1,4 +1,4 @@
-import IconButton from "mobro/containers/shared/button/IconButton";
+import IconButton from "mobro/containers/edit/button/IconButton";
 import {toggleSidebarComponent, withSidebar} from "mobro/utils/sidebar";
 import {defaultLayoutEditConfig, isEditMode} from "mobro/utils/layout";
 import {map} from "mobro/utils/helper";

@@ -1,0 +1,14 @@
+.editmode-header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.editmode-sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100%;
+}

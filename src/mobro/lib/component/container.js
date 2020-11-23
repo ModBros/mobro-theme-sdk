@@ -13,6 +13,7 @@ export default class Container {
     basicEnabled = true;
 
     reduxEnabled = false;
+    basicReduxEnabled = false;
     mapStateToProps = null;
     mapDispatchToProps = null;
     mergeProps = null;
@@ -62,6 +63,25 @@ export default class Container {
      */
     redux(mapStateToProps = null, mapDispatchToProps = null, mergeProps = null) {
         this.reduxEnabled = true;
+        this.basicReduxEnabled = false;
+
+        this.mapStateToProps = mapStateToProps;
+        this.mapDispatchToProps = mapDispatchToProps;
+        this.mergeProps = mergeProps;
+
+        return this;
+    }
+
+    /**
+     * @param {function|null} mapStateToProps
+     * @param {function|null} mapDispatchToProps
+     * @param {function|null} mergeProps
+     *
+     * @returns {this}
+     */
+    connect(mapStateToProps = null, mapDispatchToProps = null, mergeProps = null) {
+        this.basicReduxEnabled = true;
+        this.reduxEnabled = false;
 
         this.mapStateToProps = mapStateToProps;
         this.mapDispatchToProps = mapDispatchToProps;
@@ -93,6 +113,8 @@ export default class Container {
             const mergeProps = withMergePropsHook(this.id, this.mergeProps);
 
             this.component = connect(mapStateToProps, mapDispatchToProps, mergeProps)(this.component);
+        } else if (this.basicReduxEnabled) {
+            this.component = connect(this.mapStateToProps, this.mapDispatchToProps, this.mergeProps)(this.component);
         }
 
         return this;

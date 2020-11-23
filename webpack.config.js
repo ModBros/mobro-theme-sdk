@@ -34,8 +34,13 @@ module.exports = {
             use: {
                 loader: "babel-loader",
                 options: {
-                    plugins: ['@babel/plugin-transform-runtime', '@babel/plugin-proposal-class-properties'],
-                    presets: ["@babel/react", "@babel/preset-env"]
+                    plugins: [
+                        '@babel/plugin-transform-runtime',
+                        '@babel/plugin-proposal-class-properties'
+                    ],
+                    presets: [
+                        "@babel/react", "@babel/preset-env"
+                    ]
                 }
             }
         }, {
@@ -45,7 +50,12 @@ module.exports = {
                 exposes: 'React',
             },
         }, {
+            test: /\.inline\.scss$/,
+            exclude: /node_modules/,
+            use: ["raw-loader", "sass-loader"]
+        }, {
             test: /\.scss$/,
+            exclude: [/\.inline\.scss/],
             use: ["style-loader", "css-loader", "sass-loader"]
         }]
     },

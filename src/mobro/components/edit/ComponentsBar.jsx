@@ -4,7 +4,7 @@ import TriggerEditButton from "mobro/containers/edit/TriggerEditButton";
 import React from "react";
 import {getComponentPath} from "mobro/utils/component";
 import AlignCenter from "mobro/containers/shared/layout/AlignCenter";
-import IconButton from "mobro/components/shared/button/IconButton";
+import IconButton from "mobro/components/edit/button/IconButton";
 
 function ComponentsBar(props) {
     const {

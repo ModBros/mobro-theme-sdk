@@ -3,7 +3,7 @@ import {isEditMode} from "mobro/utils/layout";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {closeSidebarComponent, toggleSidebarComponent, withSidebar} from "mobro/utils/sidebar";
 import ComponentSelection from "mobro/containers/edit/ComponentSelection";
-import IconButton from "mobro/containers/shared/button/IconButton";
+import IconButton from "mobro/containers/edit/button/IconButton";
 
 function AddComponentButton({layoutMode, addComponent}) {
     if (!isEditMode(layoutMode)) {

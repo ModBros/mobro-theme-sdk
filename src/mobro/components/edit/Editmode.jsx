@@ -1,34 +1,76 @@
+import React, {useRef, useEffect, useState} from "react";
 import ComponentsBar from "mobro/containers/edit/ComponentsBar";
 import AddComponentButton from "mobro/containers/edit/AddComponentButton";
 import TriggerGlobalConfigButton from "mobro/containers/edit/TriggerGlobalConfigButton";
-import React from "react";
+import SidebarContainer from "mobro/containers/edit/SidebarContainer";
+import createCache from '@emotion/cache';
+import memoizeOne from 'memoize-one';
+import {NonceProvider} from "react-select";
+import root from "react-shadow";
+import editmodeStyles from "mobro/styles/editmode.inline.scss";
+import bootstrapStyles from "mobro/styles/bootstrap.inline.scss";
+import debounce from "debounce";
 
-function Editmode(props) {
+class EmotionProvider extends NonceProvider {
+    createEmotionCacheCustom(nonce) {
+        return createCache({nonce, key: 'editmode-shadow-root-style', container: this.props.container});
+    }
+
+    createEmotionCache = memoizeOne(this.createEmotionCacheCustom);
+}
+
+function EditmodeContent(props) {
     const {
+        shadowRoot,
         components,
-        children
+        updateEditmode
     } = props;
 
+    if(!shadowRoot.current) {
+        // can only render editmode, if shadow root is already available
+        // otherwise the container for adding emotion styles is not available which
+        // breaks components working with emotion like the react-select
+        return null;
+    }
+
+    const [headerHeight, setHeaderHeight] = useState(0);
+    const header = useRef(null);
+    const sidebar = useRef(null);
+
+    useEffect(() => {
+        const handleResize = debounce((event) => {
+            updateEditmode({
+                headerHeight: header.current?.clientHeight,
+                sidebarWidth: sidebar.current?.clientWidth
+            });
+
+            setHeaderHeight(header.current?.clientHeight);
+        });
+
+        window.addEventListener("resize", handleResize);
+        handleResize();
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        }
+    });
+
+    console.log(headerHeight);
+
     return (
-        <div className={"editmode d-flex flex-column w-100"}>
-            <div className={"d-flex flex-fill mh-100"}>
-                <div className={"d-flex flex-column flex-fill"}>
-                    <div className={"editmode-header bg-gray-100 p-2 mb-3 d-flex align-items-center"}>
-                        <small className={"flex-fill"}>
-                            MoBro Theme Explorer
-                        </small>
+        <EmotionProvider container={shadowRoot.current}>
+            <div className={"editmode"}>
+                <div className={"editmode-header bg-gray-100 p-2 mb-3 d-flex align-items-center"} ref={header}>
+                    <small className={"flex-fill"}>
+                        MoBro Theme Explorer
+                    </small>
 
-                        <small>
-                            <TriggerGlobalConfigButton/>
-                        </small>
-                    </div>
-
-                    <div className={"flex-fill d-flex justify-content-center"}>
-                        {children}
-                    </div>
+                    <small>
+                        <TriggerGlobalConfigButton/>
+                    </small>
                 </div>
 
-                <div className={"editmode-sidebar d-flex flex-column"}>
+                <div className={"editmode-sidebar d-flex flex-column"} ref={sidebar} style={{paddingTop: headerHeight}}>
                     <div className={"flex-fill editmode-sidebar-body"}>
                         <ComponentsBar components={components}/>
                     </div>
@@ -37,8 +79,30 @@ function Editmode(props) {
                         <AddComponentButton/>
                     </div>
                 </div>
+
+                <SidebarContainer/>
             </div>
-        </div>
+        </EmotionProvider>
+    );
+}
+
+function Editmode(props) {
+    const shadowRoot = useRef(null);
+
+    return (
+        <root.div>
+            <div ref={shadowRoot}>
+                <EditmodeContent {...props} shadowRoot={shadowRoot}/>
+
+                <style type="text/css">
+                    {bootstrapStyles}
+                </style>
+
+                <style type="text/css">
+                    {editmodeStyles}
+                </style>
+            </div>
+        </root.div>
     );
 }
 

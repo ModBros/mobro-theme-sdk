@@ -10,7 +10,7 @@ import {
     layoutMode,
     layoutRequested,
     pasteComponent,
-    removeComponent, selectComponent
+    removeComponent, selectComponent, updateEditmode
 } from "mobro/actions/layout";
 import {NOT_ASKED} from "mobro/utils/communication";
 import {defaultLayoutConfig, saveLayout} from "mobro/utils/layout";
@@ -27,7 +27,11 @@ const initialState = {
     layoutMode: LAYOUT_MODE_DISPLAY,
     layout: defaultLayoutConfig,
     selectedComponent: null,
-    componentTemporaryStorage: null
+    componentTemporaryStorage: null,
+    editmode: {
+        headerHeight: 0,
+        sidebarWidth: 0
+    }
 };
 
 // ----------------------------------------------
@@ -94,6 +98,10 @@ export default createReducer(initialState, {
         const {type, config} = state.componentTemporaryStorage;
 
         return dotPropImmutable.merge(state, "layout.components", {type, config});
+    },
+
+    [updateEditmode.type]: (state, {payload}) => {
+        return dotPropImmutable.merge(state, "editmode", payload);
     }
 });
 
@@ -123,3 +131,5 @@ registerPublicEndpoint("reducers.layout.getLayoutComponents", getLayoutComponent
 
 export const getLayoutComponentTemporaryStorage = state => dotPropImmutable.get(getLayoutState(state), "componentTemporaryStorate");
 registerPublicEndpoint("reducers.layout.getLayoutComponentTemporaryStorage", getLayoutComponentTemporaryStorage);
+
+export const getEditmode = state => dotPropImmutable.get(getLayoutState(state), "editmode");

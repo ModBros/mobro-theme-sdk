@@ -1,4 +1,4 @@
-import FormGroup from "mobro/containers/shared/form/FormGroup";
+import FormGroup from "mobro/containers/edit/form/FormGroup";
 import ReactSelect from "react-select";
 import {getOptionByValue} from "mobro/utils/component/select";
 

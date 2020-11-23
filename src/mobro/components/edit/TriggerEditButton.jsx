@@ -7,7 +7,7 @@ import {getDataComponentConfig} from "mobro/hooks/components-hooks";
 import {empty, map} from "mobro/utils/helper";
 import {deepValues} from "mobro/utils/object";
 import Footer from "mobro/containers/edit/Footer";
-import IconButton from "mobro/containers/shared/button/IconButton";
+import IconButton from "mobro/containers/edit/button/IconButton";
 
 function TriggerEditButton({layoutMode, type, path, config}) {
     if (!isEditMode(layoutMode)) {

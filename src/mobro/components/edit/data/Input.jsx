@@ -1,4 +1,4 @@
-import FormGroup from "mobro/containers/shared/form/FormGroup";
+import FormGroup from "mobro/containers/edit/form/FormGroup";
 import {getDataOrDefault} from "mobro/utils/component";
 
 function Input({name, data, onChange}) {

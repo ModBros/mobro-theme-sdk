@@ -1,6 +1,6 @@
 import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import Button from "mobro/containers/shared/button/Button";
+import Button from "mobro/containers/edit/button/Button";
 import {empty} from "mobro/utils/helper";
 
 function IconButton(props) {

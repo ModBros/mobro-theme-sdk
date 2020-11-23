@@ -37,3 +37,5 @@ export const addComponent = createAction("layout:component:add");
 export const removeComponent = createAction("layout:component:remove");
 export const copyComponent = createAction("layout:component:copy");
 export const pasteComponent = createAction("layout:component:paste");
+
+export const updateEditmode = createAction("layout:editmode:update");

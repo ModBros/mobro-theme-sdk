@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import FileInput from "react-file-input-previews-base64";
-import IconButton from "mobro/containers/shared/button/IconButton";
+import IconButton from "mobro/containers/edit/button/IconButton";
 import {uploadFile} from "mobro/utils/file";
 import {FINISHED, WORKING} from "mobro/enum/working-status";
 import {FAILED} from "mobro/utils/communication";
-import FormGroup from "mobro/containers/shared/form/FormGroup";
+import FormGroup from "mobro/containers/edit/form/FormGroup";
 import Preview from "mobro/containers/edit/data/image/Preview";
 import WorkingStatusIndicator from "mobro/containers/shared/WorkingStatusIndicator";
 

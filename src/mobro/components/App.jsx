@@ -1,16 +1,16 @@
-import React, {useEffect} from "react";
+import React, {useEffect, Fragment} from "react";
 import {failed, fetched, notAskedYet} from "mobro/utils/communication";
 import LoadingIndicator from "mobro/containers/shared/LoadingIndicator";
 import AlignCenter from "mobro/containers/shared/layout/AlignCenter";
 import {extractSize} from "mobro/utils/component";
 import Entry from "mobro/containers/Entry";
-import SidebarContainer from "mobro/containers/shared/SidebarContainer";
+import SidebarContainer from "mobro/containers/edit/SidebarContainer";
 import {getPublicUploadUrl, hasEditmodeParam} from "mobro/utils/socket";
 import {LAYOUT_MODE_DISPLAY, LAYOUT_MODE_EDIT} from "mobro/enum/layout";
 import {isEditMode} from "mobro/utils/layout";
 import Editmode from "mobro/containers/edit/Editmode";
 
-function App({layoutFetchingState, fetchLayout, setLayoutMode, config, layoutMode}) {
+function App({layoutFetchingState, fetchLayout, setLayoutMode, config, layoutMode, editmode}) {
     useEffect(() => {
         setLayoutMode(hasEditmodeParam() ? LAYOUT_MODE_EDIT : LAYOUT_MODE_DISPLAY);
     }, []);
@@ -52,18 +52,20 @@ function App({layoutFetchingState, fetchLayout, setLayoutMode, config, layoutMod
     }
 
     let content = (
-        <div className="app" style={style}>
-            <Entry/>
-
-            <SidebarContainer/>
+        <div className={"d-flex w-100"} style={{marginTop: editmode.headerHeight, maxWidth: window.innerWidth - editmode.sidebarWidth}}>
+            <div className="app" style={style}>
+                <Entry/>
+            </div>
         </div>
     );
 
     if(isEditMode(layoutMode)) {
         content = (
-            <Editmode>
+            <Fragment>
+                <Editmode/>
+
                 {content}
-            </Editmode>
+            </Fragment>
         );
     }
 

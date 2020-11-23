@@ -1,5 +1,5 @@
 import React from "react";
-import FormGroup from "mobro/containers/shared/form/FormGroup";
+import FormGroup from "mobro/containers/edit/form/FormGroup";
 import SourceSelect from "mobro/containers/edit/data/channel/SourceSelect";
 import HardwareSelect from "mobro/containers/edit/data/channel/HardwareSelect";
 import SensorSelect from "mobro/components/edit/data/channel/SensorSelect";

@@ -1,7 +1,7 @@
 import {registerPublicEndpoint} from "mobro/utils/public";
 import {dispatch} from "mobro/reducers";
 import {addSidebar, closeSidebar, openSidebar, removeSidebar, toggleSidebar} from "mobro/actions/sidebar";
-import Sidebar from "mobro/containers/shared/Sidebar";
+import Sidebar from "mobro/containers/edit/Sidebar";
 import {useEffect} from "react";
 
 const _sidebars = {};
