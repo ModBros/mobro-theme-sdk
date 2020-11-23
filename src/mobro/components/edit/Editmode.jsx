@@ -60,7 +60,7 @@ function EditmodeContent(props) {
     return (
         <EmotionProvider container={shadowRoot.current}>
             <div className={"editmode"}>
-                <div className={"editmode-header bg-gray-100 p-2 mb-3 d-flex align-items-center"} ref={header}>
+                <div className={"editmode-header text-white p-2 mb-3 d-flex align-items-center"} ref={header}>
                     <small className={"flex-fill"}>
                         MoBro Theme Explorer
                     </small>

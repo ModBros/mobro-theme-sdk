@@ -9,13 +9,16 @@
   min-width: 20rem;
 
   .sidebar-card {
-    border-top: none;
-    border-bottom: none;
-    border-right: none;
+    border: none;
   }
 
   .sidebar-body {
     overflow-x: hidden;
     overflow-y: auto;
+    background: $app-black;
+  }
+
+  .sidebar-footer {
+    background: $app-black;
   }
 }

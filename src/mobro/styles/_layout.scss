@@ -27,13 +27,12 @@ body {
 }
 
 .editmode-header {
-  background: $gray-100;
-  border-bottom: 1px solid $gray-400;
+  background: $primary;
 }
 
 .editmode-sidebar {
   min-width: 20rem;
-  background: white;
+  background: $app-black;
   border-left: 1px solid $gray-400;
 }
 

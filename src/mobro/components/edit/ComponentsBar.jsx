@@ -25,31 +25,35 @@ function ComponentsBar(props) {
 
     return (
         <div className={"px-2"}>
+            <h5 className={"my-2 text-white"}>
+                Your Components
+            </h5>
+
             {map(components, (component, i) => {
                 const path = getComponentPath(path, i);
 
                 return (
-                    <div key={i} onClick={() => selectComponent(path)} className={`border-bottom ${selectedComponent === path ? "selection-indicator" : ""}`}>
-                        <div className={"px-2 py-3 d-flex align-items-center"}>
-                            <small className={"text-muted mr-3"}>
-                                #{i}
-                            </small>
+                    <div key={i} onClick={() => selectComponent(path)} className={`${selectedComponent === path ? "selection-indicator" : ""}`}>
+                        <div className={"card mb-2"}>
+                            <div className={"card-body p-1"}>
+                                <div className={"d-flex align-items-center"}>
+                                    <strong>
+                                        {component.type}
+                                    </strong>
 
-                            <span className={"text-uppercase"}>
-                                {component.type}
-                            </span>
+                                    <div className={"flex-fill d-flex justify-content-end align-items-center"}>
+                                        <IconButton
+                                            icon={"trash"}
+                                            variant={"link"}
+                                            size={"sm"}
+                                            onClick={() => {
+                                                removeComponent(path)
+                                            }}
+                                        />
 
-                            <div className={"flex-fill d-flex justify-content-end align-items-center"}>
-                                <IconButton
-                                    icon={"trash"}
-                                    variant={"link"}
-                                    size={"sm"}
-                                    onClick={() => {
-                                        removeComponent(path)
-                                    }}
-                                />
-
-                                <TriggerEditButton type={component.type} path={path} config={component.config}/>
+                                        <TriggerEditButton type={component.type} path={path} config={component.config}/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
