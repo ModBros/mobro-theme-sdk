@@ -16,7 +16,7 @@ function Sidebar({title, name, children, footer = null}) {
                     </button>
                 </div>
 
-                <div className="card-body sidebar-body">
+                <div className="card-body sidebar-body p-2">
                     {children}
                 </div>
 

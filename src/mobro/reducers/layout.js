@@ -59,7 +59,7 @@ export default createReducer(initialState, {
     })),
 
     [layoutEdit.type]: (state, {payload}) => {
-        const {path, name, data} = payload;
+        const {path = "", name, data} = payload;
 
         state = dotPropImmutable.set(state, `layout${path}.config.${name}`, data);
         saveLayout(dotPropImmutable.get(state, "layout"));

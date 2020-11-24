@@ -10,6 +10,7 @@ import root from "react-shadow";
 import editmodeStyles from "mobro/styles/editmode.inline.scss";
 import bootstrapStyles from "mobro/styles/bootstrap.inline.scss";
 import debounce from "debounce";
+import EditmodeHeader from "mobro/containers/edit/EditmodeHeader";
 
 class EmotionProvider extends NonceProvider {
     createEmotionCacheCustom(nonce) {
@@ -55,19 +56,11 @@ function EditmodeContent(props) {
         }
     });
 
-    console.log(headerHeight);
-
     return (
         <EmotionProvider container={shadowRoot.current}>
             <div className={"editmode"}>
-                <div className={"editmode-header text-white p-2 mb-3 d-flex align-items-center"} ref={header}>
-                    <small className={"flex-fill"}>
-                        MoBro Theme Explorer
-                    </small>
-
-                    <small>
-                        <TriggerGlobalConfigButton/>
-                    </small>
+                <div className={"editmode-header text-white p-2 mb-3"} ref={header}>
+                    <EditmodeHeader/>
                 </div>
 
                 <div className={"editmode-sidebar d-flex flex-column"} ref={sidebar} style={{paddingTop: headerHeight}}>

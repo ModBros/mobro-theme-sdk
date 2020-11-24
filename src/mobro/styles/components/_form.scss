@@ -7,3 +7,15 @@
     font-size: 0.75em;
   }
 }
+
+.form-control-sm {
+  height: 1.5rem;
+  padding: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.form-control-inline {
+  width: auto;
+  min-width: 3rem;
+  max-width: 4rem;
+}

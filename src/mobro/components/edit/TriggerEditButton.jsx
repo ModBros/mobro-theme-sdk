@@ -31,7 +31,7 @@ function TriggerEditButton({layoutMode, type, path, config}) {
 
     return (
         <IconButton
-            icon={"cog"}
+            icon={"pen"}
             variant={"link"}
             className={"btn-sm"}
             onClick={() => toggleSidebarComponent(name)}

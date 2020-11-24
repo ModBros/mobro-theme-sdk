@@ -8,3 +8,12 @@
 .react-grid-item {
   display: flex;
 }
+
+.row-gutter-1 {
+  margin-left: -0.25rem;
+  margin-right: -0.25rem;
+
+  *[class^="col-"] {
+    padding: 0.25rem;
+  }
+}

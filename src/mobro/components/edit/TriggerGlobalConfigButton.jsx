@@ -31,12 +31,12 @@ function TriggerGlobalConfigButton(props) {
 
     return (
         <IconButton
-            icon={"cog"}
+            icon={"cogs"}
             variant={"link"}
+            className={"text-white"}
             size={"inline"}
             onClick={() => toggleSidebarComponent(name)}
         >
-            Configure
         </IconButton>
     );
 }
