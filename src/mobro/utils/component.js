@@ -6,11 +6,39 @@ import {CHANNEL_PREFIX} from "mobro/enum/channel-data";
 import {addChannel, removeChannel} from "mobro/utils/channel-data";
 import {noop} from "mobro/utils/helper";
 
+/**
+ * @param path
+ * @param index
+ *
+ * @returns {string}
+ */
 export function getComponentPath(path = "", index) {
     return `${path}.components.${index}`
 }
 
 registerPublicEndpoint("utils.component.getComponentPath", getComponentPath);
+
+/**
+ * @param path
+ * @param postfix
+ *
+ * @returns {string}
+ */
+export function getComponentConfigPath(path = "", postfix = "") {
+    return `${path}.config` + (postfix ? `.${postfix}` : "");
+}
+
+registerPublicEndpoint("utils.component.getComponentConfigPath", getComponentConfigPath);
+
+/**
+ * @param config
+ * @returns {[]}
+ */
+export function getComponentsFromConfig(config) {
+    return config?.components || [];
+}
+
+registerPublicEndpoint("utils.component.getComponentsFromConfig", getComponentsFromConfig);
 
 /**
  * @param {[]} components

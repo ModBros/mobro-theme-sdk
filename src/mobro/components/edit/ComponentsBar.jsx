@@ -18,7 +18,7 @@ function ComponentsBar(props) {
     if(empty(components)) {
         return (
             <AlignCenter>
-                <h5>No Components yet, add one!</h5>
+                <h5 className={"text-white"}>No Components yet, add one!</h5>
             </AlignCenter>
         );
     }
@@ -30,10 +30,10 @@ function ComponentsBar(props) {
             </h5>
 
             {map(components, (component, i) => {
-                const path = getComponentPath(path, i);
+                const componentPath = getComponentPath(path, i);
 
                 return (
-                    <div key={i} onClick={() => selectComponent(path)} className={`${selectedComponent === path ? "selection-indicator" : ""}`}>
+                    <div key={i} onClick={() => selectComponent(componentPath)} className={`${selectedComponent === componentPath ? "selection-indicator" : ""}`}>
                         <div className={"card mb-2"}>
                             <div className={"card-body p-1"}>
                                 <div className={"d-flex align-items-center"}>
@@ -47,11 +47,11 @@ function ComponentsBar(props) {
                                             variant={"link"}
                                             size={"sm"}
                                             onClick={() => {
-                                                removeComponent(path)
+                                                removeComponent(componentPath)
                                             }}
                                         />
 
-                                        <TriggerEditButton type={component.type} path={path} config={component.config}/>
+                                        <TriggerEditButton type={component.type} path={componentPath} config={component.config}/>
                                     </div>
                                 </div>
                             </div>

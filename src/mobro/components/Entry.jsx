@@ -1,8 +1,9 @@
 import Grid from "mobro/containers/grid/Grid";
+import {getComponentsFromConfig} from "mobro/utils/component";
 
 function Entry({layout}) {
     return (
-        <Grid components={layout.components}/>
+        <Grid components={getComponentsFromConfig(layout)}/>
     );
 }
 

@@ -1,60 +1,24 @@
-import {empty, map} from "mobro/utils/helper";
-import {useBasicChannelListener} from "mobro/utils/component";
-import AlignCenter from "mobro/containers/shared/layout/AlignCenter";
-import LoadingIndicator from "mobro/containers/shared/LoadingIndicator";
-import {extractLabel, extractRawUnit, extractValue} from "mobro/utils/channel-data";
-
-function ValueRow(props) {
-    const {
-        config
-    } = props;
-
-    const channelData = useBasicChannelListener(config?.channel);
-
-    if (!channelData) {
-        return (
-            <tr>
-                <td colSpan={2}>
-                    <AlignCenter><LoadingIndicator className="small"/></AlignCenter>
-                </td>
-            </tr>
-        );
-    }
-
-    return (
-        <tr>
-            <td>
-                {extractLabel(channelData)}
-            </td>
-
-            <td className={"text-right"}>
-                <strong>
-                    {extractValue(channelData)}{extractRawUnit(channelData)}
-                </strong>
-            </td>
-        </tr>
-    );
-}
+import {empty} from "mobro/utils/helper";
+import {getComponentsFromConfig, renderComponents} from "mobro/utils/component";
 
 function ValueTable(props) {
     const {
+        path,
         config
     } = props;
 
-    const values = config?.values;
+    const components = getComponentsFromConfig(config.components);
 
-    if (empty(values)) {
+    if (empty(components)) {
         return null;
     }
 
     return (
-        <table className={"table w-100"}>
-            <tbody>
-            {map(values, (value, i) => (
-                <ValueRow key={i} config={value}/>
+        <div className={"w-100"}>
+            {renderComponents(components, path, (Component, type, path, config) => (
+                <Component key={path} path={path} config={config}/>
             ))}
-            </tbody>
-        </table>
+        </div>
     );
 }
 

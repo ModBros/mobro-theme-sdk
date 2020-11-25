@@ -5,16 +5,23 @@ import {closeSidebarComponent, toggleSidebarComponent, withSidebar} from "mobro/
 import ComponentSelection from "mobro/containers/edit/ComponentSelection";
 import IconButton from "mobro/containers/edit/button/IconButton";
 
-function AddComponentButton({layoutMode, addComponent}) {
+function AddComponentButton(props) {
+    const {
+        path = "",
+        layoutMode,
+        addComponent,
+        allowed = []
+    } = props;
+
     if (!isEditMode(layoutMode)) {
         return null;
     }
 
     const
-        name = `add_component`,
+        name = `add_component_${path}`,
         title = "Add Component",
-        content = (<ComponentSelection onSelect={(...args) => {
-            addComponent(...args);
+        content = (<ComponentSelection allowed={allowed} onSelect={(type) => {
+            addComponent({path, type});
             closeSidebarComponent(name);
         }}/>);
 

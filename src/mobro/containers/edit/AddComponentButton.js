@@ -4,20 +4,15 @@ import {getLayoutMode} from "mobro/reducers/layout";
 import AddComponentButton from "mobro/components/edit/AddComponentButton";
 import {addComponent} from "mobro/actions/layout";
 
-/**
- * @param {MapStateToPropsEvent} event
- */
-const mapStateToProps = event => event.mergeMapStateToProps({
-    layoutMode: getLayoutMode(event.getState())
+const mapStateToProps = (state) => ({
+    layoutMode: getLayoutMode(state)
 });
 
-/**
- * @param {MapDispatchToPropsEvent} event
- */
-const mapDispatchToProps = event => event.mergeMapDispatchToProps({
-    addComponent: (type) => event.dispatch(addComponent({type}))
+const mapDispatchToProps = (dispatch) => ({
+    addComponent: (args) => dispatch(addComponent(args))
 })
 
 export default Container.create("edit.trigger-edit-button", AddComponentButton)
-    .redux(mapStateToProps, mapDispatchToProps)
+    .basic(false)
+    .connect(mapStateToProps, mapDispatchToProps)
     .generate();

@@ -1,26 +1,71 @@
 import {addEditComponent} from "mobro/hooks/components-hooks";
 
 import Input from "mobro/containers/edit/data/Input";
-addEditComponent("input", Input, "");
+
+addEditComponent({
+    name: "input",
+    component: Input,
+    defaultValue: ""
+});
 
 import Numeric from "mobro/containers/edit/data/Numeric";
-addEditComponent("numeric", Numeric, "");
+
+addEditComponent({
+    name: "numeric",
+    component: Numeric,
+    defaultValue: ""
+});
 
 import Select from "mobro/containers/edit/data/Select";
-addEditComponent("select", Select, null);
+
+addEditComponent({
+    name: "select",
+    component: Select,
+    defaultValue: null
+});
 
 import Checkbox from "mobro/containers/edit/data/Checkbox";
-addEditComponent("checkbox", Checkbox, false);
+
+addEditComponent({
+    name: "checkbox",
+    component: Checkbox,
+    defaultValue: false
+});
 
 import Channel from "mobro/containers/edit/data/Channel";
-addEditComponent("channel", Channel, {
-    source: null,
-    hardwaretype: null,
-    id: null
+
+addEditComponent({
+    name: "channel",
+    component: Channel,
+    defaultValue: {
+        source: null,
+        hardwaretype: null,
+        id: null
+    }
 });
 
 import SingleImage from "mobro/containers/edit/data/SingleImage";
-addEditComponent("single-image", SingleImage, null)
+
+addEditComponent({
+    name: "single-image",
+    component: SingleImage,
+    defaultValue: null
+})
 
 import Repeat from "mobro/containers/edit/data/Repeat";
-addEditComponent("repeat", Repeat, []);
+
+addEditComponent({
+    name: "repeat",
+    component: Repeat,
+    defaultValue: []
+});
+
+import Components from "mobro/containers/edit/data/Components";
+
+addEditComponent({
+    name: "components",
+    component: Components,
+    defaultValue: {
+        components: []
+    }
+});

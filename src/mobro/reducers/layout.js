@@ -18,6 +18,7 @@ import dotPropImmutable from "dot-prop-immutable";
 import {LAYOUT_MODE_DISPLAY} from "mobro/enum/layout";
 import {registerPublicEndpoint} from "mobro/utils/public";
 import {getDataComponentDefaultValue} from "mobro/hooks/components-hooks";
+import {getComponentConfigPath} from "mobro/utils/component";
 
 // ----------------------------------------------
 // initial state
@@ -34,6 +35,15 @@ const initialState = {
     }
 };
 
+function doSaveLayout(layout) {
+    try {
+        saveLayout(JSON.parse(JSON.stringify(layout)));
+    } catch(exception) {
+        console.error("could not save layout :(");
+        console.error(exception);
+    }
+}
+
 // ----------------------------------------------
 // reducer
 
@@ -46,10 +56,10 @@ export default createReducer(initialState, {
         }
 
         payload.forEach((item, i) => {
-            state = dotPropImmutable.merge(state, `layout.components.${i}.config`, item);
+            state = dotPropImmutable.merge(state, getComponentConfigPath(`layout.components.${i}`), item);
         });
 
-        saveLayout(dotPropImmutable.get(state, "layout"));
+        doSaveLayout(state.layout);
 
         return state;
     },
@@ -61,8 +71,8 @@ export default createReducer(initialState, {
     [layoutEdit.type]: (state, {payload}) => {
         const {path = "", name, data} = payload;
 
-        state = dotPropImmutable.set(state, `layout${path}.config.${name}`, data);
-        saveLayout(dotPropImmutable.get(state, "layout"));
+        state = dotPropImmutable.set(state, getComponentConfigPath(`layout${path}`, name), data);
+        doSaveLayout(state.layout);
 
         return state;
     },
@@ -74,9 +84,11 @@ export default createReducer(initialState, {
     },
 
     [addComponent.type]: (state, {payload}) => {
-        const {path = "", type} = payload;
+        let {path = "", type} = payload;
 
-        return dotPropImmutable.merge(state, `layout${path}.components`, {
+        path += ".components";
+
+        return dotPropImmutable.merge(state, `layout${path}`, {
             type: type,
             config: getDataComponentDefaultValue(type)
         });
