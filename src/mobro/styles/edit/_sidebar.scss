@@ -4,12 +4,21 @@
   top: 0;
   right: 0;
   height: 100%;
-  overflow: hidden;
-  max-width: 20rem;
   min-width: 20rem;
 
   .sidebar-card {
     border: none;
+    overflow: hidden;
+    box-shadow: none;
+  }
+
+  .sidebar-header {
+    background: $app-black;
+    border: none;
+  }
+
+  .sidebar-title {
+    text-transform: none;
   }
 
   .sidebar-body {

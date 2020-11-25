@@ -19,7 +19,7 @@ function AddComponentButton(props) {
 
     const
         name = `add_component_${path}`,
-        title = "Add Component",
+        title = "Add widget",
         content = (<ComponentSelection allowed={allowed} onSelect={(type) => {
             addComponent({path, type});
             closeSidebarComponent(name);
@@ -29,7 +29,7 @@ function AddComponentButton(props) {
 
     return (
         <IconButton icon={"plus"} className={"w-100"} onClick={() => toggleSidebarComponent(name)}>
-            Add Component
+            Add widget
         </IconButton>
     );
 }

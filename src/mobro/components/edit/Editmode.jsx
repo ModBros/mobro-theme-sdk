@@ -63,15 +63,17 @@ function EditmodeContent(props) {
                     <EditmodeHeader/>
                 </div>
 
-                <div className={"editmode-sidebar d-flex flex-column"} ref={sidebar} style={{paddingTop: headerHeight}}>
-                    <div className={"flex-fill editmode-sidebar-body"}>
-                        <ComponentsBar components={components}/>
-                    </div>
+                {headerHeight !== 0 && (
+                    <div className={"editmode-sidebar d-flex flex-column"} ref={sidebar} style={{paddingTop: headerHeight}}>
+                        <div className={"flex-fill editmode-sidebar-body p-2"}>
+                            <ComponentsBar components={components}/>
+                        </div>
 
-                    <div className={"editmode-sidebar-footer card-footer"}>
-                        <AddComponentButton/>
+                        <div className={"editmode-sidebar-footer card-footer"}>
+                            <AddComponentButton/>
+                        </div>
                     </div>
-                </div>
+                )}
 
                 <SidebarContainer/>
             </div>

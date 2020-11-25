@@ -15,7 +15,7 @@ function Components(props) {
 
     return (
         <Fragment>
-            <ComponentsBar path={componentsPath} components={data.components}/>
+            <ComponentsBar path={componentsPath} components={data.components} title={"Subwidgets"}/>
 
             <AddComponentButton allowed={getDataOrDefault(config.allowed, [])} path={componentsPath}/>
         </Fragment>

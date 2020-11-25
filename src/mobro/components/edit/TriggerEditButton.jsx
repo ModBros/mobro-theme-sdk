@@ -1,15 +1,20 @@
-import React, {Fragment} from "react"
+import React from "react"
 import {isEditMode} from "mobro/utils/layout";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {toggleSidebarComponent, withSidebar} from "mobro/utils/sidebar";
 import Edit from "mobro/containers/edit/Edit";
 import {getDataComponentConfig} from "mobro/hooks/components-hooks";
-import {empty, map} from "mobro/utils/helper";
+import {map} from "mobro/utils/helper";
 import {deepValues} from "mobro/utils/object";
-import Footer from "mobro/containers/edit/Footer";
 import IconButton from "mobro/containers/edit/button/IconButton";
 
-function TriggerEditButton({layoutMode, type, path, config}) {
+function TriggerEditButton(props) {
+    const {
+        layoutMode,
+        type,
+        path,
+        config
+    } = props;
+
     if (!isEditMode(layoutMode)) {
         return null;
     }
@@ -23,11 +28,10 @@ function TriggerEditButton({layoutMode, type, path, config}) {
 
     const
         name = `edit_component_${path}`,
-        title = "Configure",
-        content = (<Edit type={type} path={path} config={config}/>),
-        footer = (<Footer path={path}/>);
+        title = type,
+        content = (<Edit type={type} path={path} config={config}/>);
 
-    withSidebar({name, title, content, footer, dependencies: [dependencies]});
+    withSidebar({name, title, content, dependencies: [dependencies]});
 
     return (
         <IconButton
