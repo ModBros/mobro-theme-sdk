@@ -65,7 +65,11 @@ function EditmodeContent(props) {
 
                 {headerHeight !== 0 && (
                     <div className={"editmode-sidebar d-flex flex-column"} ref={sidebar} style={{paddingTop: headerHeight}}>
-                        <div className={"flex-fill editmode-sidebar-body p-2"}>
+                        <div className={"flex-fill editmode-sidebar-body scrollable p-2"}>
+                            <h5 className={"mb-3 text-white"}>
+                                Your widgets
+                            </h5>
+
                             <ComponentsBar components={components}/>
                         </div>
 

@@ -19,7 +19,7 @@ function Sidebar(props) {
                 {header ? (
                     header
                 ) : (
-                    <div className="card-header sidebar-header d-flex align-items-center justify-content-between text-white px-2 pt-2 pb-0">
+                    <div className="card-header sidebar-header d-flex align-items-center justify-content-between text-white p-2">
                         <h5 className="m-0 sidebar-title">
                             {title}
                         </h5>
@@ -30,7 +30,7 @@ function Sidebar(props) {
                     </div>
                 )}
 
-                <div className="card-body sidebar-body p-2">
+                <div className="card-body sidebar-body px-2 pb-2 pt-0 scrollable">
                     {children}
                 </div>
 

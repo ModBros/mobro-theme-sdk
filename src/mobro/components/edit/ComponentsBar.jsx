@@ -9,7 +9,6 @@ import IconButton from "mobro/components/edit/button/IconButton";
 function ComponentsBar(props) {
     const {
         path = "",
-        title = "Your widgets",
         components = [],
         selectedComponent,
         selectComponent = noop,
@@ -26,10 +25,6 @@ function ComponentsBar(props) {
 
     return (
         <Fragment>
-            <h5 className={"mb-2 text-white"}>
-                {title}
-            </h5>
-
             {map(components, (component, i) => {
                 const componentPath = getComponentPath(path, i);
 

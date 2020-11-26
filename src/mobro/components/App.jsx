@@ -10,7 +10,16 @@ import {LAYOUT_MODE_DISPLAY, LAYOUT_MODE_EDIT} from "mobro/enum/layout";
 import {isEditMode} from "mobro/utils/layout";
 import Editmode from "mobro/containers/edit/Editmode";
 
-function App({layoutFetchingState, fetchLayout, setLayoutMode, config, layoutMode, editmode}) {
+function App(props) {
+    const {
+        layoutFetchingState,
+        fetchLayout,
+        setLayoutMode,
+        config,
+        layoutMode,
+        editmode
+    } = props;
+
     useEffect(() => {
         setLayoutMode(hasEditmodeParam() ? LAYOUT_MODE_EDIT : LAYOUT_MODE_DISPLAY);
     }, []);
