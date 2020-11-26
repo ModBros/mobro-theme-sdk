@@ -17,6 +17,7 @@ function EditmodeHeader(props) {
                     </small>
 
                     <small
+                        className={"clickable"}
                         onClick={() => {
                             layoutEdit({name: "width", data: layoutConfig?.height});
                             layoutEdit({name: "height", data: layoutConfig?.width});
@@ -29,7 +30,7 @@ function EditmodeHeader(props) {
                 <div className={"d-flex align-items-center flex-nowrap"}>
                     <span>
                         <input
-                            type={"number"}
+                            type={"text"}
                             className={"form-control form-control-sm form-control-inline"}
                             value={layoutConfig?.width}
                             onChange={(event) => {
@@ -44,7 +45,7 @@ function EditmodeHeader(props) {
 
                     <span>
                         <input
-                            type={"number"}
+                            type={"text"}
                             value={layoutConfig?.height}
                             className={"form-control form-control-sm form-control-inline"}
                             onChange={(event) => {
