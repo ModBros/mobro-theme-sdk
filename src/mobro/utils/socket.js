@@ -19,6 +19,12 @@ export function getSocket() {
 
 registerPublicEndpoint("utils.socket.getSocket", getSocket);
 
+export function setCurrentTheme(currentTheme) {
+    theme = currentTheme;
+}
+
+registerPublicEndpoint("utils.socket.setCurrentTheme", setCurrentTheme);
+
 function init() {
     originalSearchParams = window.location.search;
     originalParams = new URLSearchParams(originalSearchParams);
