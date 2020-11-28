@@ -6,6 +6,7 @@ import LoadingIndicator from "mobro/containers/shared/LoadingIndicator";
 import {mapChannelDataToSingleChartData} from "mobro/utils/chart";
 import LineChart from "mobro/containers/shared/chart/LineChart";
 import {extractLabel, extractRawUnit} from "mobro/utils/channel-data";
+import ComponentLabel from "mobro/containers/shared/ComponentLabel";
 
 function getLabel(config, historyData) {
     if (!config?.showLabel) {
@@ -50,13 +51,7 @@ function BasicChart(props) {
 
     return (
         <div className={"w-100 d-flex flex-column"}>
-            {!!label && (
-                <label className={"d-block mb-0"}>
-                    <small>
-                        {label}
-                    </small>
-                </label>
-            )}
+            <ComponentLabel label={label}/>
 
             <div className={"flex-fill d-flex"}>
                 <LineChart

@@ -5,6 +5,7 @@ import {
     getComponentsFromConfig,
     renderComponents
 } from "mobro/utils/component";
+import ComponentLabel from "mobro/containers/shared/ComponentLabel";
 
 function ValueTable(props) {
     const {
@@ -14,6 +15,7 @@ function ValueTable(props) {
     } = props;
 
     const components = getComponentsFromConfig(config.components);
+    const label = config.label;
 
     if (empty(components)) {
         return null;
@@ -21,6 +23,8 @@ function ValueTable(props) {
 
     return (
         <div className={"w-100"}>
+            <ComponentLabel label={label}/>
+
             {renderComponents(components, getComponentConfigPath(path, "components"), ({Component, type, path, config}) => (
                 <div key={path} className={selectedComponent === path ? "selection-indicator" : ""} id={path}>
                     <Component path={path} config={config}/>

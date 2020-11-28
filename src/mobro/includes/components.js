@@ -61,6 +61,9 @@ addDataComponent({
     name: "value-table",
     component: ValueTable,
     config: {
+        label: {
+            type: "input"
+        },
         components: {
             type: "components",
             allowed: ["basic-value"]
