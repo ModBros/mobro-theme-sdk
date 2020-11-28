@@ -82,9 +82,8 @@ function Channel(props) {
 
     if (!data?.source) {
         children.push((
-            <FillingSelect>
+            <FillingSelect key="source">
                 <SourceSelect
-                    key="source"
                     sources={sources}
                     value={data?.source}
                     onChange={changeSource}
@@ -95,13 +94,12 @@ function Channel(props) {
 
     if (data?.source && !data?.hardwaretype) {
         children.push((
-            <ValuePreview value={data?.source} reset={changeSource}/>
-        ))
+            <ValuePreview key={"sourcevalue"} value={data?.source} reset={changeSource}/>
+        ));
 
         children.push((
-            <FillingSelect>
+            <FillingSelect key="hardware">
                 <HardwareSelect
-                    key="hardware"
                     className="mt-1"
                     hardwareTypes={hardwareTypes}
                     value={data?.hardwaretype}
@@ -113,17 +111,16 @@ function Channel(props) {
 
     if (data?.hardwaretype) {
         children.push((
-            <ValuePreview value={data?.source} reset={changeSource}/>
-        ))
+            <ValuePreview key={"sourcevalue"} value={data?.source} reset={changeSource}/>
+        ));
 
         children.push((
-            <ValuePreview value={data?.hardwaretype} reset={changeHardware}/>
-        ))
+            <ValuePreview key={"hardwarevalue"} value={data?.hardwaretype} reset={changeHardware}/>
+        ));
 
         children.push((
-            <FillingSelect>
+            <FillingSelect key="sensor">
                 <SensorSelect
-                    key="sensor"
                     className="mt-1"
                     sensors={sensors}
                     value={data?.id}
