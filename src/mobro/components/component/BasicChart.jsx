@@ -1,11 +1,11 @@
-import React, {Fragment} from "react";
+import React from "react";
 import {useHistoryChannelListener} from "mobro/utils/component";
 import {empty, first} from "mobro/utils/helper";
 import AlignCenter from "mobro/containers/shared/layout/AlignCenter";
 import LoadingIndicator from "mobro/containers/shared/LoadingIndicator";
 import {mapChannelDataToSingleChartData} from "mobro/utils/chart";
 import LineChart from "mobro/containers/shared/chart/LineChart";
-import {extractLabel} from "mobro/utils/channel-data";
+import {extractLabel, extractRawUnit} from "mobro/utils/channel-data";
 
 function getLabel(config, historyData) {
     if (!config?.showLabel) {
@@ -46,19 +46,25 @@ function BasicChart(props) {
     }
 
     const label = getLabel(config, historyData);
+    const unit = extractRawUnit(first(historyData));
 
     return (
-        <Fragment>
+        <div className={"w-100 d-flex flex-column"}>
             {!!label && (
-                <label className={"position-absolute-tl"}>
-                    {label}
+                <label className={"d-block mb-0"}>
+                    <small>
+                        {label}
+                    </small>
                 </label>
             )}
 
-            <LineChart
-                data={chartData}
-            />
-        </Fragment>
+            <div className={"flex-fill d-flex"}>
+                <LineChart
+                    data={chartData}
+                    unit={unit}
+                />
+            </div>
+        </div>
     );
 }
 
