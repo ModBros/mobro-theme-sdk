@@ -1,7 +1,6 @@
-import {Fragment} from "react";
+import React, {Fragment} from "react";
 import {empty, map, noop} from "mobro/utils/helper";
 import TriggerEditButton from "mobro/containers/edit/TriggerEditButton";
-import React from "react";
 import {getComponentPath} from "mobro/utils/component";
 import AlignCenter from "mobro/containers/shared/layout/AlignCenter";
 import IconButton from "mobro/components/edit/button/IconButton";
@@ -12,10 +11,11 @@ function ComponentsBar(props) {
         components = [],
         selectedComponent,
         selectComponent = noop,
-        removeComponent = noop
+        removeComponent = noop,
+        moveComponent = noop
     } = props;
 
-    if(empty(components)) {
+    if (empty(components)) {
         return (
             <AlignCenter>
                 <h5 className={"text-white"}>No Components yet, add one!</h5>
@@ -30,7 +30,22 @@ function ComponentsBar(props) {
 
                 return (
                     <div key={i} onClick={() => selectComponent(componentPath)} className={`${selectedComponent === componentPath ? "selection-indicator" : ""}`}>
-                        <div className={"card mb-2"}>
+                        <div className={"card mb-2 clickable components-bar__component"}>
+                            <div className={"components-bar__up components-bar__control"}>
+                                <IconButton
+                                    icon={"chevron-up"}
+                                    size={"sm"}
+                                    className={"btn-inline"}
+                                    onClick={() => {
+                                        if (i === 0) {
+                                            return false;
+                                        }
+
+                                        moveComponent(componentPath, getComponentPath(path, i - 1));
+                                    }}
+                                />
+                            </div>
+
                             <div className={"card-body p-1"}>
                                 <div className={"d-flex align-items-center"}>
                                     <strong>
@@ -38,6 +53,12 @@ function ComponentsBar(props) {
                                     </strong>
 
                                     <div className={"flex-fill d-flex justify-content-end align-items-center"}>
+                                        <TriggerEditButton
+                                            type={component.type}
+                                            path={componentPath}
+                                            config={component.config}
+                                        />
+
                                         <IconButton
                                             icon={"trash"}
                                             variant={"link"}
@@ -46,10 +67,23 @@ function ComponentsBar(props) {
                                                 removeComponent(componentPath)
                                             }}
                                         />
-
-                                        <TriggerEditButton type={component.type} path={componentPath} config={component.config}/>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div className={"components-bar__down components-bar__control"}>
+                                <IconButton
+                                    icon={"chevron-down"}
+                                    size={"sm"}
+                                    className={"btn-inline"}
+                                    onClick={() => {
+                                        if (i === components.length - 1) {
+                                            return false;
+                                        }
+
+                                        moveComponent(componentPath, getComponentPath(path, i + 1));
+                                    }}
+                                />
                             </div>
                         </div>
                     </div>

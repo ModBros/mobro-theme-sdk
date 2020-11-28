@@ -46,29 +46,38 @@ function App(props) {
         );
     }
 
-    let style = extractSize(config);
+    let appStyle = extractSize(config);
     const background = config?.background?.url;
 
-    if(isEditMode(layoutMode)) {
-        style = {
-            maxWidth: style.width,
-            maxHeight: style.height
+    if (isEditMode(layoutMode)) {
+        appStyle = {
+            maxWidth: appStyle.width,
+            maxHeight: appStyle.height
         }
     }
 
-    if(background) {
-        style.backgroundImage = `url(${getPublicUploadUrl(background)})`;
+    if (background) {
+        appStyle.backgroundImage = `url(${getPublicUploadUrl(background)})`;
+    }
+
+    let editmodeStyles = {};
+
+    if (editmode && editmode.headerHeight && editmode.sidebarWidth) {
+        editmodeStyles = {
+            marginTop: editmode.headerHeight,
+            maxWidth: window.innerWidth - editmode.sidebarWidth
+        };
     }
 
     let content = (
-        <div className={"d-flex w-100 align-items-center justify-content-center"} style={{marginTop: editmode.headerHeight, maxWidth: window.innerWidth - editmode.sidebarWidth}}>
-            <div className="app" style={style}>
+        <div className={"d-flex w-100 align-items-center justify-content-center"} style={editmodeStyles}>
+            <div className="app" style={appStyle}>
                 <Entry/>
             </div>
         </div>
     );
 
-    if(isEditMode(layoutMode)) {
+    if (isEditMode(layoutMode)) {
         content = (
             <Fragment>
                 <Editmode/>

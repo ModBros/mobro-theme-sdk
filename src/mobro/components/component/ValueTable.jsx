@@ -1,10 +1,16 @@
 import {empty} from "mobro/utils/helper";
-import {getComponentsFromConfig, renderComponents} from "mobro/utils/component";
+import {
+    getComponentConfigPath,
+    getComponentPath,
+    getComponentsFromConfig,
+    renderComponents
+} from "mobro/utils/component";
 
 function ValueTable(props) {
     const {
         path,
-        config
+        config,
+        selectedComponent
     } = props;
 
     const components = getComponentsFromConfig(config.components);
@@ -15,8 +21,10 @@ function ValueTable(props) {
 
     return (
         <div className={"w-100"}>
-            {renderComponents(components, path, (Component, type, path, config) => (
-                <Component key={path} path={path} config={config}/>
+            {renderComponents(components, getComponentConfigPath(path, "components"), ({Component, type, path, config}) => (
+                <div key={path} className={selectedComponent === path ? "selection-indicator" : ""} id={path}>
+                    <Component path={path} config={config}/>
+                </div>
             ))}
         </div>
     );

@@ -11,7 +11,9 @@ import MapStateToPropsEvent from "mobro/events/redux/map-state-to-prop-event";
  */
 const mapStateToProps = event => event.mergeMapStateToProps({
     layoutMode: getLayoutMode(event.getState()),
-    rowHeight: dotPropImmutable.get(getLayoutConfig(event.getState()), "rowHeight")
+    rowHeight: getLayoutConfig(event.getState())?.rowHeight,
+    width: getLayoutConfig(event.getState())?.width,
+    height: getLayoutConfig(event.getState())?.height
 });
 
 /**

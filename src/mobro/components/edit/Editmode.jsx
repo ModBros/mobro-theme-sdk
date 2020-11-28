@@ -1,7 +1,6 @@
-import React, {useRef, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import ComponentsBar from "mobro/containers/edit/ComponentsBar";
 import AddComponentButton from "mobro/containers/edit/AddComponentButton";
-import TriggerGlobalConfigButton from "mobro/containers/edit/TriggerGlobalConfigButton";
 import SidebarContainer from "mobro/containers/edit/SidebarContainer";
 import createCache from '@emotion/cache';
 import memoizeOne from 'memoize-one';
@@ -27,7 +26,7 @@ function EditmodeContent(props) {
         updateEditmode
     } = props;
 
-    if(!shadowRoot.current) {
+    if (!shadowRoot) {
         // can only render editmode, if shadow root is already available
         // otherwise the container for adding emotion styles is not available which
         // breaks components working with emotion like the react-select
@@ -57,14 +56,15 @@ function EditmodeContent(props) {
     });
 
     return (
-        <EmotionProvider container={shadowRoot.current}>
+        <EmotionProvider container={shadowRoot}>
             <div className={"editmode"}>
                 <div className={"editmode-header text-white p-2 mb-3"} ref={header}>
                     <EditmodeHeader/>
                 </div>
 
                 {headerHeight !== 0 && (
-                    <div className={"editmode-sidebar d-flex flex-column"} ref={sidebar} style={{paddingTop: headerHeight}}>
+                    <div className={"editmode-sidebar d-flex flex-column"} ref={sidebar}
+                         style={{paddingTop: headerHeight}}>
                         <div className={"flex-fill editmode-sidebar-body scrollable p-2"}>
                             <h5 className={"mb-3 text-white"}>
                                 Your widgets
@@ -86,11 +86,13 @@ function EditmodeContent(props) {
 }
 
 function Editmode(props) {
-    const shadowRoot = useRef(null);
+    // useState instead of useRef, this way the EditmodeContent is rerendered if the shadow root changes and
+    // thus becomes available after the first render :)
+    const [shadowRoot, setShadowRoot] = useState(null);
 
     return (
         <root.div>
-            <div ref={shadowRoot}>
+            <div ref={setShadowRoot}>
                 <EditmodeContent {...props} shadowRoot={shadowRoot}/>
 
                 <style type="text/css">

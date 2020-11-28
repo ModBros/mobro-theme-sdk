@@ -2,6 +2,7 @@ import debounce from "debounce";
 import {send} from "mobro/utils/communication";
 import {LAYOUT_MODE_DISPLAY, LAYOUT_MODE_EDIT} from "mobro/enum/layout";
 import {SAVE_LAYOUT} from "mobro/enum/endpoints";
+import {getDataOrDefault} from "mobro/utils/component";
 
 export const defaultLayoutConfig = {
     config: {
@@ -60,10 +61,10 @@ export function extractLayoutFromGrid(layout) {
  */
 export function extractGridConfig(config) {
     return {
-        x: config.x || 0,
-        y: config.y || 0,
-        w: config.w || 12,
-        h: config.h || 5
+        x: getDataOrDefault(config.x, 0),
+        y: getDataOrDefault(config.y, Infinity),
+        w: getDataOrDefault(config.w, 4),
+        h: getDataOrDefault(config.h, 5)
     }
 }
 

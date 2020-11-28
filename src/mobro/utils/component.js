@@ -4,7 +4,7 @@ import {getDataComponent, getEditComponentDefaultValue} from "mobro/hooks/compon
 import {getDeviceUuid, getSocket} from "mobro/utils/socket";
 import {CHANNEL_PREFIX} from "mobro/enum/channel-data";
 import {addChannel, removeChannel} from "mobro/utils/channel-data";
-import {noop} from "mobro/utils/helper";
+import {map, noop} from "mobro/utils/helper";
 
 /**
  * @param path
@@ -12,8 +12,8 @@ import {noop} from "mobro/utils/helper";
  *
  * @returns {string}
  */
-export function getComponentPath(path = "", index) {
-    return `${path}.components.${index}`
+export function getComponentPath(path = "", index = null) {
+    return `${path}.components` + (index !== null ? `.${index}` : "");
 }
 
 registerPublicEndpoint("utils.component.getComponentPath", getComponentPath);
@@ -41,6 +41,17 @@ export function getComponentsFromConfig(config) {
 registerPublicEndpoint("utils.component.getComponentsFromConfig", getComponentsFromConfig);
 
 /**
+ *
+ * @param {{}} component
+ * @returns {{}}
+ */
+export function getComponentConfig(component) {
+    return component?.config;
+}
+
+registerPublicEndpoint("utils.component.getComponentConfig", getComponentConfig);
+
+/**
  * @param {[]} components
  * @param {string} path
  * @param {function} render
@@ -51,14 +62,20 @@ export function renderComponents(components, path, render) {
         return null;
     }
 
-    return components.map((component, i) => {
+    return map(components, (component, i) => {
         const Component = getDataComponent(component.type);
 
         if (!Component) {
             return null;
         }
 
-        return render(Component, component.type, getComponentPath(path, i), component.config);
+        return render({
+            Component,
+            type: component.type,
+            path: getComponentPath(path, i),
+            config: component.config,
+            i
+        });
     });
 }
 

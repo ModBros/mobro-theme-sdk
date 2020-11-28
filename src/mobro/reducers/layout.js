@@ -8,7 +8,7 @@ import {
     layoutFailed,
     layoutFetched,
     layoutMode,
-    layoutRequested,
+    layoutRequested, moveComponent,
     pasteComponent,
     removeComponent, selectComponent, updateEditmode
 } from "mobro/actions/layout";
@@ -38,7 +38,7 @@ const initialState = {
 function doSaveLayout(layout) {
     try {
         saveLayout(JSON.parse(JSON.stringify(layout)));
-    } catch(exception) {
+    } catch (exception) {
         console.error("could not save layout :(");
         console.error(exception);
     }
@@ -92,6 +92,19 @@ export default createReducer(initialState, {
             type: type,
             config: getDataComponentDefaultValue(type)
         });
+    },
+
+    [moveComponent]: (state, {payload}) => {
+        let {sourcePath, destinationPath} = payload;
+
+        sourcePath = `layout${sourcePath}`;
+        destinationPath = `layout${destinationPath}`;
+
+        const source = dotPropImmutable.get(state, sourcePath);
+        const destination = dotPropImmutable.get(state, destinationPath);
+        
+        state = dotPropImmutable.set(state, sourcePath, destination);
+        return dotPropImmutable.set(state, destinationPath, source);
     },
 
     [removeComponent.type]: (state, {payload}) => {

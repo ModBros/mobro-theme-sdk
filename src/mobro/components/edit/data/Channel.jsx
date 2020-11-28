@@ -16,8 +16,16 @@ function ValuePreview(props) {
     } = props;
 
     return (
-        <span className={"mr-1 text-white clickable"} onClick={reset}>
-            <MobroIcon icon={getValueIcon(value)}/> <FontAwesomeIcon icon={"chevron-right"}/>
+        <span className={"mr-1 text-white clickable d-flex align-items-center"} onClick={reset}>
+            <MobroIcon
+                icon={getValueIcon(value)}
+            />
+
+            <FontAwesomeIcon
+                className={"text-muted ml-1"}
+                icon={"chevron-right"}
+                size={"xs"}
+            />
         </span>
     );
 }
@@ -34,7 +42,18 @@ function FillingSelect(props) {
     );
 }
 
-function Channel({data, name, sensorDataFetchingState, fetchSensorData, sources, hardwareTypes, sensors, onChange}) {
+function Channel(props) {
+    const {
+        data,
+        name,
+        sensorDataFetchingState,
+        fetchSensorData,
+        sources,
+        hardwareTypes,
+        sensors,
+        onChange
+    } = props;
+
     const fetching = withFetchingIndicator(fetchSensorData, sensorDataFetchingState);
 
     if (fetching) {

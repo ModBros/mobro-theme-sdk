@@ -1,0 +1,27 @@
+.components-bar__component {
+  position: relative;
+
+  &:hover {
+    z-index: 10;
+  }
+
+  &:hover .components-bar__control {
+    display: block;
+  }
+}
+
+.components-bar__up, .components-bar__down {
+  position: absolute;
+  left: 50%;
+  display: none;
+}
+
+.components-bar__up {
+  top: 0;
+  transform: translate(-50%, -50%);
+}
+
+.components-bar__down {
+  bottom: 0;
+  transform: translate(-50%, 50%);
+}
