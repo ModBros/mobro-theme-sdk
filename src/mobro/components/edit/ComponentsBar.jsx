@@ -1,9 +1,11 @@
 import React, {Fragment} from "react";
 import {empty, map, noop} from "mobro/utils/helper";
 import TriggerEditButton from "mobro/containers/edit/TriggerEditButton";
-import {getComponentPath} from "mobro/utils/component";
+import {getComponentConfig, getComponentPath, getComponentType} from "mobro/utils/component";
 import AlignCenter from "mobro/containers/shared/layout/AlignCenter";
 import IconButton from "mobro/components/edit/button/IconButton";
+import Dropdown from "react-bootstrap/Dropdown";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 function ComponentsBar(props) {
     const {
@@ -12,7 +14,8 @@ function ComponentsBar(props) {
         selectedComponent,
         selectComponent = noop,
         removeComponent = noop,
-        moveComponent = noop
+        moveComponent = noop,
+        copyComponent = noop
     } = props;
 
     if (empty(components)) {
@@ -49,14 +52,14 @@ function ComponentsBar(props) {
                             <div className={"card-body p-1"}>
                                 <div className={"d-flex align-items-center"}>
                                     <strong>
-                                        {component.type}
+                                        {getComponentType(component)}
                                     </strong>
 
                                     <div className={"flex-fill d-flex justify-content-end align-items-center"}>
                                         <TriggerEditButton
-                                            type={component.type}
+                                            type={getComponentType(component)}
                                             path={componentPath}
-                                            config={component.config}
+                                            config={getComponentConfig(component)}
                                         />
 
                                         <IconButton
@@ -67,6 +70,18 @@ function ComponentsBar(props) {
                                                 removeComponent(componentPath)
                                             }}
                                         />
+
+                                        <Dropdown>
+                                            <Dropdown.Toggle bsPrefix={"xxx"} variant={"link"} size={"sm"}>
+                                                <FontAwesomeIcon icon={"ellipsis-v"}/>
+                                            </Dropdown.Toggle>
+
+                                            <Dropdown.Menu align={"right"} flip={false}>
+                                                <Dropdown.Item onClick={() => copyComponent(getComponentType(component), getComponentConfig(component))}>
+                                                    <FontAwesomeIcon icon={"copy"}/> Copy
+                                                </Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
                                     </div>
                                 </div>
                             </div>

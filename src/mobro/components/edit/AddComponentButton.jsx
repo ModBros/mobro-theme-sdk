@@ -4,12 +4,15 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {closeSidebarComponent, toggleSidebarComponent, withSidebar} from "mobro/utils/sidebar";
 import ComponentSelection from "mobro/containers/edit/ComponentSelection";
 import IconButton from "mobro/containers/edit/button/IconButton";
+import {noop} from "mobro/utils/helper";
 
 function AddComponentButton(props) {
     const {
         path = "",
         layoutMode,
-        addComponent,
+        addComponent = noop,
+        canPasteComponent = false,
+        pasteComponent = noop,
         allowed = []
     } = props;
 
@@ -28,9 +31,21 @@ function AddComponentButton(props) {
     withSidebar({name, title, content});
 
     return (
-        <IconButton icon={"plus"} className={"w-100"} onClick={() => toggleSidebarComponent(name)}>
-            Add widget
-        </IconButton>
+        <div className={"d-flex align-items-center justify-content-between"}>
+            <IconButton icon={"plus"} className={"flex-fill"} onClick={() => toggleSidebarComponent(name)}>
+                Add widget
+            </IconButton>
+
+            {canPasteComponent && (
+                <IconButton
+                    icon={"paste"}
+                    className={"ml-2"}
+                    onClick={() => pasteComponent(path)}
+                >
+                    Paste
+                </IconButton>
+            )}
+        </div>
     );
 }
 

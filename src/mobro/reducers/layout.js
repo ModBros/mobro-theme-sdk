@@ -102,7 +102,7 @@ export default createReducer(initialState, {
 
         const source = dotPropImmutable.get(state, sourcePath);
         const destination = dotPropImmutable.get(state, destinationPath);
-        
+
         state = dotPropImmutable.set(state, sourcePath, destination);
         return dotPropImmutable.set(state, destinationPath, source);
     },
@@ -119,10 +119,11 @@ export default createReducer(initialState, {
         return dotPropImmutable.set(state, "componentTemporaryStorage", {type, config});
     },
 
-    [pasteComponent.type]: (state) => {
+    [pasteComponent.type]: (state, {payload}) => {
+        const {path = ""} = payload;
         const {type, config} = state.componentTemporaryStorage;
 
-        return dotPropImmutable.merge(state, "layout.components", {type, config});
+        return dotPropImmutable.merge(state, `layout${path}.components`, {type, config});
     },
 
     [updateEditmode.type]: (state, {payload}) => {
@@ -154,7 +155,7 @@ registerPublicEndpoint("reducers.layout.getSelectedComponent", getSelectedCompon
 export const getLayoutComponents = state => dotPropImmutable.get(getLayout(state), "components");
 registerPublicEndpoint("reducers.layout.getLayoutComponents", getLayoutComponents);
 
-export const getLayoutComponentTemporaryStorage = state => dotPropImmutable.get(getLayoutState(state), "componentTemporaryStorate");
+export const getLayoutComponentTemporaryStorage = state => dotPropImmutable.get(getLayoutState(state), "componentTemporaryStorage");
 registerPublicEndpoint("reducers.layout.getLayoutComponentTemporaryStorage", getLayoutComponentTemporaryStorage);
 
 export const getEditmode = state => dotPropImmutable.get(getLayoutState(state), "editmode");

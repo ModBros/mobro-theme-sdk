@@ -10,6 +10,7 @@
 @import "~bootstrap/scss/forms";
 @import "~bootstrap/scss/buttons";
 @import "~bootstrap/scss/transitions";
+@import "~bootstrap/scss/dropdown";
 @import "~bootstrap/scss/custom-forms";
 @import "~bootstrap/scss/card";
 @import "~bootstrap/scss/breadcrumb";
@@ -632,6 +633,7 @@ select.form-control {
 .dropdown-menu {
   margin-top: 0;
   border: none;
+  left: 1rem !important;
   box-shadow: 0 1px 4px rgba(0,0,0,.3);
 }
 

@@ -43,6 +43,17 @@ registerPublicEndpoint("utils.component.getComponentsFromConfig", getComponentsF
 /**
  *
  * @param {{}} component
+ * @returns {string}
+ */
+export function getComponentType(component) {
+    return component?.type;
+}
+
+registerPublicEndpoint("utils.component.getComponentType", getComponentType);
+
+/**
+ *
+ * @param {{}} component
  * @returns {{}}
  */
 export function getComponentConfig(component) {

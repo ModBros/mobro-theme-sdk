@@ -1,7 +1,7 @@
 import Container from "mobro/lib/component/container";
 import ComponentsBar from "mobro/components/edit/ComponentsBar";
 import {getLayout, getSelectedComponent} from "mobro/reducers/layout";
-import {moveComponent, removeComponent, selectComponent} from "mobro/actions/layout";
+import {copyComponent, moveComponent, removeComponent, selectComponent} from "mobro/actions/layout";
 
 const mapStateToProps = (state) => ({
     layout: getLayout(state),
@@ -11,7 +11,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     selectComponent: (path) => dispatch(selectComponent({path})),
     removeComponent: (path) => dispatch(removeComponent({path})),
-    moveComponent: (sourcePath, destinationPath) => dispatch(moveComponent({sourcePath, destinationPath}))
+    moveComponent: (sourcePath, destinationPath) => dispatch(moveComponent({sourcePath, destinationPath})),
+    copyComponent: (type, config) => dispatch(copyComponent({type, config}))
 })
 
 export default Container.create("edit.components-bar", ComponentsBar)
