@@ -26,7 +26,7 @@ import {getComponentConfigPath} from "mobro/utils/component";
 const initialState = {
     layoutFetchingState: NOT_ASKED,
     layoutMode: LAYOUT_MODE_DISPLAY,
-    layout: defaultLayoutConfig,
+    layout: defaultLayoutConfig(),
     selectedComponent: null,
     componentTemporaryStorage: null,
     editmode: {
@@ -87,6 +87,9 @@ export default createReducer(initialState, {
         let {path = "", type} = payload;
 
         path += ".components";
+
+        // force given path to be an array if it does not exist yet
+        state = dotPropImmutable.set(state, `layout${path}`, dotPropImmutable.get(state, `layout${path}`, []));
 
         return dotPropImmutable.merge(state, `layout${path}`, {
             type: type,
@@ -151,9 +154,6 @@ registerPublicEndpoint("reducers.layout.getLayoutConfig", getLayoutConfig);
 
 export const getSelectedComponent = state => dotPropImmutable.get(getLayoutState(state), "selectedComponent");
 registerPublicEndpoint("reducers.layout.getSelectedComponent", getSelectedComponent);
-
-export const getLayoutComponents = state => dotPropImmutable.get(getLayout(state), "components");
-registerPublicEndpoint("reducers.layout.getLayoutComponents", getLayoutComponents);
 
 export const getLayoutComponentTemporaryStorage = state => dotPropImmutable.get(getLayoutState(state), "componentTemporaryStorage");
 registerPublicEndpoint("reducers.layout.getLayoutComponentTemporaryStorage", getLayoutComponentTemporaryStorage);

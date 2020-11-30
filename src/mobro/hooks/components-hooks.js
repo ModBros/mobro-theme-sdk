@@ -3,6 +3,7 @@ import {addObjectPropertyByPath} from "mobro/utils/object";
 import {registerPublicEndpoint} from "mobro/utils/public";
 import {getDataOrDefault, getEditDefaultValues} from "mobro/utils/component";
 
+const _componentRoots = [""];
 const _components = {};
 const _dataComponents = {};
 const _editComponents = {};
@@ -23,6 +24,24 @@ export const withWrapper = createPublicHook("hooks.component", hooks => (compone
         return (<Component {...props}/>)
     }
 });
+
+/**
+ * @param {string} name
+ */
+export function addComponentRoot(name) {
+    _componentRoots.push(name);
+}
+
+registerPublicEndpoint("hooks.addComponentRoot", addComponentRoot);
+
+/**
+ * @return {[]}
+ */
+export function getComponentRoots() {
+    return _componentRoots;
+}
+
+registerPublicEndpoint("hooks.getComponentRoots", getComponentRoots);
 
 /**
  * @param name

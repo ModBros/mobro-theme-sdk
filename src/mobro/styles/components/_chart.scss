@@ -1,3 +1,17 @@
 .chart-container {
   width: 100%;
+  position: relative;
+}
+
+.chart-label {
+  position: absolute;
+  top: -0.25rem;
+  left: 0;
+}
+
+.pie-chart-label {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }

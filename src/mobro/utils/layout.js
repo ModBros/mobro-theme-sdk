@@ -4,14 +4,14 @@ import {LAYOUT_MODE_DISPLAY, LAYOUT_MODE_EDIT} from "mobro/enum/layout";
 import {SAVE_LAYOUT} from "mobro/enum/endpoints";
 import {getDataOrDefault} from "mobro/utils/component";
 
-export const defaultLayoutConfig = {
+export const defaultLayoutConfig =() => ({
     config: {
         width: 480,
         height: 320,
         rowHeight: 10
     },
     components: []
-}
+})
 
 export const defaultLayoutEditConfig = {
     rowHeight: {

@@ -17,5 +17,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default Container.create("app", App)
+    .basic(false)
     .connect(mapStateToProps, mapDispatchToProps)
     .generate();

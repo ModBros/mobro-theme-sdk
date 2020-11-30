@@ -87,7 +87,6 @@ addDataComponent({
             type: "select",
             options: [
                 {label: "Line", value: "line"},
-                {label: "Area", value: "area"},
                 {label: "Pie", value: "pie"}
             ]
         },

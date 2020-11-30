@@ -18,7 +18,7 @@ export function fetchLayout() {
         send(GET_LAYOUT)
             .then((response) => {
                 if (!response || empty(response)) {
-                    response = defaultLayoutConfig;
+                    response = defaultLayoutConfig();
                 }
 
                 dispatch(layoutFetched(response));

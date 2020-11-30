@@ -1,6 +1,7 @@
 function ComponentLabel(props) {
     const {
-        label
+        label,
+        className = ""
     } = props;
 
     if (!label) {
@@ -8,7 +9,7 @@ function ComponentLabel(props) {
     }
 
     return (
-        <label className={"d-block mb-1 line-height-1"}>
+        <label className={`d-block mb-1 line-height-1 ${className}`}>
             <small>
                 {label}
             </small>

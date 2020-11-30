@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import ComponentsBar from "mobro/containers/edit/ComponentsBar";
 import AddComponentButton from "mobro/containers/edit/AddComponentButton";
 import SidebarContainer from "mobro/containers/edit/SidebarContainer";
@@ -10,6 +10,9 @@ import editmodeStyles from "mobro/styles/editmode.inline.scss";
 import bootstrapStyles from "mobro/styles/bootstrap.inline.scss";
 import debounce from "debounce";
 import EditmodeHeader from "mobro/containers/edit/EditmodeHeader";
+import {getComponentsFromConfig} from "mobro/utils/component";
+import {map} from "mobro/utils/helper";
+import {getComponentRoots} from "mobro/hooks/components-hooks";
 
 class EmotionProvider extends NonceProvider {
     createEmotionCacheCustom(nonce) {
@@ -22,7 +25,7 @@ class EmotionProvider extends NonceProvider {
 function EditmodeContent(props) {
     const {
         shadowRoot,
-        components,
+        layout,
         updateEditmode
     } = props;
 
@@ -65,17 +68,22 @@ function EditmodeContent(props) {
                 {headerHeight !== 0 && (
                     <div className={"editmode-sidebar d-flex flex-column"} ref={sidebar}
                          style={{paddingTop: headerHeight}}>
-                        <div className={"flex-fill editmode-sidebar-body scrollable p-2"}>
-                            <h5 className={"mb-3 text-white"}>
-                                Your widgets
-                            </h5>
+                        {map(getComponentRoots(), (root) => {
+                            const componentRoot = root ? layout[root] : layout;
+                            const path = root ? `.${root}` : root;
 
-                            <ComponentsBar components={components}/>
-                        </div>
+                            return (
+                                <div className={"mb-4 p-2"} key={root}>
+                                    <h5 className={"mb-3 text-white"}>
+                                        Your widgets {root ? `[${root}]` : ""}
+                                    </h5>
 
-                        <div className={"editmode-sidebar-footer card-footer"}>
-                            <AddComponentButton/>
-                        </div>
+                                    <ComponentsBar path={path} components={getComponentsFromConfig(componentRoot)}/>
+
+                                    <AddComponentButton path={path}/>
+                                </div>
+                            );
+                        })}
                     </div>
                 )}
 

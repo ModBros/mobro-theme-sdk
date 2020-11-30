@@ -17,8 +17,6 @@ function Components(props) {
         <FormGroup label={name}>
             <ComponentsBar path={componentsPath} components={data.components}/>
 
-            <span className={"my-2"}>&nbsp;</span>
-
             <AddComponentButton allowed={getDataOrDefault(config.allowed, [])} path={componentsPath}/>
         </FormGroup>
     );

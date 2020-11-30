@@ -72,7 +72,7 @@ function ComponentsBar(props) {
                                         />
 
                                         <Dropdown>
-                                            <Dropdown.Toggle bsPrefix={"xxx"} variant={"link"} size={"sm"}>
+                                            <Dropdown.Toggle bsPrefix={"_"} variant={"link"} size={"sm"}>
                                                 <FontAwesomeIcon icon={"ellipsis-v"}/>
                                             </Dropdown.Toggle>
 
