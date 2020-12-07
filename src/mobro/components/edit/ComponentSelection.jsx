@@ -1,4 +1,4 @@
-import {getDataComponents} from "mobro/hooks/components-hooks";
+import {getComponentLabel, getDataComponentInformation, getDataComponents} from "mobro/hooks/components-hooks";
 import {map, noop} from "mobro/utils/helper";
 
 function ComponentSelection(props) {
@@ -16,7 +16,7 @@ function ComponentSelection(props) {
                     <div className="card card-clickable w-100" onClick={() => onSelect(component)}>
                         <div className="card-body p-2 d-flex align-items-center">
                             <h6 className="m-0 text-uppercase w-100 text-center">
-                                {component}
+                                {getComponentLabel(component)}
                             </h6>
                         </div>
                     </div>

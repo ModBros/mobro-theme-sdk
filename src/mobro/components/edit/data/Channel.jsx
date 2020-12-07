@@ -2,7 +2,7 @@ import React from "react";
 import FormGroup from "mobro/containers/edit/form/FormGroup";
 import SourceSelect from "mobro/containers/edit/data/channel/SourceSelect";
 import HardwareSelect from "mobro/containers/edit/data/channel/HardwareSelect";
-import SensorSelect from "mobro/components/edit/data/channel/SensorSelect";
+import SensorSelect from "mobro/containers/edit/data/channel/SensorSelect";
 import {withFetchingIndicator} from "mobro/utils/component/fetching";
 import MobroIcon from "mobro/containers/shared/MobroIcon";
 import {getValueIcon} from "mobro/utils/component/select";
@@ -16,7 +16,7 @@ function ValuePreview(props) {
     } = props;
 
     return (
-        <span className={"mr-1 text-white clickable d-flex align-items-center"} onClick={reset}>
+        <span className={"mr-1 clickable d-flex align-items-center"} onClick={reset}>
             <MobroIcon
                 icon={getValueIcon(value)}
             />
@@ -60,6 +60,13 @@ function Channel(props) {
         return fetching;
     }
 
+    const selectStyles = {
+        control: (provided) => ({
+            ...provided,
+            border: "none"
+        })
+    };
+
     const changeSource = (value) => onChange({
         source: value?.value,
         hardwaretype: null,
@@ -84,6 +91,7 @@ function Channel(props) {
         children.push((
             <FillingSelect key="source">
                 <SourceSelect
+                    styles={selectStyles}
                     sources={sources}
                     value={data?.source}
                     onChange={changeSource}
@@ -100,7 +108,7 @@ function Channel(props) {
         children.push((
             <FillingSelect key="hardware">
                 <HardwareSelect
-                    className="mt-1"
+                    styles={selectStyles}
                     hardwareTypes={hardwareTypes}
                     value={data?.hardwaretype}
                     onChange={changeHardware}
@@ -121,7 +129,7 @@ function Channel(props) {
         children.push((
             <FillingSelect key="sensor">
                 <SensorSelect
-                    className="mt-1"
+                    styles={selectStyles}
                     sensors={sensors}
                     value={data?.id}
                     onChange={changeSensor}
@@ -132,8 +140,10 @@ function Channel(props) {
 
     return (
         <FormGroup label={name}>
-            <div className={"d-flex align-items-center"}>
-                {children}
+            <div className={"card"}>
+                <div className={"d-flex align-items-center py-0 px-1"}>
+                    {children}
+                </div>
             </div>
         </FormGroup>
     );

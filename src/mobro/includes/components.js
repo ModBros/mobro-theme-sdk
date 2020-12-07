@@ -4,6 +4,7 @@ import Text from "mobro/containers/component/Text";
 
 addDataComponent({
     name: "text",
+    label: "Text",
     component: Text,
     config: {
         text: {
@@ -28,6 +29,7 @@ import Image from "mobro/containers/component/Image";
 
 addDataComponent({
     name: "image",
+    label: "Image",
     component: Image,
     config: {
         image: {
@@ -40,6 +42,7 @@ import BasicValue from "mobro/containers/component/BasicValue";
 
 addDataComponent({
     name: "basic-value",
+    label: "Basic Value",
     component: BasicValue,
     config: {
         showLabel: {
@@ -59,6 +62,7 @@ import ValueTable from "mobro/containers/component/ValueTable";
 
 addDataComponent({
     name: "value-table",
+    label: "Value Table",
     component: ValueTable,
     config: {
         label: {
@@ -75,6 +79,7 @@ import BasicChart from "mobro/containers/component/BasicChart";
 
 addDataComponent({
     name: "basic-chart",
+    label: "Basic Chart",
     component: BasicChart,
     config: {
         showLabel: {
@@ -100,6 +105,7 @@ import Spacer from "mobro/containers/component/Spacer";
 
 addDataComponent({
     name: "spacer",
+    label: "Spacer",
     component: Spacer,
     renderConfig: {
         ignoreBaseClassNames: true

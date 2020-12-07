@@ -101,6 +101,7 @@ function BasicPieChart(props) {
                     clockWise={true}
                     dataKey={"value"}
                     denominator={"max"}
+                    background
                     isAnimationActive={false}
                     cy={"100%"}
                 />

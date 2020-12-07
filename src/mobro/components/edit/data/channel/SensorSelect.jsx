@@ -3,7 +3,15 @@ import React from "react";
 import {extractRawUnit, extractValue} from "mobro/utils/channel-data";
 import {getOptionByValue} from "mobro/utils/component/select";
 
-function SensorSelect({sensors, value, onChange, className = null}) {
+function SensorSelect(props) {
+    const {
+        sensors,
+        value,
+        onChange,
+        className = null,
+        ...selectProps
+    } = props;
+
     const options = sensors.map((sensor) => ({
         value: sensor.hardwareid + sensor.id,
         label: (
@@ -16,6 +24,7 @@ function SensorSelect({sensors, value, onChange, className = null}) {
 
     return (
         <Select
+            {...selectProps}
             className={className}
             options={options}
             value={getOptionByValue(options, value)}

@@ -1,7 +1,9 @@
 import io from "socket.io-client";
-import {EVENT_CHANGE_THEME} from "mobro/enum/events";
+import {EVENT_CHANGE_LAYOUT, EVENT_CHANGE_THEME} from "mobro/enum/events";
 import {registerPublicEndpoint} from "mobro/utils/public";
 import {DEFAULT_UUID} from "mobro/enum/channel-data";
+import {dispatch} from "mobro/reducers";
+import {layoutChange} from "mobro/actions/layout";
 
 let originalSearchParams = null;
 let originalParams = null;
@@ -46,11 +48,17 @@ function init() {
                 console.error("Could not switch themes", error);
             });
     });
+
+    socket.on(EVENT_CHANGE_LAYOUT, (data) => {
+        dispatch(layoutChange(data.layout));
+    });
 }
 
 export function getUrl() {
     return url;
 }
+
+registerPublicEndpoint("utils.socket.getUrl", getUrl);
 
 export function getPublicUrl(asset) {
     if (!asset) {
@@ -60,6 +68,8 @@ export function getPublicUrl(asset) {
     return url + "/" + theme + "/".asset.replace(/^\/+/, "");
 }
 
+registerPublicEndpoint("utils.socket.getPublicUrl", getPublicUrl);
+
 export function getPublicUploadUrl(asset) {
     if (!asset) {
         return null;
@@ -67,6 +77,8 @@ export function getPublicUploadUrl(asset) {
 
     return url + "/" + asset.replace(/^\/+/, "");
 }
+
+registerPublicEndpoint("utils.socket.getPublicUploadUrl", getPublicUploadUrl);
 
 export function getDeviceName() {
     return originalParams ? originalParams.get("name") : "Local Device";

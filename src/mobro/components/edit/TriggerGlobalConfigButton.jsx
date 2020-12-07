@@ -24,7 +24,7 @@ function TriggerGlobalConfigButton(props) {
         title = "Global Configuration",
         content = (<Edit fields={editConfig} path={""} config={data}/>),
         dependencies = map(editConfig, (field, name) => {
-            return deepValues(data[name] || null);
+            return deepValues(data?.[name] || null);
         }).flat().join("|");
 
     withSidebar({name, title, content, dependencies: [dependencies]});

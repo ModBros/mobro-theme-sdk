@@ -3,11 +3,20 @@ import React from "react";
 import {applyValueIconToOptions, getOptionByValue, valuesToSelectOptions} from "mobro/utils/component/select";
 import IconOption from "mobro/containers/edit/form/IconOption";
 
-function SourceSelect({sources, value, onChange, className = null}) {
+function SourceSelect(props) {
+    const {
+        sensors,
+        value,
+        onChange,
+        className = null,
+        ...selectProps
+    } = props;
+
     const options = valuesToSelectOptions(sources);
 
     return (
         <Select
+            {...selectProps}
             className={className}
             options={applyValueIconToOptions(options)}
             components={{Option: IconOption}}

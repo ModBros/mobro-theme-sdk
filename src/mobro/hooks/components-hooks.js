@@ -59,6 +59,7 @@ registerPublicEndpoint("hooks.getComponent");
 export function addDataComponent(args) {
     const {
         name,
+        label,
         component,
         config = {},
         componentPaths = [],
@@ -70,6 +71,7 @@ export function addDataComponent(args) {
 
     addObjectPropertyByPath(_dataComponents, name, {
         component,
+        label,
         config,
         componentPaths,
         defaultValue,
@@ -99,6 +101,15 @@ export function getDataComponents() {
 registerPublicEndpoint("hooks.getDataComponents", getDataComponents);
 
 /**
+ * @returns {{}}
+ */
+export function getDataComponentInformation(name) {
+    return _dataComponents[name];
+}
+
+registerPublicEndpoint("hooks.getDataComponentInformation", getDataComponentInformation);
+
+/**
  * @param name
  * @returns {*}
  */
@@ -107,6 +118,17 @@ export function getDataComponentConfig(name) {
 }
 
 registerPublicEndpoint("hooks.getDataComponentConfig", getDataComponentConfig);
+
+/**
+ *
+ * @param {{}} name
+ * @returns {string}
+ */
+export function getComponentLabel(name) {
+    return _dataComponents[name]?.label || name;
+}
+
+registerPublicEndpoint("hooks.getComponentLabel", getComponentLabel);
 
 /**
  * @param name

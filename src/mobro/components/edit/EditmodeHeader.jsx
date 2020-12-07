@@ -1,6 +1,7 @@
 import TriggerGlobalConfigButton from "mobro/containers/edit/TriggerGlobalConfigButton";
 import {noop} from "mobro/utils/helper";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import LayoutNames from "mobro/containers/edit/header/LayoutNames";
 
 function EditmodeHeader(props) {
     const {
@@ -56,10 +57,13 @@ function EditmodeHeader(props) {
                 </div>
             </div>
 
+            <div className={"d-flex align-items-center flex-nowrap"}>
+                <small>
+                    <TriggerGlobalConfigButton/>
+                </small>
 
-            <small>
-                <TriggerGlobalConfigButton/>
-            </small>
+                <LayoutNames/>
+            </div>
         </div>
     );
 }

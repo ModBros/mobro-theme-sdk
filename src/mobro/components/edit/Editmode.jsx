@@ -41,7 +41,7 @@ function EditmodeContent(props) {
     const sidebar = useRef(null);
 
     useEffect(() => {
-        const handleResize = debounce((event) => {
+        const handleResize = debounce(() => {
             updateEditmode({
                 headerHeight: header.current?.clientHeight,
                 sidebarWidth: sidebar.current?.clientWidth
@@ -57,6 +57,7 @@ function EditmodeContent(props) {
             window.removeEventListener("resize", handleResize);
         }
     });
+
 
     return (
         <EmotionProvider container={shadowRoot}>

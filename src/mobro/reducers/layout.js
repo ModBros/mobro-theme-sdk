@@ -8,24 +8,36 @@ import {
     layoutFailed,
     layoutFetched,
     layoutMode,
-    layoutRequested, moveComponent,
+    layoutNameChange,
+    layoutNamesFailed,
+    layoutNamesFetched,
+    layoutNamesRequested,
+    layoutRequested,
+    layoutUpdate,
+    moveComponent,
     pasteComponent,
-    removeComponent, selectComponent, updateEditmode
+    removeComponent,
+    selectComponent,
+    updateEditmode
 } from "mobro/actions/layout";
 import {NOT_ASKED} from "mobro/utils/communication";
 import {defaultLayoutConfig, saveLayout} from "mobro/utils/layout";
 import dotPropImmutable from "dot-prop-immutable";
-import {LAYOUT_MODE_DISPLAY} from "mobro/enum/layout";
+import {DEFAULT_LAYOUT_NAME, LAYOUT_MODE_DISPLAY} from "mobro/enum/layout";
 import {registerPublicEndpoint} from "mobro/utils/public";
 import {getDataComponentDefaultValue} from "mobro/hooks/components-hooks";
 import {getComponentConfigPath} from "mobro/utils/component";
+import {empty} from "mobro/utils/helper";
 
 // ----------------------------------------------
 // initial state
 
 const initialState = {
     layoutFetchingState: NOT_ASKED,
+    layoutNamesFetchingState: NOT_ASKED,
     layoutMode: LAYOUT_MODE_DISPLAY,
+    layoutNames: [DEFAULT_LAYOUT_NAME],
+    layoutName: DEFAULT_LAYOUT_NAME,
     layout: defaultLayoutConfig(),
     selectedComponent: null,
     componentTemporaryStorage: null,
@@ -35,9 +47,9 @@ const initialState = {
     }
 };
 
-function doSaveLayout(layout) {
+function doSaveLayout(layoutName, layout) {
     try {
-        saveLayout(JSON.parse(JSON.stringify(layout)));
+        saveLayout(JSON.parse(JSON.stringify({layoutName, layout})));
     } catch (exception) {
         console.error("could not save layout :(");
         console.error(exception);
@@ -50,7 +62,7 @@ function doSaveLayout(layout) {
 export default createReducer(initialState, {
     [layoutMode.type]: (state, {payload}) => dotPropImmutable.set(state, "layoutMode", payload),
 
-    [layoutChange.type]: (state, {payload}) => {
+    [layoutUpdate.type]: (state, {payload}) => {
         if (!Array.isArray(payload)) {
             return state;
         }
@@ -59,20 +71,40 @@ export default createReducer(initialState, {
             state = dotPropImmutable.merge(state, getComponentConfigPath(`layout.components.${i}`), item);
         });
 
-        doSaveLayout(state.layout);
+        doSaveLayout(state.layoutName, state.layout);
 
         return state;
     },
 
-    ...fetchingAction(layoutRequested.type, layoutFetched.type, layoutFailed.type, "layoutFetchingState", payload => ({
-        layout: payload
-    })),
+    [layoutNameChange.type]: (state, {payload}) => {
+        return dotPropImmutable.set(state, "layoutName", payload);
+    },
+
+    [layoutChange.type]: (state, {payload}) => {
+        return dotPropImmutable.set(state, "layout", payload);
+    },
+
+    ...fetchingAction(layoutRequested.type, layoutFetched.type, layoutFailed.type, "layoutFetchingState", (payload) => {
+        const state = {layoutName: payload.layoutName};
+
+        if (!empty(payload.layout)) {
+            state.layout = payload.layout;
+        }
+
+        return state;
+    }),
+
+    ...fetchingAction(layoutNamesRequested.type, layoutNamesFetched.type, layoutNamesFailed.type, "layoutNamesFetchingState", (payload) => {
+        return {
+            layoutNames: payload
+        };
+    }),
 
     [layoutEdit.type]: (state, {payload}) => {
         const {path = "", name, data} = payload;
 
         state = dotPropImmutable.set(state, getComponentConfigPath(`layout${path}`, name), data);
-        doSaveLayout(state.layout);
+        doSaveLayout(state.layoutName, state.layout);
 
         return state;
     },
@@ -142,6 +174,15 @@ registerPublicEndpoint("reducers.layout.getLayoutState", getLayoutState);
 
 export const getLayoutFetchingState = state => dotPropImmutable.get(getLayoutState(state), "layoutFetchingState");
 registerPublicEndpoint("reducers.layout.getLayoutFetchingState", getLayoutFetchingState);
+
+export const getLayoutNamesFetchingState = state => dotPropImmutable.get(getLayoutState(state), "layoutNamesFetchingState");
+registerPublicEndpoint("reducers.layout.getLayoutNamesFetchingState", getLayoutNamesFetchingState);
+
+export const getLayoutNames = state => dotPropImmutable.get(getLayoutState(state), "layoutNames");
+registerPublicEndpoint("reducers.layout.getLayoutNames", getLayoutNames);
+
+export const getLayoutName = state => dotPropImmutable.get(getLayoutState(state), "layoutName");
+registerPublicEndpoint("reducers.layout.getLayoutName", getLayoutName);
 
 export const getLayout = state => dotPropImmutable.get(getLayoutState(state), "layout");
 registerPublicEndpoint("reducers.layout.getLayout", getLayout);

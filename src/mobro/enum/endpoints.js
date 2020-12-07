@@ -3,6 +3,12 @@ import {registerPublicEndpoint} from "mobro/utils/public";
 export const GET_LAYOUT = "theme:layout";
 registerPublicEndpoint("enum.endpoints.GET_LAYOUT", GET_LAYOUT);
 
+export const GET_LAYOUT_NAMES = "theme:layout:names";
+registerPublicEndpoint("enum.endpoints.GET_LAYOUT_NAMES", GET_LAYOUT_NAMES);
+
+export const CHANGE_LAYOUT = "theme:layout:change";
+registerPublicEndpoint("enum.endpoints.CHANGE_LAYOUT", CHANGE_LAYOUT);
+
 export const SAVE_LAYOUT = "theme:layout:save";
 registerPublicEndpoint("enum.endpoints.SAVE_LAYOUT", SAVE_LAYOUT);
 
