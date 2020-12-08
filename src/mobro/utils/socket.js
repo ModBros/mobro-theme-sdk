@@ -3,7 +3,7 @@ import {EVENT_CHANGE_LAYOUT, EVENT_CHANGE_THEME} from "mobro/enum/events";
 import {registerPublicEndpoint} from "mobro/utils/public";
 import {DEFAULT_UUID} from "mobro/enum/channel-data";
 import {dispatch} from "mobro/reducers";
-import {layoutChange} from "mobro/actions/layout";
+import {layoutChange, layoutNameChange} from "mobro/actions/layout";
 
 let originalSearchParams = null;
 let originalParams = null;
@@ -50,7 +50,7 @@ function init() {
     });
 
     socket.on(EVENT_CHANGE_LAYOUT, (data) => {
-        dispatch(layoutChange(data.layout));
+        dispatch(layoutChange(data));
     });
 }
 

@@ -3,7 +3,7 @@ import {fetchingAction} from "mobro/utils/redux";
 import {
     addComponent,
     copyComponent,
-    layoutChange,
+    layoutChange, layoutDelete,
     layoutEdit,
     layoutFailed,
     layoutFetched,
@@ -77,11 +77,39 @@ export default createReducer(initialState, {
     },
 
     [layoutNameChange.type]: (state, {payload}) => {
-        return dotPropImmutable.set(state, "layoutName", payload);
+        state = dotPropImmutable.set(state, "layoutName", payload);
+
+        if (state.layoutNames && !state.layoutNames.includes(payload)) {
+            state = dotPropImmutable.merge(state, "layoutNames", [payload]);
+        }
+
+        return state;
     },
 
     [layoutChange.type]: (state, {payload}) => {
-        return dotPropImmutable.set(state, "layout", payload);
+        const {layoutName, layout} = payload;
+
+        state = dotPropImmutable.set(state, "layout", !empty(layout) ? layout : defaultLayoutConfig());
+
+        if (layoutName) {
+            state = dotPropImmutable.set(state, "layoutName", layoutName);
+        }
+
+        return state;
+    },
+
+    [layoutDelete.type]: (state, {payload}) => {
+        if (empty(state.layoutNames)) {
+            return state;
+        }
+
+        const index = state.layoutNames.indexOf(payload);
+
+        if (index === -1) {
+            return state;
+        }
+
+        return dotPropImmutable.delete(state, `layoutNames.${index}`);
     },
 
     ...fetchingAction(layoutRequested.type, layoutFetched.type, layoutFailed.type, "layoutFetchingState", (payload) => {

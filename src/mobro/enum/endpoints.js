@@ -9,6 +9,9 @@ registerPublicEndpoint("enum.endpoints.GET_LAYOUT_NAMES", GET_LAYOUT_NAMES);
 export const CHANGE_LAYOUT = "theme:layout:change";
 registerPublicEndpoint("enum.endpoints.CHANGE_LAYOUT", CHANGE_LAYOUT);
 
+export const DELETE_LAYOUT = "theme:layout:delete";
+registerPublicEndpoint("enum.endpoints.DELETE_LAYOUT", DELETE_LAYOUT);
+
 export const SAVE_LAYOUT = "theme:layout:save";
 registerPublicEndpoint("enum.endpoints.SAVE_LAYOUT", SAVE_LAYOUT);
 

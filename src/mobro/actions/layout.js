@@ -1,8 +1,7 @@
 import {createAction} from "@reduxjs/toolkit";
 import {send} from "mobro/utils/communication";
-import {CHANGE_LAYOUT, GET_LAYOUT, GET_LAYOUT_NAMES} from "mobro/enum/endpoints";
-import {defaultLayoutConfig} from "mobro/utils/layout";
-import {empty} from "mobro/utils/helper";
+import {CHANGE_LAYOUT, DELETE_LAYOUT, GET_LAYOUT, GET_LAYOUT_NAMES} from "mobro/enum/endpoints";
+import {noop} from "mobro/utils/helper";
 import {DEFAULT_LAYOUT_NAME} from "mobro/enum/layout";
 
 export const layoutRequested = createAction("layout:requested");
@@ -15,8 +14,8 @@ export function fetchLayout() {
 
         send(GET_LAYOUT)
             .then((response) => {
-                const layoutName = response?.name || DEFAULT_LAYOUT_NAME;
-                const layout = response?.config || {};
+                const layoutName = response?.layoutName || DEFAULT_LAYOUT_NAME;
+                const layout = response?.layout || {};
 
                 dispatch(layoutFetched({layoutName, layout}));
             })
@@ -44,16 +43,26 @@ export function fetchLayoutNames() {
     }
 }
 
-export function changeToLayoutName(name) {
+export function changeToLayoutName(layoutName, layout = null) {
     return function (dispatch) {
-        dispatch(layoutNameChange(name));
+        dispatch(layoutNameChange(layoutName));
 
-        send(CHANGE_LAYOUT, name)
+        send(CHANGE_LAYOUT, {layoutName, layout})
             .then((response) => {
-                layoutChange(response);
+                dispatch(layoutChange(response));
             })
-            .catch(() => {
+            .catch(noop)
+    }
+}
+
+export function deleteLayout(layoutName) {
+    return function (dispatch) {
+        send(DELETE_LAYOUT, layoutName)
+            .then((response) => {
+                dispatch(layoutDelete(layoutName));
+                dispatch(layoutChange(response));
             })
+            .catch(noop);
     }
 }
 
@@ -63,6 +72,7 @@ export const layoutMode = createAction("layout:mode");
 export const layoutUpdate = createAction("layout:update");
 export const layoutNameChange = createAction("layout:name:change");
 export const layoutChange = createAction("layout:change");
+export const layoutDelete = createAction("layout:delete");
 
 export const layoutEdit = createAction("layout:edit");
 export const addComponent = createAction("layout:component:add");

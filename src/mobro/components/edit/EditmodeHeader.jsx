@@ -33,7 +33,7 @@ function EditmodeHeader(props) {
                         <input
                             type={"text"}
                             className={"form-control form-control-sm form-control-inline"}
-                            value={layoutConfig?.width}
+                            value={layoutConfig?.width || ""}
                             onChange={(event) => {
                                 layoutEdit({name: "width", data: event.target.value})
                             }}
@@ -47,7 +47,7 @@ function EditmodeHeader(props) {
                     <span>
                         <input
                             type={"text"}
-                            value={layoutConfig?.height}
+                            value={layoutConfig?.height || ""}
                             className={"form-control form-control-sm form-control-inline"}
                             onChange={(event) => {
                                 layoutEdit({name: "height", data: event.target.value})
