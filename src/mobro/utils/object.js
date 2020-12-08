@@ -30,6 +30,27 @@ export function addObjectPropertyByPath(object, path, value) {
     current[lastPart] = value;
 }
 
+export function getObjectPropertyByPath(object, path) {
+    if (typeof object !== "object" || typeof path !== "string") {
+        return;
+    }
+
+    path = path.split(".");
+    let current = object;
+
+    for (let i = 0; i < path.length; i++) {
+        let part = path[i];
+
+        if (!current[part]) {
+            current[part] = {};
+        }
+
+        current = current[part];
+    }
+
+    return current;
+}
+
 export function deepValues(object, values = []) {
     if (!object || typeof object !== "object") {
         return object;

@@ -9,7 +9,6 @@ function BaseComponent(props) {
         config,
         Component,
         selectedComponent,
-        pasteComponent = noop,
         selectComponent = noop
     } = props;
 
@@ -19,7 +18,8 @@ function BaseComponent(props) {
     return (
         <div
             className={`${baseClassNames} ${renderConfig?.baseClassNames} ${selectedComponent === path ? "selection-indicator" : ""}`}
-            onClick={() => selectComponent(path)}>
+            onClick={() => selectComponent(path)}
+        >
             <div className="component-body card-body">
                 <Component path={path} config={config}/>
             </div>
