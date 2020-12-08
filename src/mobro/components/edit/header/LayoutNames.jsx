@@ -1,4 +1,3 @@
-import ReactSelect from "react-select";
 import {valuesToSelectOptions, valueToOption} from "mobro/utils/component/select";
 import {noop} from "mobro/utils/helper";
 import React, {useState} from "react";
@@ -6,6 +5,7 @@ import {withFetchingIndicator} from "mobro/utils/component/fetching";
 import IconButton from "mobro/containers/edit/button/IconButton";
 import Modal from "react-bootstrap/Modal";
 import FormGroup from "mobro/containers/edit/form/FormGroup";
+import Select from "mobro/containers/shared/form/Select";
 
 function sanitizeLayoutName(layoutName) {
     return layoutName.replace(/[^\w_\-]/g, "");
@@ -114,7 +114,7 @@ function LayoutNames(props) {
                 </div>
             </div>
 
-            <ReactSelect
+            <Select
                 styles={selectStyles}
                 value={valueToOption(layoutName)}
                 options={valuesToSelectOptions(layoutNames)}

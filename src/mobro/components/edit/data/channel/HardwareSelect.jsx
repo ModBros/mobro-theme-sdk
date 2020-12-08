@@ -1,6 +1,6 @@
-import Select from "react-select";
 import React from "react";
 import {getOptionByValue, valuesToSelectOptions} from "mobro/utils/component/select";
+import Select from "mobro/containers/shared/form/Select";
 
 function HardwareSelect(props) {
     const {
