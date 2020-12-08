@@ -5,7 +5,7 @@ import IconOption from "mobro/containers/edit/form/IconOption";
 
 function SourceSelect(props) {
     const {
-        sensors,
+        sources,
         value,
         onChange,
         className = null,

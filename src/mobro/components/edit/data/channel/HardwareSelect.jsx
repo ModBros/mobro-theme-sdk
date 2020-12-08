@@ -4,7 +4,7 @@ import {getOptionByValue, valuesToSelectOptions} from "mobro/utils/component/sel
 
 function HardwareSelect(props) {
     const {
-        sensors,
+        hardwareTypes,
         value,
         onChange,
         className = null,
