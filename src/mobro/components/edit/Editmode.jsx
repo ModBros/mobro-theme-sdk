@@ -56,7 +56,7 @@ function EditmodeContent(props) {
         return () => {
             window.removeEventListener("resize", handleResize);
         }
-    });
+    }, [header.current, sidebar.current]);
 
 
     return (

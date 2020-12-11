@@ -1,0 +1,1 @@
+require.context("../containers/", true, /\.(js)$/);

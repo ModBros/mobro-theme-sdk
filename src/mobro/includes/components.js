@@ -75,32 +75,6 @@ addDataComponent({
     }
 });
 
-import BasicChart from "mobro/containers/component/BasicChart";
-
-addDataComponent({
-    name: "basic-chart",
-    label: "Basic Chart",
-    component: BasicChart,
-    config: {
-        showLabel: {
-            type: "checkbox"
-        },
-        customLabel: {
-            type: "input"
-        },
-        displayType: {
-            type: "select",
-            options: [
-                {label: "Line", value: "line"},
-                {label: "Pie", value: "pie"}
-            ]
-        },
-        channel: {
-            type: "channel"
-        }
-    }
-});
-
 import Spacer from "mobro/containers/component/Spacer";
 
 addDataComponent({

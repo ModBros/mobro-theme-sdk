@@ -61,4 +61,4 @@ export function last(value) {
     return value;
 }
 
-registerPublicEndpoint("utils.helper.first", last);
+registerPublicEndpoint("utils.helper.last", last);

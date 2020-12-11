@@ -44,10 +44,16 @@ module.exports = {
                 }
             }
         }, {
-            test: require.resolve('React'),
+            test: require.resolve('react'),
             loader: 'expose-loader',
             options: {
-                exposes: 'React',
+                exposes: 'React'
+            },
+        }, {
+            test: require.resolve('react-dom'),
+            loader: 'expose-loader',
+            options: {
+                exposes: 'ReactDOM'
             },
         }, {
             test: /\.inline\.scss$/,

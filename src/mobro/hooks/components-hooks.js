@@ -11,14 +11,16 @@ const _editComponents = {};
 const _globalEditModificators = [];
 const _editModificators = {};
 
-export const withWrapper = createPublicHook("hooks.component", hooks => (componentId, WrappedComponent) => {
+export function addComponent(componentId, WrappedComponent) {
     addObjectPropertyByPath(_components, componentId, WrappedComponent);
+}
 
+export const withWrapper = createPublicHook("hooks.component", hooks => (componentId, WrappedComponent) => {
     let Component = WrappedComponent;
     let generated = false;
 
     const generate = () => {
-        if(generated) {
+        if (generated) {
             return;
         }
 

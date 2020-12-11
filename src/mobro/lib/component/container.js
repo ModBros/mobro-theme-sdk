@@ -1,6 +1,6 @@
 import {Component} from "react";
 import {connect} from "react-redux";
-import {withWrapper} from "mobro/hooks/components-hooks";
+import {addComponent, withWrapper} from "mobro/hooks/components-hooks";
 import {withMapStateToPropsHook} from "mobro/hooks/redux/map-state-to-props-hooks";
 import {withMapDispatchToPropsHook} from "mobro/hooks/redux/map-dispatch-to-props-hooks";
 import {withMergePropsHook} from "mobro/hooks/redux/merge-props-hook";
@@ -95,6 +95,8 @@ export default class Container {
      * @returns {this}
      */
     _basic() {
+        addComponent(this.id, this.component);
+
         if (this.basicEnabled) {
             this.component = withWrapper(this.id, this.component);
         }

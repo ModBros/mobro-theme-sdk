@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import {Provider} from "react-redux";
 import {createStore} from "mobro/reducers";
 import {registerPublicEndpoint} from "mobro/utils/public";
-import App from "mobro/containers/app";
+import App from "mobro/containers/App";
 
 import "mobro/styles/vendor.scss"
 import "mobro/styles/bootstrap.scss"
