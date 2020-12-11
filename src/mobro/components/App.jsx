@@ -14,6 +14,8 @@ function App(props) {
         layoutFetchingState,
         fetchLayout,
         setLayoutMode,
+        settingsFetchingState,
+        fetchSettings,
         config,
         layoutMode,
         editmode
@@ -27,7 +29,11 @@ function App(props) {
         fetchLayout();
     }
 
-    if (failed(layoutFetchingState)) {
+    if (notAskedYet(settingsFetchingState)) {
+        fetchSettings();
+    }
+
+    if (failed(layoutFetchingState) || failed(settingsFetchingState)) {
         return (
             <AlignCenter>
                 <div className="alert alert-danger">
@@ -37,7 +43,7 @@ function App(props) {
         )
     }
 
-    if (!fetched(layoutFetchingState)) {
+    if (!fetched(layoutFetchingState) || !fetched(settingsFetchingState)) {
         return (
             <AlignCenter>
                 <LoadingIndicator/>

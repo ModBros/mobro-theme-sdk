@@ -29,6 +29,7 @@ export default createReducer(initialState, {
 
 // ----------------------------------------------
 // selectors
+
 export const getSensorsState = state => dotPropImmutable.get(state, "sensors");
 registerPublicEndpoint("reducers.sensors.getSensorState", getSensorsState);
 

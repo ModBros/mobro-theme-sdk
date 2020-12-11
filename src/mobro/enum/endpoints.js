@@ -26,3 +26,6 @@ registerPublicEndpoint("enum.endpoints.ADD_CHANNEL", ADD_CHANNEL);
 
 export const REMOVE_CHANNEL = "theme:channel:remove";
 registerPublicEndpoint("enum.endpoints.REMOVE_CHANNEL", REMOVE_CHANNEL);
+
+export const GET_SETTINGS = "settings";
+registerPublicEndpoint("enum.endpoints.GET_SETTINGS", GET_SETTINGS);
