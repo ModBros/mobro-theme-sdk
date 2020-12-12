@@ -41,6 +41,7 @@
     "dot-prop-immutable": "^2.1.0",
     "react": "^16.14.0",
     "react-bootstrap": "^1.4.0",
+    "react-color": "^2.19.3",
     "react-dom": "^16.14.0",
     "react-drag-listview": "^0.1.7",
     "react-file-input-previews-base64": "^1.0.8",

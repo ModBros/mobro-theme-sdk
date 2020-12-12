@@ -11,7 +11,7 @@ function Preview(props) {
 
     return (
         <div>
-            <img className={"img-fluid mw-20"} src={getPublicUploadUrl(url)}/>
+            <img className={"img-fluid"} src={getPublicUploadUrl(url)}/>
         </div>
     )
 }

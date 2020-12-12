@@ -9,10 +9,8 @@ function ComponentLabel(props) {
     }
 
     return (
-        <label className={`d-block mb-1 line-height-1 ${className}`}>
-            <small>
-                {label}
-            </small>
+        <label className={`d-block mb-1 line-height-1 ${className} component-label`}>
+            {label}
         </label>
     );
 }

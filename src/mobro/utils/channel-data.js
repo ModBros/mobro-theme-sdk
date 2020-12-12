@@ -1,4 +1,3 @@
-import dotPropImmutable from "dot-prop-immutable";
 import {UNIT_PERCENTAGE} from "mobro/enum/channel-data";
 import {ADD_CHANNEL, REMOVE_CHANNEL} from "mobro/enum/endpoints";
 import {send} from "mobro/utils/communication";
@@ -56,8 +55,8 @@ export function extractRawUnit(data) {
 
 registerPublicEndpoint("utils.channelData.extractRawUnit", extractRawUnit);
 
-export function extractValue(data, fixate = true) {
-    let value = extractRawValue(data);
+export function extractValue(data, fixate = true, extractor = extractRawValue) {
+    let value = extractor(data);
 
     if (typeof value !== "number" || !fixate) {
         return value;
@@ -74,6 +73,18 @@ export function extractValue(data, fixate = true) {
 }
 
 registerPublicEndpoint("utils.channelData.extractValue", extractValue);
+
+export function extractRawMinValue(data) {
+    return data?.min;
+}
+
+registerPublicEndpoint("utils.channelData.extractRawMinValue", extractRawMinValue);
+
+export function extractRawMaxValue(data) {
+    return data?.max;
+}
+
+registerPublicEndpoint("utils.channelData.extractRawMaxValue", extractRawMaxValue);
 
 export function isPercentageData(data) {
     return extractRawUnit(data) === UNIT_PERCENTAGE;

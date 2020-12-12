@@ -22,7 +22,7 @@ export function withPublicUrl(asset) {
                     return new Promise(resolve => resolve(false));
                 }
             });
-    }, []);
+    }, [asset]);
 
     return url;
 }

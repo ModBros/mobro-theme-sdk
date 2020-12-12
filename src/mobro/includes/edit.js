@@ -49,8 +49,17 @@ import SingleImage from "mobro/containers/edit/data/SingleImage";
 addEditComponent({
     name: "single-image",
     component: SingleImage,
-    defaultValue: null
-})
+    defaultValue: ""
+});
+
+import Color from "mobro/containers/edit/data/Color";
+import {defaultColorValue} from "mobro/components/edit/data/Color";
+
+addEditComponent({
+    name: "color",
+    component: Color,
+    defaultValue: defaultColorValue
+});
 
 import Repeat from "mobro/containers/edit/data/Repeat";
 

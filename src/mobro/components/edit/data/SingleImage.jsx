@@ -46,10 +46,23 @@ function SingleImage({name, data, onChange}) {
                         });
                 }}
                 buttonComponent={
-                    <div className={"w-100"}>
+                    <div className={"w-100 d-flex align-items-center justify-content-between"}>
                         <IconButton icon={"file-upload"}>
                             Choose Image
                         </IconButton>
+
+                        {data?.url !== null && (
+                            <IconButton
+                                icon={"trash"}
+                                variant={"danger"}
+                                onClick={(event) => {
+                                    event.stopPropagation();
+                                    onChange({url: null});
+                                }}
+                            >
+                                Clear
+                            </IconButton>
+                        )}
                     </div>
                 }
             />

@@ -67,7 +67,7 @@ function EditmodeContent(props) {
                 </div>
 
                 {headerHeight !== 0 && (
-                    <div className={"editmode-sidebar d-flex flex-column"} ref={sidebar}
+                    <div className={"editmode-sidebar d-flex flex-column scrollable"} ref={sidebar}
                          style={{paddingTop: headerHeight}}>
                         {map(getComponentRoots(), (root) => {
                             const componentRoot = root ? layout[root] : layout;
