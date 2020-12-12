@@ -21,7 +21,7 @@ import {
     updateEditmode
 } from "mobro/actions/layout";
 import {NOT_ASKED} from "mobro/utils/communication";
-import {defaultLayoutConfig, saveLayout} from "mobro/utils/layout";
+import {defaultLayoutConfig, isEditMode, saveLayout} from "mobro/utils/layout";
 import dotPropImmutable from "dot-prop-immutable";
 import {DEFAULT_LAYOUT_NAME, LAYOUT_MODE_DISPLAY} from "mobro/enum/layout";
 import {registerPublicEndpoint} from "mobro/utils/public";
@@ -138,9 +138,11 @@ export default createReducer(initialState, {
     },
 
     [selectComponent.type]: (state, {payload}) => {
-        const {path} = payload;
+        if(isEditMode(state.layoutMode)) {
+            const {path} = payload;
 
-        return dotPropImmutable.set(state, `selectedComponent`, path !== state.selectedComponent ? path : null);
+            return dotPropImmutable.set(state, `selectedComponent`, path !== state.selectedComponent ? path : null);
+        }
     },
 
     [addComponent.type]: (state, {payload}) => {
