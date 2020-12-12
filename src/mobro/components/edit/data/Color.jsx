@@ -35,8 +35,13 @@ function Color(props) {
 
                 <ChromePicker
                     color={color}
-                    onChange={(color) => setColor(color.rgb)}
-                    onChangeComplete={(color) => onChange(color.rgb)}
+                    onChange={(color) => {
+                        setColor(color.rgb)
+                    }}
+                    onChangeComplete={(color) => {
+                        setColor(color.rgb);
+                        onChange(color.rgb)
+                    }}
                 />
             </div> : null}
         </FormGroup>
