@@ -5,6 +5,12 @@ export function noop() {
 
 registerPublicEndpoint("utils.helper.noop", noop);
 
+export function noco() {
+    return null;
+}
+
+registerPublicEndpoint("utils.helper.noco", noco);
+
 export function empty(value) {
     if (!value) {
         return true;

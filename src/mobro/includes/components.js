@@ -6,6 +6,7 @@ addDataComponent({
     name: "text",
     label: "Text",
     component: Text,
+    icon: "widget.text",
     config: {
         text: {
             type: "input"
@@ -29,6 +30,7 @@ import Image from "mobro/containers/component/Image";
 
 addDataComponent({
     name: "image",
+    icon: "widget.image",
     label: "Image",
     component: Image,
     config: {
@@ -42,6 +44,7 @@ import BasicValue from "mobro/containers/component/BasicValue";
 
 addDataComponent({
     name: "basic-value",
+    icon: "widget.data_value",
     label: "Basic Value",
     component: BasicValue,
     config: {
@@ -62,6 +65,7 @@ import ValueTable from "mobro/containers/component/ValueTable";
 
 addDataComponent({
     name: "value-table",
+    icon: "widget.table",
     label: "Value Table",
     component: ValueTable,
     config: {
@@ -79,6 +83,7 @@ import Spacer from "mobro/containers/component/Spacer";
 
 addDataComponent({
     name: "spacer",
+    icon: "widget.spacer",
     label: "Spacer",
     component: Spacer,
     renderConfig: {

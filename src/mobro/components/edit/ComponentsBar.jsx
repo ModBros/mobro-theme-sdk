@@ -6,7 +6,9 @@ import AlignCenter from "mobro/containers/shared/layout/AlignCenter";
 import IconButton from "mobro/components/edit/button/IconButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {getComponentLabel, getDataComponentInformation} from "mobro/hooks/components-hooks";
+import {getComponentIcon, getComponentLabel, getDataComponentInformation} from "mobro/hooks/components-hooks";
+import {hasIcon} from "mobro/utils/icons";
+import MobroIcon from "mobro/containers/shared/MobroIcon";
 
 function ComponentsBar(props) {
     const {
@@ -52,6 +54,12 @@ function ComponentsBar(props) {
 
                             <div className={"card-body p-1"}>
                                 <div className={"d-flex align-items-center"}>
+                                    {getComponentIcon(getComponentType(component)) !== null && (
+                                        <small>
+                                            <MobroIcon icon={getComponentIcon(getComponentType(component))} className={"mr-2"}/>
+                                        </small>
+                                    )}
+
                                     <strong>
                                         {getComponentLabel(getComponentType(component))}
                                     </strong>

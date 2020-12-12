@@ -1,16 +1,25 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {getIcon, hasIcon} from "mobro/utils/icons";
 
 function MobroIcon(props) {
     const {
-        icon
+        icon,
+        className = "",
+        ...iconProps
     } = props;
 
-    // todo check if internal library has given icon
+    if (hasIcon(icon)) {
+        return (
+            <span className={`mobro-icon ${className}`} dangerouslySetInnerHTML={{__html: getIcon(icon)}}></span>
+        );
+    }
 
     // fallback to fontawesome
     return (
         <FontAwesomeIcon
             icon={icon}
+            className={className}
+            {...iconProps}
         />
     );
 }

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26">
+    <g id="Layer_2" data-name="Layer 2">
+        <g id="Layer_2-2" data-name="Layer 2">
+            <rect x="2.12" y="2" width="22" height="22"
+                  style="fill:none;stroke:currentColor;stroke-linejoin:round;stroke-width:2px"/>
+            <circle cx="9.92" cy="8.04" r="1.81" fill="currentColor"/>
+            <polyline points="23.78 15.19 19.16 10.58 5.87 23.88"
+                      style="fill:none;stroke:currentColor;stroke-linejoin:round;stroke-width:2px"/>
+            <polyline points="11.39 19.11 6.78 14.49 2 19.27"
+                      style="fill:none;stroke:currentColor;stroke-linejoin:round;stroke-width:2px"/>
+        </g>
+        <g id="Layer_3" data-name="Layer 3">
+            <rect width="26" height="26" style="fill:none"/>
+        </g>
+    </g>
+</svg>

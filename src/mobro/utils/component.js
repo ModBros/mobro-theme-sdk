@@ -4,7 +4,7 @@ import {getDataComponent, getEditComponentDefaultValue} from "mobro/hooks/compon
 import {getDeviceUuid, getSocket} from "mobro/utils/socket";
 import {CHANNEL_PREFIX} from "mobro/enum/channel-data";
 import {addChannel, removeChannel} from "mobro/utils/channel-data";
-import {map, noop} from "mobro/utils/helper";
+import {map, noco, noop} from "mobro/utils/helper";
 
 /**
  * @param path
@@ -74,10 +74,10 @@ export function renderComponents(components, path, render) {
     }
 
     return map(components, (component, i) => {
-        const Component = getDataComponent(component.type);
+        let Component = getDataComponent(component.type);
 
         if (!Component) {
-            return null;
+            Component = noco;
         }
 
         return render({
