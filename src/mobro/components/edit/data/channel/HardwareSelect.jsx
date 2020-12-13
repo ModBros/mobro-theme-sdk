@@ -1,6 +1,7 @@
 import React from "react";
-import {getOptionByValue, valuesToSelectOptions} from "mobro/utils/component/select";
+import {applyValueIconToOptions, getOptionByValue, valuesToSelectOptions} from "mobro/utils/component/select";
 import Select from "mobro/containers/shared/form/Select";
+import IconOption from "mobro/containers/edit/form/IconOption";
 
 function HardwareSelect(props) {
     const {
@@ -17,7 +18,8 @@ function HardwareSelect(props) {
         <Select
             {...selectProps}
             className={className}
-            options={options}
+            options={applyValueIconToOptions(options)}
+            components={{Option: IconOption}}
             value={getOptionByValue(options, value)}
             onChange={value => onChange(value)}
         />

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.01 26">
+    <g id="Layer_2" data-name="Layer 2">
+        <g id="Layer_2-2" data-name="Layer 2">
+            <rect x="1.01" y="4.2" width="24" height="16"
+                  style="fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"/>
+            <rect x="3.72" y="7.42" width="3.72" height="8"
+                  style="fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"/>
+            <rect x="18.59" y="7.42" width="3.72" height="8"
+                  style="fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"/>
+            <rect x="11.15" y="7.42" width="3.72" height="8"
+                  style="fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"/>
+            <line x1="22.31" y1="18" x2="22.31" y2="20.2"
+                  style="fill:none;stroke:currentColor;stroke-linejoin:round;stroke-width:2px"/>
+            <line x1="3.72" y1="18" x2="3.72" y2="20.2"
+                  style="fill:none;stroke:currentColor;stroke-linejoin:round;stroke-width:2px"/>
+            <line x1="7.44" y1="18" x2="7.44" y2="20.2"
+                  style="fill:none;stroke:currentColor;stroke-linejoin:round;stroke-width:2px"/>
+            <line x1="11.15" y1="18" x2="11.15" y2="20.2"
+                  style="fill:none;stroke:currentColor;stroke-linejoin:round;stroke-width:2px"/>
+            <line x1="14.87" y1="18" x2="14.87" y2="20.2"
+                  style="fill:none;stroke:currentColor;stroke-linejoin:round;stroke-width:2px"/>
+            <line x1="18.59" y1="18" x2="18.59" y2="20.2"
+                  style="fill:none;stroke:currentColor;stroke-linejoin:round;stroke-width:2px"/>
+        </g>
+        <g id="Layer_3" data-name="Layer 3">
+            <rect width="26" height="26" style="fill:none"/>
+        </g>
+    </g>
+</svg>

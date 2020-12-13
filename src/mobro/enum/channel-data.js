@@ -7,4 +7,7 @@ export const CHANNEL_PREFIX = "monitor:data:";
 registerPublicEndpoint("enum.channelData.CHANNEL_PREFIX", CHANNEL_PREFIX);
 
 export const UNIT_PERCENTAGE = "%";
-registerPublicEndpoint("enum.channelData.UNIT_PERCENTAGE");
+registerPublicEndpoint("enum.channelData.UNIT_PERCENTAGE", UNIT_PERCENTAGE);
+
+export const SENSOR_TYPE_TEMPERATURE = "Temperature";
+registerPublicEndpoint("enum.channelData.SENSOR_TYPE_TEMPERATURE", SENSOR_TYPE_TEMPERATURE);

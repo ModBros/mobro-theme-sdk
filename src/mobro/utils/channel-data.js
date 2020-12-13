@@ -1,4 +1,4 @@
-import {UNIT_PERCENTAGE} from "mobro/enum/channel-data";
+import {SENSOR_TYPE_TEMPERATURE, UNIT_PERCENTAGE} from "mobro/enum/channel-data";
 import {ADD_CHANNEL, REMOVE_CHANNEL} from "mobro/enum/endpoints";
 import {send} from "mobro/utils/communication";
 import {registerPublicEndpoint} from "mobro/utils/public";
@@ -55,6 +55,12 @@ export function extractRawUnit(data) {
 
 registerPublicEndpoint("utils.channelData.extractRawUnit", extractRawUnit);
 
+export function extractRawSensorType(data) {
+    return data?.sensortype;
+}
+
+registerPublicEndpoint("utils.channelData.extractRawSensorType", extractRawSensorType);
+
 export function extractValue(data, fixate = true, extractor = extractRawValue) {
     let value = extractor(data);
 
@@ -91,3 +97,9 @@ export function isPercentageData(data) {
 }
 
 registerPublicEndpoint("utils.channelData.isPercentageData", isPercentageData);
+
+export function isTemperatureData(data) {
+    return extractRawSensorType(data) === SENSOR_TYPE_TEMPERATURE;
+}
+
+registerPublicEndpoint("utils.channelData.isTemperatureData", isTemperatureData);

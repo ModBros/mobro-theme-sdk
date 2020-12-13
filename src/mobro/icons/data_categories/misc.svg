@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26">
+    <g id="Layer_2" data-name="Layer 2">
+        <g id="Layer_2-2" data-name="Layer 2">
+            <line x1="13.01" y1="13" x2="12.99" y2="13"
+                  style="fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:3px"/>
+            <line x1="7.93" y1="13" x2="7.92" y2="13"
+                  style="fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:3px"/>
+            <line x1="18.08" y1="13" x2="18.07" y2="13"
+                  style="fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:3px"/>
+            <rect x="2" y="2" width="22" height="22"
+                  style="fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"/>
+        </g>
+        <g id="Layer_3" data-name="Layer 3">
+            <rect width="26" height="26" style="fill:none"/>
+        </g>
+    </g>
+</svg>

@@ -15,6 +15,12 @@ export function addIcon(name, svg) {
 
 registerPublicEndpoint("utils.icons.addIcon", addIcon);
 
+export function addIconAlias(alias, name) {
+    _aliases[alias] = name;
+}
+
+registerPublicEndpoint("utils.icons.addIconAlias", addIconAlias);
+
 export function getIcon(name) {
     return _library[getNameByAlias(name)];
 }

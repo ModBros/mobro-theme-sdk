@@ -1,6 +1,6 @@
 import {library} from "@fortawesome/fontawesome-svg-core";
 import * as icons from "@fortawesome/free-solid-svg-icons";
-import {addIcon} from "mobro/utils/icons";
+import {addIcon, addIconAlias} from "mobro/utils/icons";
 
 // font awesome library
 
@@ -12,6 +12,8 @@ const iconList = Object
 library.add(...iconList);
 
 // custom icons todo replace later with better implementation
+
+// widgets
 
 import WidgetTextIcon from "mobro/icons/widgets/text.svg";
 addIcon("widget.text", WidgetTextIcon);
@@ -27,3 +29,34 @@ addIcon("widget.image", WidgetImageIcon);
 
 import WidgetSpacerIcon from "mobro/icons/widgets/spacer.svg";
 addIcon("widget.spacer", WidgetSpacerIcon);
+
+// data categories
+
+import BatteryIcon from "mobro/icons/data_categories/battery.svg";
+addIcon("data_category.battery", BatteryIcon);
+addIconAlias("option_Battery", "data_category.battery");
+
+import CpuIcon from "mobro/icons/data_categories/cpu.svg";
+addIcon("data_category.cpu", CpuIcon);
+addIconAlias("option_Processor", "data_category.cpu");
+
+import GpuIcon from "mobro/icons/data_categories/gpu.svg";
+addIcon("data_category.gpu", GpuIcon);
+addIconAlias("option_Graphics", "data_category.gpu");
+
+import MemoryIcon from "mobro/icons/data_categories/memory.svg";
+addIcon("data_category.memory", MemoryIcon);
+addIconAlias("option_Memory", "data_category.memory");
+
+import MiscIcon from "mobro/icons/data_categories/misc.svg";
+addIcon("data_category.misc", MiscIcon);
+addIconAlias("option_Misc", "data_category.misc");
+addIconAlias("misc", "data_category.misc");
+
+import NetworkIcon from "mobro/icons/data_categories/network.svg";
+addIcon("data_category.network", NetworkIcon);
+addIconAlias("option_Network", "data_category.network");
+
+import StorageIcon from "mobro/icons/data_categories/storage.svg";
+addIcon("data_category.storage", StorageIcon);
+addIconAlias("option_Storage", "data_category.storage");

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26">
+    <g id="Layer_2" data-name="Layer 2">
+        <g id="Layer_2-2" data-name="Layer 2">
+            <rect x="2" y="6.87" width="23" height="11.81"
+                  style="fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"/>
+            <line x1="2" y1="3.87" x2="2" y2="20.13"
+                  style="fill:none;stroke:currentColor;stroke-linecap:square;stroke-linejoin:round;stroke-width:2px"/>
+            <line x1="2" y1="3.87" x2="1" y2="3.87"
+                  style="fill:none;stroke:currentColor;stroke-linecap:square;stroke-linejoin:round;stroke-width:2px"/>
+            <line x1="5.36" y1="20.13" x2="13.85" y2="20.13"
+                  style="fill:none;stroke:currentColor;stroke-linecap:square;stroke-linejoin:round;stroke-width:2px"/>
+            <line x1="16.53" y1="20.13" x2="21.99" y2="20.13"
+                  style="fill:none;stroke:currentColor;stroke-linecap:square;stroke-linejoin:round;stroke-width:2px"/>
+            <circle cx="18.67" cy="12.82" r="4.5"
+                    style="fill:none;stroke:currentColor;stroke-linecap:square;stroke-linejoin:round;stroke-width:2px"/>
+            <line x1="14.87" y1="12.82" x2="22.47" y2="12.82"
+                  style="fill:none;stroke:currentColor;stroke-linecap:square;stroke-linejoin:round"/>
+            <line x1="18.67" y1="16.27" x2="18.67" y2="8.68"
+                  style="fill:none;stroke:currentColor;stroke-linecap:square;stroke-linejoin:round"/>
+            <line x1="15.99" y1="15.51" x2="21.36" y2="10.14"
+                  style="fill:none;stroke:currentColor;stroke-linecap:square;stroke-linejoin:round"/>
+            <line x1="21.36" y1="15.51" x2="15.99" y2="10.14"
+                  style="fill:none;stroke:currentColor;stroke-linecap:square;stroke-linejoin:round"/>
+            <circle cx="8.09" cy="12.82" r="4.5"
+                    style="fill:none;stroke:currentColor;stroke-linecap:square;stroke-linejoin:round;stroke-width:2px"/>
+            <line x1="4.29" y1="12.82" x2="11.88" y2="12.82"
+                  style="fill:none;stroke:currentColor;stroke-linecap:square;stroke-linejoin:round"/>
+            <line x1="8.09" y1="16.27" x2="8.09" y2="8.68"
+                  style="fill:none;stroke:currentColor;stroke-linecap:square;stroke-linejoin:round"/>
+            <line x1="5.4" y1="15.51" x2="10.77" y2="10.14"
+                  style="fill:none;stroke:currentColor;stroke-linecap:square;stroke-linejoin:round"/>
+            <line x1="10.77" y1="15.51" x2="5.4" y2="10.14"
+                  style="fill:none;stroke:currentColor;stroke-linecap:square;stroke-linejoin:round"/>
+        </g>
+        <g id="Layer_3" data-name="Layer 3">
+            <rect width="26" height="26" style="fill:none"/>
+        </g>
+    </g>
+</svg>

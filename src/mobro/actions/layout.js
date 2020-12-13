@@ -35,7 +35,7 @@ export function fetchLayoutNames() {
 
         send(GET_LAYOUT_NAMES)
             .then((response) => {
-                dispatch(layoutNamesFetched(response));
+                dispatch(layoutNamesFetched(response.layoutNames));
             })
             .catch(() => {
                 dispatch(layoutNamesFailed())
