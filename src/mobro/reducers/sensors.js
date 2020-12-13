@@ -70,7 +70,8 @@ export const getSensorDataBySourceAndHardwareType = () => {
                 if (hardware.hardwaretype === hardwareType) {
                     data = data.concat(hardware.sensors.map((sensor) => ({
                         ...sensor,
-                        hardwareid: hardware.id
+                        hardwareid: hardware.id,
+                        hardwarename: hardware.title,
                     })));
                 }
             })

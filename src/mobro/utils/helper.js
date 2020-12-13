@@ -1,4 +1,5 @@
 import {registerPublicEndpoint} from "mobro/utils/public";
+import debounce from "debounce";
 
 export function noop() {
 }
@@ -68,3 +69,5 @@ export function last(value) {
 }
 
 registerPublicEndpoint("utils.helper.last", last);
+
+registerPublicEndpoint("utils.helper.debounce", debounce);
