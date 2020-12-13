@@ -13,6 +13,7 @@ export const defaultColorValue = {
 function Color(props) {
     const {
         name,
+        config,
         data,
         onChange
     } = props;
@@ -21,7 +22,7 @@ function Color(props) {
     const [color, setColor] = useState(getDataOrDefault(data, defaultColorValue));
 
     return (
-        <FormGroup label={name} inline={true}>
+        <FormGroup label={name} inline={true} info={config?.info}>
             <div
                 className={"color-preview"}
                 onClick={() => setShow(!show)}

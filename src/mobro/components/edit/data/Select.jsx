@@ -11,7 +11,7 @@ function Select(props) {
     } = props;
 
     return (
-        <FormGroup label={name}>
+        <FormGroup label={name} info={config?.info}>
             <FormSelect
                 value={getOptionByValue(config.options, data)}
                 options={config.options}

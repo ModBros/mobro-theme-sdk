@@ -14,7 +14,7 @@ function Components(props) {
     const componentsPath = getComponentConfigPath(path, name);
 
     return (
-        <FormGroup label={name}>
+        <FormGroup label={name} info={config?.info}>
             <ComponentsBar path={componentsPath} components={data.components}/>
 
             <AddComponentButton allowed={getDataOrDefault(config.allowed, [])} path={componentsPath}/>

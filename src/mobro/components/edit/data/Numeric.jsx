@@ -5,7 +5,7 @@ function Numeric({name, config, data, onChange}) {
     data = getDataOrDefault(data, "");
 
     return (
-        <FormGroup label={name}>
+        <FormGroup label={name} info={config?.info}>
             <input
                 className="form-control"
                 type="number"

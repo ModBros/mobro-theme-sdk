@@ -45,6 +45,7 @@ function FillingSelect(props) {
 function Channel(props) {
     const {
         data,
+        config,
         name,
         sensorDataFetchingState,
         fetchSensorData,
@@ -139,7 +140,7 @@ function Channel(props) {
     }
 
     return (
-        <FormGroup label={name}>
+        <FormGroup label={name} info={config?.info}>
             <div className={"card"}>
                 <div className={"d-flex align-items-center py-0 px-1"}>
                     {children}

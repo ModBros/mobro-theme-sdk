@@ -8,11 +8,11 @@ import FormGroup from "mobro/containers/edit/form/FormGroup";
 import Preview from "mobro/containers/edit/data/image/Preview";
 import WorkingStatusIndicator from "mobro/containers/shared/WorkingStatusIndicator";
 
-function SingleImage({name, data, onChange}) {
+function SingleImage({name, config, data, onChange}) {
     const [status, setStatus] = useState(null);
 
     return (
-        <FormGroup label={name}>
+        <FormGroup label={name} info={config?.info}>
             <WorkingStatusIndicator status={status} className={"d-inline-block ml-2"}/>
 
             <Preview url={data?.url}/>
