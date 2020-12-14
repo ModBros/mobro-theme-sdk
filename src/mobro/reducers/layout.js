@@ -2,7 +2,7 @@ import {createReducer} from "@reduxjs/toolkit";
 import {fetchingAction} from "mobro/utils/redux";
 import {
     addComponent,
-    copyComponent,
+    copyComponent, duplicateComponent,
     layoutChange, layoutDelete,
     layoutEdit,
     layoutFailed,
@@ -138,7 +138,7 @@ export default createReducer(initialState, {
     },
 
     [selectComponent.type]: (state, {payload}) => {
-        if(isEditMode(state.layoutMode)) {
+        if (isEditMode(state.layoutMode)) {
             const {path} = payload;
 
             return dotPropImmutable.set(state, `selectedComponent`, path !== state.selectedComponent ? path : null);
@@ -187,6 +187,16 @@ export default createReducer(initialState, {
     [pasteComponent.type]: (state, {payload}) => {
         const {path = ""} = payload;
         const {type, config} = state.componentTemporaryStorage;
+
+        return dotPropImmutable.merge(state, `layout${path}.components`, {type, config});
+    },
+
+    [duplicateComponent.type]: (state, {payload}) => {
+        const {
+            path = "",
+            type,
+            config
+        } = payload;
 
         return dotPropImmutable.merge(state, `layout${path}.components`, {type, config});
     },

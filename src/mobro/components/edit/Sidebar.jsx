@@ -8,6 +8,7 @@ function Sidebar(props) {
         width,
         title,
         name,
+        close = true,
         children,
         header = null,
         footer = null
@@ -24,9 +25,11 @@ function Sidebar(props) {
                             {title}
                         </h5>
 
-                        <button type="button" className="btn btn-link btn-sm text-light py-0" onClick={() => closeSidebarComponent(name)}>
-                            <FontAwesomeIcon icon="times"/>
-                        </button>
+                        {close && (
+                            <button type="button" className="btn btn-link btn-sm text-light py-0" onClick={() => closeSidebarComponent(name)}>
+                                <FontAwesomeIcon icon="times"/>
+                            </button>
+                        )}
                     </div>
                 )}
 

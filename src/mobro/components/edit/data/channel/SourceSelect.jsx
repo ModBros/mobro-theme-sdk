@@ -22,6 +22,7 @@ function SourceSelect(props) {
             options={applyValueIconToOptions(options)}
             components={{Option: IconOption}}
             value={getOptionByValue(options, value)}
+
             onChange={value => onChange(value)}
         />
     );

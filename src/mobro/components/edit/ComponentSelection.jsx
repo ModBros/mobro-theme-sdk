@@ -19,17 +19,19 @@ function ComponentSelection(props) {
         <div className={"row row-gutter-1"}>
             {map(allowedComponents, (component) => (
                 <div key={component} className={"col-6 d-flex"}>
-                    <div className="card card-clickable w-100" onClick={() => onSelect(component)}>
-                        <div className="card-body p-2 d-flex flex-column align-items-center">
-                            {getComponentIcon(component) !== null && (
-                                <div className={"text-center my-1"}>
-                                    <MobroIcon icon={getComponentIcon(component)}/>
-                                </div>
-                            )}
+                    <div className="card card-clickable w-100 embed-responsive embed-responsive-1by1" onClick={() => onSelect(component)}>
+                        <div className="card-body p-2 d-flex align-items-center justify-content-center embed-responsive-item">
+                            <div className={"d-flex flex-column align-items-center"}>
+                                {getComponentIcon(component) !== null && (
+                                    <div className={"text-center my-1 icon-2x"}>
+                                        <MobroIcon icon={getComponentIcon(component)}/>
+                                    </div>
+                                )}
 
-                            <h6 className="m-0 text-uppercase text-center">
-                                {getComponentLabel(component)}
-                            </h6>
+                                <h6 className="m-0 text-uppercase text-center">
+                                    {getComponentLabel(component)}
+                                </h6>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -5,7 +5,8 @@ function Button(props) {
         round = false,
         size = null,
         onClick,
-        children
+        children,
+        ...buttonProps
     } = props;
 
     const roundCls = round ? "btn-round" : "";
@@ -13,6 +14,7 @@ function Button(props) {
 
     return (
         <button
+            {...buttonProps}
             type={"button"}
             className={`btn btn-${variant} ${className} ${roundCls} ${sizeCls}`}
             onClick={onClick}

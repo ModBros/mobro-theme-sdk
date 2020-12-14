@@ -71,3 +71,7 @@ addIconAlias("option_Network", "data_category.network");
 import StorageIcon from "mobro/icons/data_categories/storage.svg";
 addIcon("data_category.storage", StorageIcon);
 addIconAlias("option_Storage", "data_category.storage");
+
+import MainboardIcon from "mobro/icons/data_categories/mainboard.svg";
+addIcon("data_category.mainboard", MainboardIcon);
+addIconAlias("option_Mainboard", "data_category.mainboard");

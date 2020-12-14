@@ -1,10 +1,11 @@
 import Container from "mobro/lib/component/container";
 import BaseComponent from "mobro/components/component/BaseComponent";
 import {selectComponent} from "mobro/actions/layout";
-import {getSelectedComponent} from "mobro/reducers/layout";
+import {getLayoutMode, getSelectedComponent} from "mobro/reducers/layout";
 
 const mapStateToProps = event => event.mergeMapStateToProps({
-    selectedComponent: getSelectedComponent(event.getState())
+    selectedComponent: getSelectedComponent(event.getState()),
+    layoutMode: getLayoutMode(event.getState())
 })
 
 const mapDispatchToProps = event => event.mergeMapDispatchToProps({

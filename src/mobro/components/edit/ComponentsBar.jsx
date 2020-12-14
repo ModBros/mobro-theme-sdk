@@ -18,7 +18,7 @@ function ComponentsBar(props) {
         selectComponent = noop,
         removeComponent = noop,
         moveComponent = noop,
-        copyComponent = noop
+        duplicateComponent = noop
     } = props;
 
     if (empty(components)) {
@@ -75,22 +75,21 @@ function ComponentsBar(props) {
                                             icon={"trash"}
                                             variant={"link"}
                                             size={"sm"}
+                                            title={"delete"}
                                             onClick={() => {
                                                 removeComponent(componentPath)
                                             }}
                                         />
 
-                                        <Dropdown>
-                                            <Dropdown.Toggle bsPrefix={"_"} variant={"link"} size={"sm"}>
-                                                <FontAwesomeIcon icon={"ellipsis-v"}/>
-                                            </Dropdown.Toggle>
-
-                                            <Dropdown.Menu align={"right"} flip={false}>
-                                                <Dropdown.Item onClick={() => copyComponent(getComponentType(component), getComponentConfig(component))}>
-                                                    <FontAwesomeIcon icon={"copy"}/> Copy
-                                                </Dropdown.Item>
-                                            </Dropdown.Menu>
-                                        </Dropdown>
+                                        <IconButton
+                                            icon={"clone"}
+                                            variant={"link"}
+                                            size={"sm"}
+                                            title={"duplicate"}
+                                            onClick={() => {
+                                                duplicateComponent(getComponentType(component), getComponentConfig(component));
+                                            }}
+                                        />
                                     </div>
                                 </div>
                             </div>

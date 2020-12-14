@@ -1,10 +1,19 @@
 import React, {useEffect, useState} from "react";
 import {registerPublicEndpoint} from "mobro/utils/public";
-import {getDataComponent, getEditComponentDefaultValue} from "mobro/hooks/components-hooks";
+import {
+    getComponentLabel,
+    getDataComponent,
+    getDataComponentConfig,
+    getEditComponentDefaultValue
+} from "mobro/hooks/components-hooks";
 import {getDeviceUuid, getSocket} from "mobro/utils/socket";
 import {CHANNEL_PREFIX} from "mobro/enum/channel-data";
 import {addChannel, removeChannel} from "mobro/utils/channel-data";
 import {map, noco, noop} from "mobro/utils/helper";
+import {deepValues} from "mobro/utils/object";
+import Edit from "mobro/containers/edit/Edit";
+import {closeSidebarComponent, toggleSidebarComponent, withSidebar} from "mobro/utils/sidebar";
+import IconButton from "mobro/containers/edit/button/IconButton";
 
 /**
  * @param path
@@ -269,3 +278,38 @@ export function getEditDefaultValues(config, defaultValue = {}) {
 }
 
 registerPublicEndpoint("utils.component.getEditDefaultValues", getEditDefaultValues);
+
+/**
+ * @param {{}} args
+ * @returns {function(): void}
+ */
+export function withEditSidebar(args) {
+    const {
+        path,
+        type,
+        config
+    } = args
+
+    const componentConfig = getDataComponentConfig(type);
+
+    // extract necessary values for sidebar dependencies
+    const dependencies = map(componentConfig, (field, name) => {
+        return deepValues(config[name] || null);
+    }).flat().join("|");
+
+    const
+        name = `edit_component_${path}`,
+        title = getComponentLabel(type),
+        content = (<Edit type={type} path={path} config={config}/>),
+        footer = (
+            <IconButton icon={"save"} className={"w-100"} onClick={() => closeSidebarComponent(name)}>
+                save
+            </IconButton>
+        );
+
+    withSidebar({name, title, content, footer, close: false, dependencies: [dependencies]});
+
+    return () => toggleSidebarComponent(name);
+}
+
+registerPublicEndpoint("utils.component.withEditSidebar", withEditSidebar);

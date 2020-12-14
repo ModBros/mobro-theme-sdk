@@ -24,7 +24,7 @@ function EditmodeHeader(props) {
                             layoutEdit({name: "height", data: layoutConfig?.width});
                         }}
                     >
-                        <FontAwesomeIcon icon={"sync-alt"}/>
+                        <FontAwesomeIcon icon={"retweet"}/>
                     </small>
                 </div>
 

@@ -32,10 +32,6 @@ function LayoutNames(props) {
 
     const fetching = withFetchingIndicator(fetchLayoutNames, layoutNamesFetchingState);
 
-    if (fetching) {
-        return fetching;
-    }
-
     const selectStyles = {
         control: (provided) => ({
             ...provided,

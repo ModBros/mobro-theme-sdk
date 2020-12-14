@@ -61,6 +61,7 @@ export function deleteLayout(layoutName) {
             .then((response) => {
                 dispatch(layoutDelete(layoutName));
                 dispatch(layoutChange(response));
+                dispatch(fetchLayoutNames());
             })
             .catch(noop);
     }
@@ -79,6 +80,7 @@ export const addComponent = createAction("layout:component:add");
 export const removeComponent = createAction("layout:component:remove");
 export const copyComponent = createAction("layout:component:copy");
 export const pasteComponent = createAction("layout:component:paste");
+export const duplicateComponent = createAction("layout:component:duplicate");
 export const moveComponent = createAction("layout:component:move");
 
 export const updateEditmode = createAction("layout:editmode:update");
