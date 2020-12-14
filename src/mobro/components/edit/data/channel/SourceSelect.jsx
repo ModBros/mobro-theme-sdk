@@ -17,6 +17,7 @@ function SourceSelect(props) {
     return (
         <Select
             {...selectProps}
+            placeholder={"select source"}
             className={className}
             options={applyValueIconToOptions(options)}
             components={{Option: IconOption}}

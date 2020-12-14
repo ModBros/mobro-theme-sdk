@@ -30,6 +30,17 @@ addIcon("widget.image", WidgetImageIcon);
 import WidgetSpacerIcon from "mobro/icons/widgets/spacer.svg";
 addIcon("widget.spacer", WidgetSpacerIcon);
 
+// data sources
+
+import HardwareMonitorIcon from "mobro/icons/sources/hardware_monitor.svg";
+addIcon("data_source.hardware_monitor", HardwareMonitorIcon);
+addIconAlias("option_openhardwaremonitor", "data_source.hardware_monitor");
+addIconAlias("option_librehardwaremonitor", "data_source.hardware_monitor");
+
+import HWInfoIcon from "mobro/icons/sources/hwinfo.svg";
+addIcon("data_source.hwinfo", HWInfoIcon);
+addIconAlias("option_hwinfo", "data_source.hwinfo");
+
 // data categories
 
 import BatteryIcon from "mobro/icons/data_categories/battery.svg";

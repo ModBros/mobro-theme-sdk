@@ -43,6 +43,7 @@ function SensorSelect(props) {
     return (
         <Select
             {...selectProps}
+            placeholder={"select sensor value"}
             className={className}
             options={options}
             value={getOptionByValue(options, value)}

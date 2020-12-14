@@ -17,6 +17,7 @@ function HardwareSelect(props) {
     return (
         <Select
             {...selectProps}
+            placeholder={"select hardware type"}
             className={className}
             options={applyValueIconToOptions(options)}
             components={{Option: IconOption}}
