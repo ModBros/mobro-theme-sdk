@@ -25,3 +25,13 @@
   bottom: 0;
   transform: translate(-50%, 50%);
 }
+
+.selection-indicator .components-bar__component {
+  background: $primary;
+  color: white;
+  border: 1px solid $primary;
+
+  .btn.btn-link {
+    color: white;
+  }
+}
