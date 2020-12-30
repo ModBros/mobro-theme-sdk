@@ -290,12 +290,8 @@ export function withEditSidebar(args) {
         config
     } = args
 
-    const componentConfig = getDataComponentConfig(type);
-
     // extract necessary values for sidebar dependencies
-    const dependencies = map(componentConfig, (field, name) => {
-        return deepValues(config[name] || null);
-    }).flat().join("|");
+    const dependencies = deepValues(config || {}).flat().join("|");
 
     const
         name = `edit_component_${path}`,

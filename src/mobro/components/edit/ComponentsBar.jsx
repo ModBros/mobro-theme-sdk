@@ -1,13 +1,10 @@
 import React, {Fragment} from "react";
 import {empty, map, noop} from "mobro/utils/helper";
 import TriggerEditButton from "mobro/containers/edit/TriggerEditButton";
-import {getComponentConfig, getComponentPath, getComponentType} from "mobro/utils/component";
+import {getComponentConfig, getComponentPath, getComponentType, withEditSidebar} from "mobro/utils/component";
 import AlignCenter from "mobro/containers/shared/layout/AlignCenter";
 import IconButton from "mobro/components/edit/button/IconButton";
-import Dropdown from "react-bootstrap/Dropdown";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {getComponentIcon, getComponentLabel, getDataComponentInformation} from "mobro/hooks/components-hooks";
-import {hasIcon} from "mobro/utils/icons";
+import {getComponentIcon, getComponentLabel} from "mobro/hooks/components-hooks";
 import MobroIcon from "mobro/containers/shared/MobroIcon";
 
 function ComponentsBar(props) {
@@ -33,9 +30,19 @@ function ComponentsBar(props) {
         <Fragment>
             {map(components, (component, i) => {
                 const componentPath = getComponentPath(path, i);
+                const toggleEditSidebar = withEditSidebar({
+                    path: componentPath,
+                    type: getComponentType(component),
+                    config: getComponentConfig(component)
+                });
 
                 return (
-                    <div key={i} onClick={() => selectComponent(componentPath)} className={`${selectedComponent === componentPath ? "selection-indicator" : ""}`}>
+                    <div
+                        key={i}
+                        onClick={() => selectComponent(componentPath)}
+                        onDoubleClick={toggleEditSidebar}
+                        className={`${selectedComponent === componentPath ? "selection-indicator" : ""}`}
+                    >
                         <div className={"card mb-2 clickable components-bar__component"}>
                             <div className={"components-bar__up components-bar__control"}>
                                 <IconButton
@@ -56,11 +63,14 @@ function ComponentsBar(props) {
                                 <div className={"d-flex align-items-center"}>
                                     {getComponentIcon(getComponentType(component)) !== null && (
                                         <small>
-                                            <MobroIcon icon={getComponentIcon(getComponentType(component))} className={"mr-2"}/>
+                                            <MobroIcon
+                                                icon={getComponentIcon(getComponentType(component))}
+                                                className={"mr-2"}
+                                            />
                                         </small>
                                     )}
 
-                                    <strong>
+                                    <strong className={"user-select-none"}>
                                         {getComponentLabel(getComponentType(component))}
                                     </strong>
 

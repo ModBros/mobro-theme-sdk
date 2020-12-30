@@ -21,3 +21,55 @@
   min-width: 3rem;
   max-width: 4rem;
 }
+
+.form-group-container .form-group:last-of-type {
+  margin-bottom: 0;
+}
+
+.fieldset {
+  position: relative;
+  margin-top: 0.5rem;
+}
+
+.fieldset-label {
+  color: $gray-500;
+  text-transform: uppercase;
+  font-weight: 100;
+  font-size: 0.75em;
+  position: absolute;
+  top: -0.75rem;
+  left: 0.25rem;
+  padding: 0.25rem;
+  width: calc(100% - 0.5rem);
+
+  .btn {
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 0.5rem;
+    color: $gray-500;
+  }
+
+  & > * {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    background: $app-black;
+  }
+}
+
+.fieldset-body {
+  border: 1px solid $gray-500;
+
+  &.collapsed {
+    border-top: none;
+  }
+}
+
+.field-container {
+  .field-container-wrapper {
+    padding-right: 0.5rem;
+
+    &:last-of-type {
+      padding-right: 0;
+    }
+  }
+}

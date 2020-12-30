@@ -1,5 +1,5 @@
 import React from "react";
-import {getDataComponentConfig, getEditComponent} from "mobro/hooks/components-hooks";
+import {getDataComponentConfig, getEditComponent, renderEdit} from "mobro/hooks/components-hooks";
 import {map} from "mobro/utils/helper";
 
 function Edit({type, fields = null, path, config, layoutEdit}) {
@@ -7,23 +7,11 @@ function Edit({type, fields = null, path, config, layoutEdit}) {
         fields = getDataComponentConfig(type);
     }
 
-    return map(fields, (fieldConfig, name) => {
-        const EditComponent = getEditComponent(fieldConfig.type);
-
-        if (!EditComponent) {
-            return null;
-        }
-
-        return (
-            <EditComponent
-                key={name}
-                name={name}
-                path={path}
-                config={fieldConfig}
-                data={config?.[name] ? config[name] : null}
-                onChange={(data) => layoutEdit({path, name, data})}
-            />
-        );
+    return renderEdit({
+        fields,
+        path,
+        config,
+        onChange: (name, data) => layoutEdit({path, name, data})
     });
 }
 

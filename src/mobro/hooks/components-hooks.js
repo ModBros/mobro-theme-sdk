@@ -2,12 +2,14 @@ import {createPublicHook} from "mobro/utils/hooks";
 import {addObjectPropertyByPath, getObjectPropertyByPath} from "mobro/utils/object";
 import {registerPublicEndpoint} from "mobro/utils/public";
 import {getDataOrDefault, getEditDefaultValues} from "mobro/utils/component";
-import {empty} from "mobro/utils/helper";
+import {empty, map, noop} from "mobro/utils/helper";
+import React from "react";
 
 const _componentRoots = [""];
 const _components = {};
 const _dataComponents = {};
 const _editComponents = {};
+const _layoutComponents = {};
 const _globalEditModificators = [];
 const _editModificators = {};
 
@@ -232,8 +234,6 @@ export function addEditComponent(args) {
     });
 }
 
-registerPublicEndpoint("hooks.addEditComponent", addEditComponent);
-
 /**
  * @param name
  * @returns {*}
@@ -241,8 +241,6 @@ registerPublicEndpoint("hooks.addEditComponent", addEditComponent);
 export function getEditComponentDefaultValue(name) {
     return _editComponents[name]?.defaultValue;
 }
-
-registerPublicEndpoint("hooks.getEditComponentDefaultValue", getEditComponentDefaultValue);
 
 /**
  * @param name
@@ -252,4 +250,71 @@ export function getEditComponent(name) {
     return _editComponents[name]?.component;
 }
 
-registerPublicEndpoint("hooks.getEditComponent", getEditComponent);
+/**
+ * @param {{}} args
+ */
+export function addLayoutComponent(args) {
+    const {
+        name,
+        component
+    } = args;
+
+    addObjectPropertyByPath(_layoutComponents, name, {
+        name,
+        component
+    });
+}
+
+/**
+ * @param name
+ * @returns {*}
+ */
+export function getLayoutComponent(name) {
+    return _layoutComponents[name]?.component;
+}
+
+function DefaultEditWrapper(props) {
+    const {children} = props;
+
+    return children;
+}
+
+export function renderEdit({fields, path, config, onChange = noop, Wrapper = DefaultEditWrapper}) {
+    return map(fields, (fieldConfig, name) => {
+        const EditComponent = getEditComponent(fieldConfig.type);
+
+        if (EditComponent) {
+            return (
+                <Wrapper>
+                    <EditComponent
+                        key={name}
+                        name={name}
+                        path={path}
+                        config={fieldConfig}
+                        data={config?.[name] ? config[name] : null}
+                        onChange={(data) => {
+                            onChange(name, data);
+                        }}
+                    />
+                </Wrapper>
+            );
+        }
+
+        const LayoutComponent = getLayoutComponent(fieldConfig.type);
+
+        if (LayoutComponent) {
+            return (
+                <LayoutComponent
+                    key={name}
+                    name={name}
+                    path={path}
+                    layoutConfig={fieldConfig}
+                    config={config}
+                    onChange={onChange}
+                />
+            );
+        }
+
+        return null;
+    });
+}

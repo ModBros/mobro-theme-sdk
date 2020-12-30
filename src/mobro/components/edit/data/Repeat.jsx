@@ -2,7 +2,7 @@ import {Fragment} from "react";
 import FormGroup from "mobro/containers/edit/form/FormGroup";
 import IconButton from "mobro/containers/edit/button/IconButton";
 import {empty, map} from "mobro/utils/helper";
-import {getEditComponent} from "mobro/hooks/components-hooks";
+import {getEditComponent, renderEdit} from "mobro/hooks/components-hooks";
 import React from "react";
 import {getEditDefaultValues} from "mobro/utils/component";
 
@@ -27,27 +27,17 @@ function Repeat(props) {
                         <div className={"draggable"} key={i}>
                             <div className={"card mb-3"}>
                                 <div className={"card-body p-2"}>
-                                    {map(config.fields, (fieldConfig, fieldName) => {
-                                        const EditComponent = getEditComponent(fieldConfig.type);
+                                    {renderEdit({
+                                        fields:
+                                        config.fields,
+                                        path,
+                                        config: item,
+                                        onChange: (fieldName, value) => {
+                                            // set new value on this item (reference)
+                                            item[fieldName] = value;
 
-                                        if (!EditComponent) {
-                                            return null;
+                                            onChange(data);
                                         }
-
-                                        return (
-                                            <EditComponent
-                                                key={fieldName}
-                                                name={fieldName}
-                                                config={fieldConfig}
-                                                data={item?.[fieldName] ? item?.[fieldName] : null}
-                                                onChange={(value) => {
-                                                    // set new value on this item (reference)
-                                                    item[fieldName] = value;
-
-                                                    onChange(data);
-                                                }}
-                                            />
-                                        );
                                     })}
 
                                     <IconButton icon={"trash"} className={"w-100"} size={"sm"} onClick={() => {

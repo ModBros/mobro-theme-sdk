@@ -1,4 +1,18 @@
-import {addEditComponent} from "mobro/hooks/components-hooks";
+import {addEditComponent, addLayoutComponent} from "mobro/hooks/components-hooks";
+
+import Fieldset from "mobro/containers/edit/layout/Fieldset";
+
+addLayoutComponent({
+    name: "fieldset",
+    component: Fieldset
+});
+
+import FieldContainer from "mobro/containers/edit/layout/FieldContainer";
+
+addLayoutComponent({
+    name: "field-container",
+    component: FieldContainer
+});
 
 import Input from "mobro/containers/edit/data/Input";
 

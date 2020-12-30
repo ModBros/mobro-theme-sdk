@@ -141,7 +141,7 @@ export default createReducer(initialState, {
         if (isEditMode(state.layoutMode)) {
             const {path} = payload;
 
-            return dotPropImmutable.set(state, `selectedComponent`, path !== state.selectedComponent ? path : null);
+            return dotPropImmutable.set(state, `selectedComponent`, path);
         }
     },
 
