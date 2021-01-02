@@ -5,8 +5,8 @@ function CollapseButton(props) {
     const {
         collapsed = false,
         onClick = noop,
-        collapsedIcon = "chevron-down",
-        collapseIcon = "chevron-up"
+        collapsedIcon = "plus-square",
+        collapseIcon = "minus-square"
     } = props;
 
     return (

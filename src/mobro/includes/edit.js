@@ -14,6 +14,13 @@ addLayoutComponent({
     component: FieldContainer
 });
 
+import Tabs from "mobro/containers/edit/layout/Tabs";
+
+addLayoutComponent({
+    name: "tabs",
+    component: Tabs
+});
+
 import Input from "mobro/containers/edit/data/Input";
 
 addEditComponent({

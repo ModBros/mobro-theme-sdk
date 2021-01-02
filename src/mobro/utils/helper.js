@@ -70,4 +70,14 @@ export function last(value) {
 
 registerPublicEndpoint("utils.helper.last", last);
 
+export function count(value) {
+    if (Array.isArray(value)) {
+        return value.length;
+    }
+
+    return Object.keys(value).length;
+}
+
+registerPublicEndpoint("utils.helper.count", count);
+
 registerPublicEndpoint("utils.helper.debounce", debounce);

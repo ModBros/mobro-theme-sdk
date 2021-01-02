@@ -10,7 +10,10 @@ function Fieldset(props) {
         onChange
     } = props;
 
-    const [show, setShow] = useState(!layoutConfig?.collapsed || !layoutConfig?.collapsible);
+    const collapsed = layoutConfig?.collapsed === true;
+    const collapsible = layoutConfig?.collapsible !== false;
+
+    const [show, setShow] = useState(!collapsed || !collapsible);
 
     return (
         <div className={`fieldset form-group`}>
@@ -19,12 +22,14 @@ function Fieldset(props) {
                     {layoutConfig?.label}
                 </div>
 
-                <div className={"line-height-1"}>
-                    <CollapseButton
-                        collapsed={!show}
-                        onClick={() => setShow(!show)}
-                    />
-                </div>
+                {collapsible && (
+                    <div className={"line-height-1"}>
+                        <CollapseButton
+                            collapsed={!show}
+                            onClick={() => setShow(!show)}
+                        />
+                    </div>
+                )}
             </div>
 
             <div className={`fieldset-body form-group-container ${show ? "p-2" : "collapsed"}`}>

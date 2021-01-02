@@ -1,10 +1,18 @@
 import {renderEdit} from "mobro/hooks/components-hooks";
+import {count} from "mobro/utils/helper";
 
 function Wrapper(props) {
-    const {children} = props;
+    const {
+        fields,
+        fieldConfig,
+        children
+    } = props;
+
+    const fieldCount = count(fields);
+    const colWidth = fieldConfig?.layoutWidth || Math.round(12 / fieldCount)
 
     return (
-        <div className={"field-container-wrapper"}>
+        <div className={`field-container-wrapper col col-${colWidth}`}>
             {children}
         </div>
     );
@@ -19,7 +27,7 @@ function FieldContainer(props) {
     } = props;
 
     return (
-        <div className={`field-container form-group d-flex align-items-center`}>
+        <div className={`field-container form-group row align-items-center no-gutters`}>
             {renderEdit({
                 fields: layoutConfig?.children,
                 path,

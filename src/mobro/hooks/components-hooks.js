@@ -279,15 +279,22 @@ function DefaultEditWrapper(props) {
     return children;
 }
 
-export function renderEdit({fields, path, config, onChange = noop, Wrapper = DefaultEditWrapper}) {
+export function renderEdit(args) {
+    const {
+        fields,
+        path,
+        config,
+        onChange = noop,
+        Wrapper = DefaultEditWrapper
+    } = args;
+
     return map(fields, (fieldConfig, name) => {
         const EditComponent = getEditComponent(fieldConfig.type);
 
         if (EditComponent) {
             return (
-                <Wrapper>
+                <Wrapper fields={fields} fieldConfig={fieldConfig} key={name} name={name}>
                     <EditComponent
-                        key={name}
                         name={name}
                         path={path}
                         config={fieldConfig}

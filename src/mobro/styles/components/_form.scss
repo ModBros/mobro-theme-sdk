@@ -28,7 +28,7 @@
 
 .fieldset {
   position: relative;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
 }
 
 .fieldset-label {
@@ -60,7 +60,10 @@
   border: 1px solid $gray-500;
 
   &.collapsed {
-    border-top: none;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    padding-top: 0.5em;
   }
 }
 
