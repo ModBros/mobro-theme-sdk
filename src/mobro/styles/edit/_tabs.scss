@@ -25,7 +25,7 @@
     &.active, &:focus, &:hover {
       border: none;
       outline: none;
-      background: transparent;
+      background: darken($app-black, 5);
       color: $white;
 
       &:after {

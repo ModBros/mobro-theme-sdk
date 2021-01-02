@@ -39,7 +39,7 @@ function Tabs(props) {
             <NavigationComponent setCurrentTab={setCurrentTab} tabs={children} currentTab={currentTab}/>
 
             <div className={"tab-content"}>
-                <div className={"tab-pane active"} role={"tabpanel"}>
+                <div className={"tab-pane py-2 active"} role={"tabpanel"}>
                     {map(children, (child) => {
                         if (child.key === currentTab.key) {
                             return child.props.children;

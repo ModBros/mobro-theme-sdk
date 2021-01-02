@@ -8,6 +8,10 @@
     font-weight: 100;
     font-size: 0.75em;
   }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 }
 
 .form-control-sm {

@@ -160,16 +160,18 @@ export default createReducer(initialState, {
     },
 
     [moveComponent]: (state, {payload}) => {
-        let {sourcePath, destinationPath} = payload;
+        const {sourcePath, destinationPath} = payload;
 
-        sourcePath = `layout${sourcePath}`;
-        destinationPath = `layout${destinationPath}`;
+        const accessSourcePath = `layout${sourcePath}`;
+        const accessDestinationPath = `layout${destinationPath}`;
 
-        const source = dotPropImmutable.get(state, sourcePath);
-        const destination = dotPropImmutable.get(state, destinationPath);
+        const source = dotPropImmutable.get(state, accessSourcePath);
+        const destination = dotPropImmutable.get(state, accessDestinationPath);
 
-        state = dotPropImmutable.set(state, sourcePath, destination);
-        return dotPropImmutable.set(state, destinationPath, source);
+        state = dotPropImmutable.set(state, accessSourcePath, destination);
+        state = dotPropImmutable.set(state, "selectedComponent", destinationPath);
+
+        return dotPropImmutable.set(state, accessDestinationPath, source);
     },
 
     [removeComponent.type]: (state, {payload}) => {

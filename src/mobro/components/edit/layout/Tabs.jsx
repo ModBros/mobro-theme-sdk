@@ -16,14 +16,12 @@ function Tabs(props) {
             <ConcreteTabs>
                 {map(layoutConfig?.children, (child, name) => (
                     <Tab key={name} label={child?.label || name}>
-                        <div className={"pt-2"}>
-                            {renderEdit({
-                                fields: child?.children,
-                                path,
-                                config,
-                                onChange
-                            })}
-                        </div>
+                        {renderEdit({
+                            fields: child?.children,
+                            path,
+                            config,
+                            onChange
+                        })}
                     </Tab>
                 ))}
             </ConcreteTabs>

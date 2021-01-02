@@ -49,12 +49,13 @@ function ComponentsBar(props) {
                                     icon={"chevron-up"}
                                     size={"sm"}
                                     className={"btn-inline"}
-                                    onClick={() => {
+                                    onClick={(event) => {
                                         if (i === 0) {
                                             return false;
                                         }
 
                                         moveComponent(componentPath, getComponentPath(path, i - 1));
+                                        event.stopPropagation();
                                     }}
                                 />
                             </div>
@@ -109,12 +110,13 @@ function ComponentsBar(props) {
                                     icon={"chevron-down"}
                                     size={"sm"}
                                     className={"btn-inline"}
-                                    onClick={() => {
+                                    onClick={(event) => {
                                         if (i === components.length - 1) {
                                             return false;
                                         }
 
                                         moveComponent(componentPath, getComponentPath(path, i + 1));
+                                        event.stopPropagation();
                                     }}
                                 />
                             </div>

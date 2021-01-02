@@ -10,6 +10,21 @@
   }
 }
 
+.selection-indicator .components-bar__component {
+  background: $primary;
+  color: white;
+  border: 1px solid $primary;
+  z-index: 10;
+
+  .btn.btn-link {
+    color: white;
+  }
+
+  .components-bar__control {
+    display: block;
+  }
+}
+
 .components-bar__up, .components-bar__down {
   position: absolute;
   left: 50%;
@@ -24,14 +39,4 @@
 .components-bar__down {
   bottom: 0;
   transform: translate(-50%, 50%);
-}
-
-.selection-indicator .components-bar__component {
-  background: $primary;
-  color: white;
-  border: 1px solid $primary;
-
-  .btn.btn-link {
-    color: white;
-  }
 }
