@@ -95,8 +95,6 @@ export default class Container {
      * @returns {this}
      */
     _basic() {
-        addComponent(this.id, this.component);
-
         if (this.basicEnabled) {
             this.component = withWrapper(this.id, this.component);
         }
@@ -129,6 +127,8 @@ export default class Container {
         this
             ._basic()
             ._redux();
+
+        addComponent(this.id, this.component);
 
         return this.component;
     }
