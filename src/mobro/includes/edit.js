@@ -99,3 +99,14 @@ addEditComponent({
         components: []
     }
 });
+
+import Coordinates from "mobro/containers/edit/data/Coordinates";
+
+addEditComponent({
+    name: "coordinates",
+    component: Coordinates,
+    defaultValue: {
+        x: 0,
+        y: 0
+    }
+});

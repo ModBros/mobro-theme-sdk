@@ -1,0 +1,60 @@
+.coordinates {
+  padding: 0.5rem 0;
+  background: darken($app-black, 5%);
+}
+
+.coordinates-controls {
+  margin-bottom: 0.5rem;
+  position: relative;
+  width: 100%;
+  height: 5rem;
+}
+
+.coordinates-control {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 1rem;
+  width: 1rem;
+  text-align: center;
+  line-height: 1;
+  color: white;
+  cursor: pointer;
+
+  .svg-inline--fa {
+    height: 1rem;
+    width: auto;
+  }
+
+  &.up-10 {
+    transform: translateX(-50%) translateY(calc(-50% - 2rem));
+  }
+
+  &.up-1 {
+    transform: translateX(-50%) translateY(calc(-50% - 1rem));
+  }
+
+  &.down-10 {
+    transform: translateX(-50%) translateY(calc(-50% + 2rem));
+  }
+
+  &.down-1 {
+    transform: translateX(-50%) translateY(calc(-50% + 1rem));
+  }
+
+  &.left-10 {
+    transform: translateX(calc(-50% - 2rem)) translateY(-50%);
+  }
+
+  &.left-1 {
+    transform: translateX(calc(-50% - 1rem)) translateY(-50%);
+  }
+
+  &.right-10 {
+    transform: translateX(calc(-50% + 2rem)) translateY(-50%);
+  }
+
+  &.right-1 {
+    transform: translateX(calc(-50% + 1rem)) translateY(-50%);
+  }
+}
