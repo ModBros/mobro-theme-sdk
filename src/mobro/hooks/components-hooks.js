@@ -7,7 +7,7 @@ import React from "react";
 
 const _componentRoots = [""];
 const _components = {};
-const _dataComponents = {};
+const _widgets = {};
 const _editComponents = {};
 const _layoutComponents = {};
 const _globalEditModificators = [];
@@ -75,7 +75,7 @@ registerPublicEndpoint("hooks.getComponent", getComponent);
 /**
  * @param {{}} args
  */
-export function addDataComponent(args) {
+export function addWidget(args) {
     const {
         name,
         icon,
@@ -91,7 +91,7 @@ export function addDataComponent(args) {
 
     addObjectPropertyByPath(_editModificators, name, []);
 
-    addObjectPropertyByPath(_dataComponents, name, {
+    addObjectPropertyByPath(_widgets, name, {
         component,
         icon,
         label,
@@ -102,7 +102,8 @@ export function addDataComponent(args) {
     });
 }
 
-registerPublicEndpoint("hooks.addDataComponent", addDataComponent);
+registerPublicEndpoint("hooks.addWidget", addWidget);
+registerPublicEndpoint("hooks.addDataComponent", addWidget);
 
 /**
  * @param {function} modificator
@@ -128,7 +129,7 @@ registerPublicEndpoint("hooks.addEditModificator", addEditModificator);
  * @returns {*}
  */
 export function getDataComponent(name) {
-    return _dataComponents[name]?.component;
+    return _widgets[name]?.component;
 }
 
 registerPublicEndpoint("hooks.getDataComponent", getDataComponent);
@@ -137,7 +138,7 @@ registerPublicEndpoint("hooks.getDataComponent", getDataComponent);
  * @returns {{}}
  */
 export function getDataComponents() {
-    return _dataComponents;
+    return _widgets;
 }
 
 registerPublicEndpoint("hooks.getDataComponents", getDataComponents);
@@ -146,7 +147,7 @@ registerPublicEndpoint("hooks.getDataComponents", getDataComponents);
  * @returns {{}}
  */
 export function getDataComponentInformation(name) {
-    return _dataComponents[name];
+    return _widgets[name];
 }
 
 registerPublicEndpoint("hooks.getDataComponentInformation", getDataComponentInformation);
@@ -155,8 +156,8 @@ registerPublicEndpoint("hooks.getDataComponentInformation", getDataComponentInfo
  * @param name
  * @returns {*}
  */
-export function getDataComponentConfig(name) {
-    let config = _dataComponents[name]?.config;
+export function getWidgetConfig(name) {
+    let config = _widgets[name]?.config;
 
     const modificators = _editModificators[name];
 
@@ -175,47 +176,47 @@ export function getDataComponentConfig(name) {
     return config;
 }
 
-registerPublicEndpoint("hooks.getDataComponentConfig", getDataComponentConfig);
+registerPublicEndpoint("hooks.getWidgetConfig", getWidgetConfig);
 
 /**
  * @param {{}} name
  * @returns {string}
  */
-export function getComponentLabel(name) {
-    return _dataComponents[name]?.label || name;
+export function getWidgetLabel(name) {
+    return _widgets[name]?.label || name;
 }
 
-registerPublicEndpoint("hooks.getComponentLabel", getComponentLabel);
+registerPublicEndpoint("hooks.getWidgetLabel", getWidgetLabel);
 
 /**
  * @param {{}} name
  * @returns {string|null}
  */
-export function getComponentIcon(name) {
-    return _dataComponents[name]?.icon || null;
+export function getWidgetIcon(name) {
+    return _widgets[name]?.icon || null;
 }
 
-registerPublicEndpoint("hooks.getComponentIcon", getComponentIcon);
+registerPublicEndpoint("hooks.getWidgetIcon", getWidgetIcon);
 
 /**
  * @param name
  * @returns {{}}
  */
-export function getDataComponentDefaultValue(name) {
-    return getDataOrDefault(_dataComponents[name]?.defaultValue, {});
+export function getWidgetDefaultValue(name) {
+    return getDataOrDefault(_widgets[name]?.defaultValue, {});
 }
 
-registerPublicEndpoint("hooks.getDataComponentDefaultValue", getDataComponentDefaultValue);
+registerPublicEndpoint("hooks.getWidgetDefaultValue", getWidgetDefaultValue);
 
 /**
  * @param name
  * @returns {{}}
  */
-export function getDataComponentRenderConfig(name) {
-    return getDataOrDefault(_dataComponents[name]?.renderConfig, {});
+export function getWidgetRenderConfig(name) {
+    return getDataOrDefault(_widgets[name]?.renderConfig, {});
 }
 
-registerPublicEndpoint("hooks.getDataComponentRenderConfig", getDataComponentRenderConfig);
+registerPublicEndpoint("hooks.getWidgetRenderConfig", getWidgetRenderConfig);
 
 /**
  * @param {{}} args

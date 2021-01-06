@@ -1,6 +1,6 @@
 import {
-    getComponentIcon,
-    getComponentLabel,
+    getWidgetIcon,
+    getWidgetLabel,
     getDataComponentInformation,
     getDataComponents
 } from "mobro/hooks/components-hooks";
@@ -22,14 +22,14 @@ function ComponentSelection(props) {
                     <div className="card card-clickable w-100 embed-responsive embed-responsive-1by1" onClick={() => onSelect(component)}>
                         <div className="card-body p-2 d-flex align-items-center justify-content-center embed-responsive-item">
                             <div className={"d-flex flex-column align-items-center"}>
-                                {getComponentIcon(component) !== null && (
+                                {getWidgetIcon(component) !== null && (
                                     <div className={"text-center my-1 icon-2x"}>
-                                        <MobroIcon icon={getComponentIcon(component)}/>
+                                        <MobroIcon icon={getWidgetIcon(component)}/>
                                     </div>
                                 )}
 
                                 <h6 className="m-0 text-uppercase text-center">
-                                    {getComponentLabel(component)}
+                                    {getWidgetLabel(component)}
                                 </h6>
                             </div>
                         </div>

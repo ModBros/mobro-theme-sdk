@@ -25,7 +25,7 @@ import {defaultLayoutConfig, isEditMode, saveLayout} from "mobro/utils/layout";
 import dotPropImmutable from "dot-prop-immutable";
 import {DEFAULT_LAYOUT_NAME, LAYOUT_MODE_DISPLAY} from "mobro/enum/layout";
 import {registerPublicEndpoint} from "mobro/utils/public";
-import {getDataComponentDefaultValue} from "mobro/hooks/components-hooks";
+import {getWidgetDefaultValue} from "mobro/hooks/components-hooks";
 import {getComponentConfigPath} from "mobro/utils/component";
 import {empty} from "mobro/utils/helper";
 
@@ -155,7 +155,7 @@ export default createReducer(initialState, {
 
         return dotPropImmutable.merge(state, `layout${path}`, {
             type: type,
-            config: getDataComponentDefaultValue(type)
+            config: getWidgetDefaultValue(type)
         });
     },
 

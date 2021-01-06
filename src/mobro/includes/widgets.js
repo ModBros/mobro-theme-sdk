@@ -1,8 +1,8 @@
-import {addDataComponent} from "mobro/hooks/components-hooks";
+import {addWidget} from "mobro/hooks/components-hooks";
 
-import Text from "mobro/containers/component/Text";
+import Text from "mobro/containers/widget/Text";
 
-addDataComponent({
+addWidget({
     name: "text",
     label: "Text",
     component: Text,
@@ -26,9 +26,9 @@ addDataComponent({
     }
 });
 
-import Image from "mobro/containers/component/Image";
+import Image from "mobro/containers/widget/Image";
 
-addDataComponent({
+addWidget({
     name: "image",
     icon: "widget.image",
     label: "Image",
@@ -40,9 +40,9 @@ addDataComponent({
     }
 });
 
-import BasicValue from "mobro/containers/component/BasicValue";
+import BasicValue from "mobro/containers/widget/BasicValue";
 
-addDataComponent({
+addWidget({
     name: "basic-value",
     icon: "widget.data_value",
     label: "Basic Value",
@@ -61,9 +61,9 @@ addDataComponent({
     }
 });
 
-import ValueTable from "mobro/containers/component/ValueTable";
+import ValueTable from "mobro/containers/widget/ValueTable";
 
-addDataComponent({
+addWidget({
     name: "value-table",
     icon: "widget.table",
     label: "Value Table",
@@ -79,9 +79,9 @@ addDataComponent({
     }
 });
 
-import Spacer from "mobro/containers/component/Spacer";
+import Spacer from "mobro/containers/widget/Spacer";
 
-addDataComponent({
+addWidget({
     name: "spacer",
     icon: "widget.spacer",
     label: "Spacer",

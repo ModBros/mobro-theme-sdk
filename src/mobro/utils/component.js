@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {registerPublicEndpoint} from "mobro/utils/public";
 import {
-    getComponentLabel,
+    getWidgetLabel,
     getDataComponent,
-    getDataComponentConfig,
+    getWidgetConfig,
     getEditComponentDefaultValue
 } from "mobro/hooks/components-hooks";
 import {getDeviceUuid, getSocket} from "mobro/utils/socket";
@@ -295,7 +295,7 @@ export function withEditSidebar(args) {
 
     const
         name = `edit_component_${path}`,
-        title = getComponentLabel(type),
+        title = getWidgetLabel(type),
         content = (<Edit type={type} path={path} config={config}/>),
         footer = (
             <IconButton icon={"save"} className={"w-100"} onClick={() => closeSidebarComponent(name)}>

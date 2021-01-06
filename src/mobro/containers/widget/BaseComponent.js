@@ -1,5 +1,5 @@
 import Container from "mobro/lib/component/container";
-import BaseComponent from "mobro/components/component/BaseComponent";
+import BaseComponent from "mobro/components/widget/BaseComponent";
 import {selectComponent} from "mobro/actions/layout";
 import {getLayoutMode, getSelectedComponent} from "mobro/reducers/layout";
 

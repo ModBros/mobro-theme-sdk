@@ -1,6 +1,6 @@
 import React from "react";
 import {noop} from "mobro/utils/helper";
-import {getDataComponentRenderConfig} from "mobro/hooks/components-hooks";
+import {getWidgetRenderConfig} from "mobro/hooks/components-hooks";
 import {isEditMode} from "mobro/utils/layout";
 import {withEditSidebar} from "mobro/utils/component";
 
@@ -15,7 +15,7 @@ function BaseComponent(props) {
         selectComponent = noop
     } = props;
 
-    const renderConfig = getDataComponentRenderConfig(type);
+    const renderConfig = getWidgetRenderConfig(type);
     const baseClassNames = !renderConfig?.ignoreBaseClassNames ? "component card" : "";
 
     let defaultClasses = "";

@@ -1,5 +1,4 @@
 import React from "react";
-import {getPublicUploadUrl} from "mobro/utils/socket";
 import {withPublicUrl} from "mobro/utils/http";
 
 function Image(props) {

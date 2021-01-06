@@ -1,10 +1,5 @@
 import {empty} from "mobro/utils/helper";
-import {
-    getComponentConfigPath,
-    getComponentPath,
-    getComponentsFromConfig,
-    renderComponents
-} from "mobro/utils/component";
+import {getComponentConfigPath, getComponentsFromConfig, renderComponents} from "mobro/utils/component";
 import ComponentLabel from "mobro/containers/shared/ComponentLabel";
 
 function ValueTable(props) {

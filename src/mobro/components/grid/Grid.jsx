@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {Responsive, WidthProvider} from "react-grid-layout";
 import {extractGridConfig, extractLayoutFromGrid, isEditMode} from "mobro/utils/layout";
-import BaseComponent from "mobro/containers/component/BaseComponent";
+import BaseComponent from "mobro/containers/widget/BaseComponent";
 import {getComponentConfig, renderComponents} from "mobro/utils/component";
 import {map} from "mobro/utils/helper";
 

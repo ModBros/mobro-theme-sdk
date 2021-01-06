@@ -1,6 +1,6 @@
 import IconButton from "mobro/components/edit/button/IconButton";
 import {getComponentConfig, getComponentPath, getComponentType, withEditSidebar} from "mobro/utils/component";
-import {getComponentIcon, getComponentLabel} from "mobro/hooks/components-hooks";
+import {getWidgetIcon, getWidgetLabel} from "mobro/hooks/components-hooks";
 import MobroIcon from "mobro/containers/shared/MobroIcon";
 import TriggerEditButton from "mobro/containers/edit/TriggerEditButton";
 import {noop} from "mobro/utils/helper";
@@ -51,17 +51,17 @@ function ComponentsBarItem(props) {
 
                 <div className={"card-body p-1"}>
                     <div className={"d-flex align-items-center"}>
-                        {getComponentIcon(getComponentType(component)) !== null && (
+                        {getWidgetIcon(getComponentType(component)) !== null && (
                             <small>
                                 <MobroIcon
-                                    icon={getComponentIcon(getComponentType(component))}
+                                    icon={getWidgetIcon(getComponentType(component))}
                                     className={"mr-2"}
                                 />
                             </small>
                         )}
 
                         <strong className={"user-select-none"}>
-                            {getComponentLabel(getComponentType(component))}
+                            {getWidgetLabel(getComponentType(component))}
                         </strong>
 
                         <div className={"flex-fill d-flex justify-content-end align-items-center"}>

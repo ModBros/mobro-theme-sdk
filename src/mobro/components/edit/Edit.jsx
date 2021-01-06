@@ -1,10 +1,10 @@
 import React from "react";
-import {getDataComponentConfig, getEditComponent, renderEdit} from "mobro/hooks/components-hooks";
+import {getWidgetConfig, getEditComponent, renderEdit} from "mobro/hooks/components-hooks";
 import {map} from "mobro/utils/helper";
 
 function Edit({type, fields = null, path, config, layoutEdit}) {
     if (!fields) {
-        fields = getDataComponentConfig(type);
+        fields = getWidgetConfig(type);
     }
 
     return renderEdit({
