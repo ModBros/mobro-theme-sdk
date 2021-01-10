@@ -252,6 +252,14 @@ export function getEditComponent(name) {
 }
 
 /**
+ * @param name
+ * @returns {boolean}
+ */
+export function isEditComponent(name) {
+    return !!_editComponents[name];
+}
+
+/**
  * @param {{}} args
  */
 export function addLayoutComponent(args) {

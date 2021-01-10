@@ -71,6 +71,10 @@ export function last(value) {
 registerPublicEndpoint("utils.helper.last", last);
 
 export function count(value) {
+    if(!value) {
+        return 0;
+    }
+
     if (Array.isArray(value)) {
         return value.length;
     }

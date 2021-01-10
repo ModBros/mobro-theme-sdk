@@ -90,10 +90,10 @@ addEditComponent({
     defaultValue: []
 });
 
-import Components from "mobro/containers/edit/data/Components";
+import Components from "mobro/containers/edit/data/Widgets";
 
 addEditComponent({
-    name: "components",
+    name: "widgets",
     component: Components,
     defaultValue: {
         components: []

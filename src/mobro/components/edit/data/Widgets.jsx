@@ -3,7 +3,7 @@ import AddComponentButton from "mobro/containers/edit/AddComponentButton";
 import {getComponentConfigPath, getDataOrDefault} from "mobro/utils/component";
 import FormGroup from "mobro/containers/edit/form/FormGroup";
 
-function Components(props) {
+function Widgets(props) {
     const {
         name,
         path,
@@ -15,11 +15,11 @@ function Components(props) {
 
     return (
         <FormGroup label={name} info={config?.info}>
-            <ComponentsBar path={componentsPath} components={data.components}/>
+            <ComponentsBar path={componentsPath} components={data?.components}/>
 
             <AddComponentButton allowed={getDataOrDefault(config.allowed, [])} path={componentsPath}/>
         </FormGroup>
     );
 }
 
-export default Components;
+export default Widgets;

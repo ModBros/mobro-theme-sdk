@@ -26,12 +26,13 @@ function updateValue(onChange, data, variable, value, force = false) {
 function Coordinates(props) {
     const {
         name,
+        config,
         data,
         onChange
     } = props;
 
     return (
-        <FormGroup label={name}>
+        <FormGroup label={name} info={config?.info}>
             <div className={"coordinates"}>
                 <div className={"coordinates-controls"}>
                     <Control

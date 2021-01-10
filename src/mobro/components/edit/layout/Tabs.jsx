@@ -14,8 +14,8 @@ function Tabs(props) {
     return (
         <div className={"form-group"}>
             <ConcreteTabs>
-                {map(layoutConfig?.children, (child, name) => (
-                    <Tab key={name} label={child?.label || name}>
+                {map(layoutConfig?.children, (child, i) => (
+                    <Tab key={i} label={child?.label}>
                         {renderEdit({
                             fields: child?.children,
                             path,

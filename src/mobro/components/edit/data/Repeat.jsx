@@ -19,45 +19,41 @@ function Repeat(props) {
         return null;
     }
 
+    const dataWithFallback = data || [];
+
     return (
         <FormGroup label={name}>
             <Fragment>
-                {map(data, (item, i) => {
+                {map(dataWithFallback, (item, i) => {
                     return (
-                        <div className={"draggable"} key={i}>
-                            <div className={"card mb-3"}>
-                                <div className={"card-body p-2"}>
-                                    {renderEdit({
-                                        fields:
-                                        config.fields,
-                                        path,
-                                        config: item,
-                                        onChange: (fieldName, value) => {
-                                            // set new value on this item (reference)
-                                            item[fieldName] = value;
+                        <div key={i} className={"border p-2 mb-2"}>
+                            {renderEdit({
+                                fields:
+                                config.fields,
+                                path,
+                                config: item,
+                                onChange: (fieldName, value) => {
+                                    // set new value on this item (reference)
+                                    item[fieldName] = value;
 
-                                            onChange(data);
-                                        }
-                                    })}
+                                    onChange(dataWithFallback);
+                                }
+                            })}
 
-                                    <IconButton icon={"trash"} className={"w-100"} size={"sm"} onClick={() => {
-                                        data.splice(i, 1);
-                                        onChange(data);
-                                    }}>
-                                        Remove Item
-                                    </IconButton>
-                                </div>
-                            </div>
+                            <IconButton icon={"trash"} className={"w-100 mt-2"} size={"sm"} onClick={() => {
+                                dataWithFallback.splice(i, 1);
+                                onChange(dataWithFallback);
+                            }}>
+                                Remove Item
+                            </IconButton>
                         </div>
                     );
                 })}
             </Fragment>
 
-            <IconButton icon={"plus"} className={"w-100"} onClick={() => {
+            <IconButton icon={"plus"} className={"w-100"} size={"sm"} onClick={() => {
                 const defaultValues = getEditDefaultValues(config.fields);
-                data.push(defaultValues);
-
-                onChange(data);
+                onChange([...dataWithFallback, defaultValues]);
             }}>
                 Add Item
             </IconButton>

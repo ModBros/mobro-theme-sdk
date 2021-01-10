@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {registerPublicEndpoint} from "mobro/utils/public";
 import {
-    getWidgetLabel,
     getDataComponent,
-    getWidgetConfig,
-    getEditComponentDefaultValue
+    getEditComponentDefaultValue,
+    getWidgetLabel,
+    isEditComponent
 } from "mobro/hooks/components-hooks";
 import {getDeviceUuid, getSocket} from "mobro/utils/socket";
 import {CHANNEL_PREFIX} from "mobro/enum/channel-data";
@@ -266,15 +266,23 @@ export function getDataOrDefault(data, defaultValue = null) {
 registerPublicEndpoint("utils.component.getDataOrDefault", getDataOrDefault);
 
 export function getEditDefaultValues(config, defaultValue = {}) {
-    const allDefaultValues = defaultValue;
+    const allDefaultValues = {...defaultValue};
 
-    Object.entries(config).forEach(([key, config]) => {
-        if (allDefaultValues[key] === undefined) {
-            allDefaultValues[key] = getEditComponentDefaultValue(config.type);
-        }
-    });
+    getEditDefaultValuesRecursive(config, allDefaultValues);
 
     return allDefaultValues;
+}
+
+function getEditDefaultValuesRecursive(config, allDefaultValues) {
+    map(config, (config, key) => {
+        if (config.type && isEditComponent(config.type)) {
+            if (allDefaultValues[key] === undefined) {
+                allDefaultValues[key] = getEditComponentDefaultValue(config.type);
+            }
+        } else if (config.children) {
+            getEditDefaultValuesRecursive(config.children, allDefaultValues);
+        }
+    });
 }
 
 registerPublicEndpoint("utils.component.getEditDefaultValues", getEditDefaultValues);
