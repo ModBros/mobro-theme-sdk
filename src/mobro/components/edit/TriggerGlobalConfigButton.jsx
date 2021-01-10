@@ -6,6 +6,7 @@ import {deepValues} from "mobro/utils/object";
 import Edit from "mobro/containers/edit/Edit";
 import {withGlobalConfigHook} from "mobro/hooks/global-config-hook";
 import React from "react";
+import {getDependenciesForEditSidebar} from "mobro/utils/component";
 
 function TriggerGlobalConfigButton(props) {
     const {
@@ -23,9 +24,7 @@ function TriggerGlobalConfigButton(props) {
         name = "global_config",
         title = "Global Configuration",
         content = (<Edit fields={editConfig} path={""} config={data}/>),
-        dependencies = map(editConfig, (field, name) => {
-            return deepValues(data?.[name] || null);
-        }).flat().join("|");
+        dependencies = getDependenciesForEditSidebar(data);
 
     withSidebar({name, title, content, dependencies: [dependencies]});
 

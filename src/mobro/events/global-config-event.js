@@ -9,6 +9,10 @@ export default class GlobalConfigEvent extends AbstractEvent {
         this.editConfig = editConfig;
     }
 
+    setEditConfig(editConfig) {
+        this.editConfig = editConfig;
+    }
+
     addEditComponent(key, config) {
         this.editConfig[key] = config;
     }

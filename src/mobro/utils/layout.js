@@ -3,6 +3,7 @@ import {send} from "mobro/utils/communication";
 import {LAYOUT_MODE_DISPLAY, LAYOUT_MODE_EDIT} from "mobro/enum/layout";
 import {SAVE_LAYOUT} from "mobro/enum/endpoints";
 import {getDataOrDefault} from "mobro/utils/component";
+import {registerPublicEndpoint} from "mobro/utils/public";
 
 export const defaultLayoutConfig =() => ({
     config: {
@@ -30,6 +31,8 @@ export function isDisplayMode(mode) {
     return mode === LAYOUT_MODE_DISPLAY;
 }
 
+registerPublicEndpoint("utils.layout.isDisplayMode", isDisplayMode);
+
 /**
  * @param {string} mode
  * @returns {boolean}
@@ -37,6 +40,8 @@ export function isDisplayMode(mode) {
 export function isEditMode(mode) {
     return mode === LAYOUT_MODE_EDIT;
 }
+
+registerPublicEndpoint("utils.layout.isEditMode", isEditMode);
 
 /**
  * @param {[]} layout

@@ -12,6 +12,6 @@ const mapDispatchToProps = event => event.mergeMapDispatchToProps({
     selectComponent: (path) => event.dispatch(selectComponent({path}))
 });
 
-export default Container.create("component.base-component", BaseComponent)
+export default Container.create("widget.base-component", BaseComponent)
     .redux(mapStateToProps, mapDispatchToProps)
     .generate();

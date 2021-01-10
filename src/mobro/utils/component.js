@@ -317,3 +317,13 @@ export function withEditSidebar(args) {
 }
 
 registerPublicEndpoint("utils.component.withEditSidebar", withEditSidebar);
+
+/**
+ * @param {{}} config
+ * @returns {string}
+ */
+export function getDependenciesForEditSidebar(config) {
+    return deepValues(config || {}).flat().join("|");
+}
+
+registerPublicEndpoint("utils.component.getDependenciesForEditSidebar", getDependenciesForEditSidebar);
