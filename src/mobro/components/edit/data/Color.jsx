@@ -33,9 +33,9 @@ function Color(props) {
                     }}
                 ></div>
 
-                <span className={"text-white mx-2"}>
-                    {data ? `R[${color.r}] G[${color.g}] B[${color.b}] A[${color.a}]` : "No color selected yet"}
-                </span>
+                <small className={"text-white mx-2"}>
+                    {data ? `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})` : "No color selected yet"}
+                </small>
 
                 {data !== null && (
                     <IconButton
