@@ -1,8 +1,16 @@
 import {createReducer} from "@reduxjs/toolkit";
 import dotPropImmutable from "dot-prop-immutable";
-import {addSidebar, closeSidebar, openSidebar, removeSidebar, toggleSidebar} from "mobro/actions/sidebar";
+import {
+    addSidebar,
+    closeSidebar,
+    closeSidebarsStartingWith,
+    openSidebar,
+    removeSidebar,
+    toggleSidebar
+} from "mobro/actions/sidebar";
 import {v4} from "uuid";
 import {registerPublicEndpoint} from "mobro/utils/public";
+import {map} from "mobro/utils/helper";
 
 // ----------------------------------------------
 // initial state
@@ -47,6 +55,16 @@ export default createReducer(initialState, {
 
     [toggleSidebar.type]: (state, {payload}) => {
         return dotPropImmutable.toggle(state, `sidebars.${payload}`);
+    },
+
+    [closeSidebarsStartingWith.type]: (state, {payload}) => {
+        map(state.sidebars, (open, name) => {
+            if (payload.indexOf(name) !== 0) {
+                state = dotPropImmutable.set(state, `sidebars.${name}`, false);
+            }
+        });
+
+        return state;
     }
 });
 

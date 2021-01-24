@@ -12,7 +12,12 @@ import {addChannel, removeChannel} from "mobro/utils/channel-data";
 import {map, noco, noop} from "mobro/utils/helper";
 import {deepValues} from "mobro/utils/object";
 import Edit from "mobro/containers/edit/Edit";
-import {closeSidebarComponent, toggleSidebarComponent, withSidebar} from "mobro/utils/sidebar";
+import {
+    closeSidebarComponent,
+    closeSidebarComponentsStartingWith,
+    toggleSidebarComponent,
+    withSidebar
+} from "mobro/utils/sidebar";
 import IconButton from "mobro/containers/edit/button/IconButton";
 
 /**
@@ -313,7 +318,10 @@ export function withEditSidebar(args) {
 
     withSidebar({name, title, content, footer, close: false, dependencies: [dependencies]});
 
-    return () => toggleSidebarComponent(name);
+    return () => {
+        closeSidebarComponentsStartingWith(name);
+        toggleSidebarComponent(name);
+    }
 }
 
 registerPublicEndpoint("utils.component.withEditSidebar", withEditSidebar);

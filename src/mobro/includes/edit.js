@@ -78,8 +78,7 @@ import {defaultColorValue} from "mobro/components/edit/data/Color";
 
 addEditComponent({
     name: "color",
-    component: Color,
-    defaultValue: defaultColorValue
+    component: Color
 });
 
 import Repeat from "mobro/containers/edit/data/Repeat";

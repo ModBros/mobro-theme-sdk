@@ -1,7 +1,7 @@
-import ConcreteTabs from "mobro/containers/edit/layout/tabs/tabs";
+import ConcreteTabs from "mobro/containers/edit/layout/tab/tabs";
 import {renderEdit} from "mobro/hooks/components-hooks";
 import {map} from "mobro/utils/helper";
-import Tab from "mobro/containers/edit/layout/tabs/Tab";
+import Tab from "mobro/containers/edit/layout/tab/Tab";
 
 function Tabs(props) {
     const {

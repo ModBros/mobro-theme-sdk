@@ -1,6 +1,13 @@
 import {registerPublicEndpoint} from "mobro/utils/public";
 import {dispatch} from "mobro/reducers";
-import {addSidebar, closeSidebar, openSidebar, removeSidebar, toggleSidebar} from "mobro/actions/sidebar";
+import {
+    addSidebar,
+    closeSidebar,
+    closeSidebarsStartingWith,
+    openSidebar,
+    removeSidebar,
+    toggleSidebar
+} from "mobro/actions/sidebar";
 import Sidebar from "mobro/containers/edit/Sidebar";
 import {useEffect} from "react";
 
@@ -85,3 +92,9 @@ export function toggleSidebarComponent(name) {
 }
 
 registerPublicEndpoint("utils.sidebar.toggleSidebarComponent", toggleSidebarComponent);
+
+export function closeSidebarComponentsStartingWith(name) {
+    dispatch(closeSidebarsStartingWith(sanitizeName(name)));
+}
+
+registerPublicEndpoint("utils.sidebar.closeSidebarComponentsStartingWith", closeSidebarComponentsStartingWith);

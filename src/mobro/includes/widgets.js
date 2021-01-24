@@ -73,7 +73,7 @@ addWidget({
             type: "input"
         },
         components: {
-            type: "components",
+            type: "widgets",
             allowed: ["basic-value"]
         }
     }

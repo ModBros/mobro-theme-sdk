@@ -6,7 +6,7 @@ import ComponentsBarItem from "mobro/containers/edit/ComponentsBarItem";
 function ComponentsBar(props) {
     const {
         path = "",
-        components = [],
+        components = []
     } = props;
 
     if (empty(components)) {
