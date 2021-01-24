@@ -1,6 +1,6 @@
 import {ChromePicker} from "react-color";
 import {getDataOrDefault} from "mobro/utils/component";
-import {useState} from "react";
+import {useState, useEffect, useRef} from "react";
 import FormGroup from "mobro/containers/edit/form/FormGroup";
 import IconButton from "mobro/containers/edit/button/IconButton";
 
@@ -19,12 +19,25 @@ function Color(props) {
         onChange
     } = props;
 
+    const wrapperRef = useRef(null);
     const [show, setShow] = useState(false);
     const [color, setColor] = useState(getDataOrDefault(data, defaultColorValue));
 
+    useEffect(() => {
+        const handleDocumentClick = () => {
+            setShow(false);
+        }
+
+        document.addEventListener("mousedown", handleDocumentClick);
+
+        return () => {
+            document.removeEventListener("mousedown", handleDocumentClick);
+        }
+    })
+
     return (
         <FormGroup label={name} info={config?.info}>
-            <div className={"d-flex align-items-center"}>
+            <div className={"d-flex align-items-center position-relative"} onMouseDown={(event) => event.stopPropagation()}>
                 <div
                     className={"color-preview"}
                     onClick={() => setShow(!show)}
@@ -50,22 +63,20 @@ function Color(props) {
                         clear
                     </IconButton>
                 )}
+
+                {show ? <div className={"color-popover mt-2"}>
+                    <ChromePicker
+                        color={color}
+                        onChange={(color) => {
+                            setColor(color.rgb)
+                        }}
+                        onChangeComplete={(color) => {
+                            setColor(color.rgb);
+                            onChange(color.rgb)
+                        }}
+                    />
+                </div> : null}
             </div>
-
-            {show ? <div className={"color-popover mt-2"}>
-                <div className={"color-cover"} onClick={() => setShow(false)}/>
-
-                <ChromePicker
-                    color={color}
-                    onChange={(color) => {
-                        setColor(color.rgb)
-                    }}
-                    onChangeComplete={(color) => {
-                        setColor(color.rgb);
-                        onChange(color.rgb)
-                    }}
-                />
-            </div> : null}
         </FormGroup>
     )
 }

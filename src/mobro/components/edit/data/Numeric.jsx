@@ -1,8 +1,15 @@
 import FormGroup from "mobro/containers/edit/form/FormGroup";
 import {getDataOrDefault} from "mobro/utils/component";
 
-function Numeric({name, config, data, onChange}) {
-    data = getDataOrDefault(data, "");
+function Numeric(props) {
+    const {
+        name,
+        config,
+        data,
+        onChange
+    } = props;
+
+    const value = getDataOrDefault(data, "");
 
     return (
         <FormGroup label={name} info={config?.info}>
@@ -11,8 +18,26 @@ function Numeric({name, config, data, onChange}) {
                 type="number"
                 min={config.min}
                 max={config.max}
-                value={data}
-                onChange={(event) => onChange(event.target.value)}
+                value={value}
+                onChange={(event) => {
+                    const val = event.target.value;
+
+                    if (
+                        config.min !== null &&
+                        config.min > parseFloat(val)
+                    ) {
+                        return;
+                    }
+
+                    if (
+                        config.max !== null &&
+                        config.max < parseFloat(val)
+                    ) {
+                        return;
+                    }
+
+                    onChange(val)
+                }}
             />
         </FormGroup>
     );
