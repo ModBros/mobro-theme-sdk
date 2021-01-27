@@ -3,6 +3,7 @@ import {send} from "mobro/utils/communication";
 import {CHANGE_LAYOUT, DELETE_LAYOUT, GET_LAYOUT, GET_LAYOUT_NAMES} from "mobro/enum/endpoints";
 import {noop} from "mobro/utils/helper";
 import {DEFAULT_LAYOUT_NAME} from "mobro/enum/layout";
+import {registerPublicEndpoint} from "mobro/utils/public";
 
 export const layoutRequested = createAction("layout:requested");
 export const layoutFetched = createAction("layout:fetched");
@@ -76,6 +77,8 @@ export const layoutChange = createAction("layout:change");
 export const layoutDelete = createAction("layout:delete");
 
 export const layoutEdit = createAction("layout:edit");
+registerPublicEndpoint("actions.layout.layoutEdit", layoutEdit);
+
 export const addComponent = createAction("layout:component:add");
 export const removeComponent = createAction("layout:component:remove");
 export const copyComponent = createAction("layout:component:copy");
