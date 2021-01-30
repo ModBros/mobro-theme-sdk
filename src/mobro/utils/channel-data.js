@@ -2,6 +2,7 @@ import {SENSOR_TYPE_TEMPERATURE, UNIT_PERCENTAGE} from "mobro/enum/channel-data"
 import {ADD_CHANNEL, REMOVE_CHANNEL} from "mobro/enum/endpoints";
 import {send} from "mobro/utils/communication";
 import {registerPublicEndpoint} from "mobro/utils/public";
+import {map} from "mobro/utils/helper";
 
 const _channelListeners = {};
 
@@ -18,6 +19,15 @@ export function addChannel({id}) {
 }
 
 registerPublicEndpoint("utils.channelData.addChannel", addChannel);
+
+export function refreshAllChannels() {
+    map(_channelListeners, async (count, id) => {
+        await send(REMOVE_CHANNEL, {id});
+        await send(ADD_CHANNEL, {id});
+    });
+}
+
+registerPublicEndpoint("utils.channelData.refreshAllChannels", refreshAllChannels);
 
 export function removeChannel({id}) {
     if (!id) {

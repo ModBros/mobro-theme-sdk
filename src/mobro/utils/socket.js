@@ -3,7 +3,8 @@ import {EVENT_CHANGE_LAYOUT, EVENT_CHANGE_THEME} from "mobro/enum/events";
 import {registerPublicEndpoint} from "mobro/utils/public";
 import {DEFAULT_UUID} from "mobro/enum/channel-data";
 import {dispatch} from "mobro/reducers";
-import {layoutChange, layoutNameChange} from "mobro/actions/layout";
+import {layoutChange} from "mobro/actions/layout";
+import {refreshAllChannels} from "mobro/utils/channel-data";
 
 let originalSearchParams = null;
 let originalParams = null;
@@ -51,6 +52,13 @@ function init() {
 
     socket.on(EVENT_CHANGE_LAYOUT, (data) => {
         dispatch(layoutChange(data));
+    });
+
+    socket.on("connect", () => {
+        // refresh all channel listeners on connect
+        // on first connect it' empty anyways
+        // on reconnect, all listeners have to be re-registered, otherwise no updates are received anymore
+        refreshAllChannels();
     });
 }
 
