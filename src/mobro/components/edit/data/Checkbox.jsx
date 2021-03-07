@@ -1,18 +1,19 @@
-function Checkbox({name, data, onChange}) {
-    return (
-        <div className="form-group">
-            <label>
-                {name}
+import InputCheckbox from "mobro/containers/shared/form/Checkbox";
 
-                <input
-                    className="ml-1"
-                    type="checkbox"
-                    value={!!data}
-                    checked={!!data}
-                    onChange={(event) => onChange(!!event.target.checked)}
-                />
-            </label>
-        </div>
+function Checkbox(props) {
+    const {
+        name,
+        data,
+        onChange
+    } = props;
+
+    return (
+        <InputCheckbox
+            label={name}
+            value={!!data}
+            checked={!!data}
+            onChange={(value) => onChange(!!value)}
+        />
     );
 }
 

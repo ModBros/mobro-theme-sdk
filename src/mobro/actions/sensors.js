@@ -11,8 +11,8 @@ export const sensorDataModified = createAction("sensor:data:modified");
 export function fetchSensorData() {
     return function (dispatch, getState) {
         const state = getState();
-        let modified = getSensorDataModified(state);
-        let now = new Date();
+        const modified = getSensorDataModified(state);
+        const now = new Date();
 
         // re-fetch only every minute
         if (!modified || (now.getTime() - modified >= 60 * 60 * 1000)) {

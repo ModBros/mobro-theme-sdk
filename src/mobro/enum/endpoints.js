@@ -29,3 +29,6 @@ registerPublicEndpoint("enum.endpoints.REMOVE_CHANNEL", REMOVE_CHANNEL);
 
 export const GET_SETTINGS = "settings";
 registerPublicEndpoint("enum.endpoints.GET_SETTINGS", GET_SETTINGS);
+
+export const GET_FONT_LIST = "theme:font:list";
+registerPublicEndpoint("enum.endpoints.GET_FONT_LIST", GET_FONT_LIST);

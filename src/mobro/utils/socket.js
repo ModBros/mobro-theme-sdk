@@ -33,7 +33,7 @@ function init() {
     originalParams = new URLSearchParams(originalSearchParams);
 
     url = `${window.location.protocol}//${window.location.hostname}:42100`;
-    socket = io(`${window.location.protocol}//${window.location.hostname}:42100${window.location.search}`, {
+    socket = io(`${url}${window.location.search}`, {
         transports: ["websocket"]
     });
 

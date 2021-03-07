@@ -65,6 +65,17 @@ addEditComponent({
     }
 });
 
+import Font from "mobro/containers/edit/data/Font";
+
+addEditComponent({
+    name: "font",
+    component: Font,
+    defaultValue: {
+        family: null,
+        style: null
+    }
+});
+
 import SingleImage from "mobro/containers/edit/data/SingleImage";
 
 addEditComponent({

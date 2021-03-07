@@ -1,4 +1,4 @@
-import {SENSOR_TYPE_TEMPERATURE, UNIT_PERCENTAGE} from "mobro/enum/channel-data";
+import {SENSOR_TYPE_TEMPERATURE, UNIT_PERCENTAGE, UNIT_VOLTAGE} from "mobro/enum/channel-data";
 import {ADD_CHANNEL, REMOVE_CHANNEL} from "mobro/enum/endpoints";
 import {send} from "mobro/utils/communication";
 import {registerPublicEndpoint} from "mobro/utils/public";
@@ -85,6 +85,10 @@ export function extractValue(data, fixate = true, extractor = extractRawValue) {
         fixed = 1;
     }
 
+    if(isVoltageData(data)) {
+        fixed = 3;
+    }
+
     return value.toFixed(fixed);
 }
 
@@ -107,6 +111,12 @@ export function isPercentageData(data) {
 }
 
 registerPublicEndpoint("utils.channelData.isPercentageData", isPercentageData);
+
+export function isVoltageData(data) {
+    return extractRawUnit(data) === UNIT_VOLTAGE;
+}
+
+registerPublicEndpoint("utils.channelData.isVoltageData", isVoltageData);
 
 export function isTemperatureData(data) {
     return extractRawSensorType(data) === SENSOR_TYPE_TEMPERATURE;
