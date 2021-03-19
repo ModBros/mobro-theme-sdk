@@ -19,7 +19,7 @@ module.exports = {
             path.resolve(__dirname, "node_modules")
         ],
 
-        extensions: ["*", ".js", ".jsx"],
+        extensions: ["*", ".js", ".jsx", ".ts", ".tsx"],
 
         alias: {
             mobro: path.resolve(__dirname, "src/mobro/"),
@@ -44,6 +44,11 @@ module.exports = {
                 }
             }
         }, {
+            test: /\.tsx?$/,
+            use: 'ts-loader',
+            exclude: /node_modules/,
+        },
+        {
             test: require.resolve('react'),
             loader: 'expose-loader',
             options: {
@@ -72,6 +77,6 @@ module.exports = {
     devServer: {
         contentBase: path.resolve(__dirname, "dist"),
         compress: true,
-        port: 8080
+        port: 80
     }
 };
