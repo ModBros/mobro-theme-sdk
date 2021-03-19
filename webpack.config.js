@@ -70,7 +70,11 @@ module.exports = {
             use: ["style-loader", "css-loader", "sass-loader"]
         }, {
             test: /\.svg$/,
+            exclude: [/\.asset\.svg/],
             loader: "svg-inline-loader"
+        }, {
+            test: /\.(png|jpg|gif|asset\.svg)$/,
+            loader: 'url-loader'
         }]
     },
 

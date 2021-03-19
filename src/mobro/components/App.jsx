@@ -61,7 +61,7 @@ function App(props) {
     }
 
     let content = (
-        <div className={"d-flex w-100 align-items-center justify-content-center"} style={styles}>
+        <div className={`d-flex w-100 align-items-center justify-content-center ${isEditMode(layoutMode) ? "editmode-container" : ""}`} style={styles}>
             <AppContainer style={extractSize(config)}/>
         </div>
     );
