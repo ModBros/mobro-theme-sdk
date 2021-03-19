@@ -100,7 +100,7 @@ function Editmode(props) {
     const [shadowRoot, setShadowRoot] = useState(null);
 
     return (
-        <root.div>
+        <root.div className={"z-index-1"}>
             <div ref={setShadowRoot}>
                 <EditmodeContent {...props} shadowRoot={shadowRoot}/>
 
