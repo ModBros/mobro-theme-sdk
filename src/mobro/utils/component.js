@@ -309,14 +309,8 @@ export function withEditSidebar(args) {
     const
         name = `edit_component_${path}`,
         title = getWidgetLabel(type),
-        content = (<Edit type={type} path={path} config={config}/>),
-        footer = (
-            <IconButton icon={"save"} className={"w-100"} onClick={() => closeSidebarComponent(name)}>
-                save
-            </IconButton>
-        );
-
-    withSidebar({name, title, content, footer, close: false, dependencies: [dependencies]});
+        content = (<Edit type={type} path={path} config={config}/>);
+    withSidebar({name, title, content, close: true, dependencies: [dependencies]});
 
     return () => {
         closeSidebarComponentsStartingWith(name);
