@@ -1,14 +1,17 @@
 import Container from "mobro/lib/component/container";
 import EditmodeHeader from "mobro/components/edit/EditmodeHeader";
-import {layoutEdit} from "mobro/actions/layout";
-import {getLayoutConfig} from "mobro/reducers/layout";
+import {adaptToDeviceResolution, layoutEdit, setZoomLevel} from "mobro/actions/layout";
+import {getLayoutConfig, getZoomLevel} from "mobro/reducers/layout";
 
 const mapStateToProps = (state) => ({
-    layoutConfig: getLayoutConfig(state)
+    layoutConfig: getLayoutConfig(state),
+    zoomLevel: getZoomLevel(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    layoutEdit: ({name, data}) => dispatch(layoutEdit({path: "", name, data}))
+    layoutEdit: ({name, data}) => dispatch(layoutEdit({path: "", name, data})),
+    setZoomLevel: (zoomLevel) => dispatch(setZoomLevel(zoomLevel)),
+    adaptToDeviceResolution: () => dispatch(adaptToDeviceResolution())
 });
 
 export default Container.create("edit.editmode-header", EditmodeHeader)

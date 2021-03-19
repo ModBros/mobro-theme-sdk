@@ -1,6 +1,7 @@
 import {createReducer} from "@reduxjs/toolkit";
 import {fetchingAction} from "mobro/utils/redux";
 import {
+    adaptToDeviceResolution,
     addComponent,
     copyComponent, duplicateComponent,
     layoutChange, layoutDelete,
@@ -17,7 +18,7 @@ import {
     moveComponent,
     pasteComponent,
     removeComponent,
-    selectComponent,
+    selectComponent, setZoomLevel,
     updateEditmode
 } from "mobro/actions/layout";
 import {NOT_ASKED} from "mobro/utils/communication";
@@ -28,6 +29,8 @@ import {registerPublicEndpoint} from "mobro/utils/public";
 import {getWidgetDefaultValue} from "mobro/hooks/components-hooks";
 import {getComponentConfigPath} from "mobro/utils/component";
 import {empty} from "mobro/utils/helper";
+import {ZOOM_LEVEL_M} from "mobro/enum/zoom-levels";
+import {getDeviceResolution} from "mobro/utils/socket";
 
 // ----------------------------------------------
 // initial state
@@ -41,6 +44,7 @@ const initialState = {
     layout: defaultLayoutConfig(),
     selectedComponent: null,
     componentTemporaryStorage: null,
+    zoomLevel: ZOOM_LEVEL_M,
     editmode: {
         headerHeight: 0,
         sidebarWidth: 0
@@ -137,6 +141,19 @@ export default createReducer(initialState, {
         return state;
     },
 
+    [adaptToDeviceResolution.type]: (state) => {
+        const {width, height} = getDeviceResolution();
+
+        if (!width || !height) {
+            return state;
+        }
+
+        state = dotPropImmutable.set(state, getComponentConfigPath('layout', "width"), width);
+        state = dotPropImmutable.set(state, getComponentConfigPath('layout', "height"), height);
+
+        return state;
+    },
+
     [selectComponent.type]: (state, {payload}) => {
         if (isEditMode(state.layoutMode)) {
             const {path} = payload;
@@ -205,6 +222,10 @@ export default createReducer(initialState, {
 
     [updateEditmode.type]: (state, {payload}) => {
         return dotPropImmutable.merge(state, "editmode", payload);
+    },
+
+    [setZoomLevel.type]: (state, {payload}) => {
+        return dotPropImmutable.set(state, "zoomLevel", payload);
     }
 });
 
@@ -242,3 +263,4 @@ export const getLayoutComponentTemporaryStorage = state => dotPropImmutable.get(
 registerPublicEndpoint("reducers.layout.getLayoutComponentTemporaryStorage", getLayoutComponentTemporaryStorage);
 
 export const getEditmode = state => dotPropImmutable.get(getLayoutState(state), "editmode");
+export const getZoomLevel = state => getLayoutState(state).zoomLevel;

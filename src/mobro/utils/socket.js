@@ -102,6 +102,20 @@ export function getDeviceUuid() {
     return DEFAULT_UUID;
 }
 
+registerPublicEndpoint("utils.socket.getDeviceUuid", getDeviceUuid);
+
+export function getDeviceResolution() {
+    if (originalParams && originalParams.get("resolution")) {
+        const [width, height] = originalParams.get("resolution").split("x");
+
+        return {width, height};
+    }
+
+    return null;
+}
+
+registerPublicEndpoint("utils.socket.getDeviceResolution", getDeviceResolution);
+
 export function hasEditmodeParam() {
     return originalParams ? !!originalParams.get("editmode") : false;
 }

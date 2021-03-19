@@ -5,7 +5,8 @@ import Entry from "mobro/containers/Entry";
 function AppContainer(props) {
     const {
         config,
-        style
+        style,
+        zoomLevel
     } = props;
 
     let styles = {...style};
@@ -15,6 +16,13 @@ function AppContainer(props) {
         styles = {
             ...styles,
             backgroundImage: `url(${getPublicUploadUrl(background)})`
+        }
+    }
+
+    if(zoomLevel) {
+        styles = {
+            ...styles,
+            zoom: zoomLevel
         }
     }
 

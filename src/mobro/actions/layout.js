@@ -87,3 +87,6 @@ export const duplicateComponent = createAction("layout:component:duplicate");
 export const moveComponent = createAction("layout:component:move");
 
 export const updateEditmode = createAction("layout:editmode:update");
+
+export const setZoomLevel = createAction("layout:zoom-level:set");
+export const adaptToDeviceResolution = createAction("layout:resolution:adapt-to-device");

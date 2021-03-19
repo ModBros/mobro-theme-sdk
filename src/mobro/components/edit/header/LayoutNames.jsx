@@ -5,7 +5,7 @@ import {withFetchingIndicator} from "mobro/utils/component/fetching";
 import IconButton from "mobro/containers/edit/button/IconButton";
 import Modal from "react-bootstrap/Modal";
 import FormGroup from "mobro/containers/edit/form/FormGroup";
-import Select from "mobro/containers/shared/form/Select";
+import TinySelect from "mobro/containers/shared/form/TinySelect";
 
 function sanitizeLayoutName(layoutName) {
     return layoutName.replace(/[^\w_\-]/g, "");
@@ -39,28 +39,6 @@ function LayoutNames(props) {
             paddingTop: 0,
             paddingBottom: 0,
             minHeight: "auto"
-        }),
-
-        indicatorsContainer: (provided) => ({
-            ...provided,
-            padding: 0
-        }),
-
-        dropdownIndicator: (provided) => ({
-            ...provided,
-            paddingTop: 1,
-            paddingBottom: 1
-        }),
-
-        valueContainer: (provided) => ({
-            ...provided,
-            paddingTop: 0,
-            paddingBottom: 0,
-            fontSize: "0.75rem"
-        }),
-
-        input: (provided) => ({
-            fontSize: "0.75rem"
         })
     }
 
@@ -110,7 +88,7 @@ function LayoutNames(props) {
                 </div>
             </div>
 
-            <Select
+            <TinySelect
                 styles={selectStyles}
                 value={valueToOption(layoutName)}
                 options={valuesToSelectOptions(layoutNames)}
@@ -129,7 +107,10 @@ function LayoutNames(props) {
                         <input
                             type={"text"}
                             value={modalState.layoutName}
-                            onChange={(event) => setModalState({...modalState, layoutName: sanitizeLayoutName(event.target.value)})}
+                            onChange={(event) => setModalState({
+                                ...modalState,
+                                layoutName: sanitizeLayoutName(event.target.value)
+                            })}
                             className={"form-control"}
                         />
                     </FormGroup>
