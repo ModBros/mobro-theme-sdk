@@ -5,29 +5,39 @@
   right: 0;
   height: 100%;
   min-width: 20rem;
+  background: $app-black;
 
   .sidebar-card {
     border: none;
     overflow: hidden;
     box-shadow: none;
+    background: transparent;
   }
 
   .sidebar-header {
-    background: $app-black;
+    background: $neutral110;
     border: none;
   }
 
   .sidebar-title {
-    text-transform: none;
+    text-transform: uppercase;
   }
 
   .sidebar-body {
     overflow-x: hidden;
     overflow-y: auto;
-    background: $app-black;
   }
 
   .sidebar-footer {
-    background: $app-black;
+    background: $neutral110;
   }
+
+  .nav-link{
+    text-transform: uppercase;
+  }
+
+  .nav-tabs{
+    margin: 0 -.5rem;
+  }
+
 }
