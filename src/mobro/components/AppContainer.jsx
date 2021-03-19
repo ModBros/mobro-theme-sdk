@@ -27,7 +27,7 @@ function AppContainer(props) {
     }
 
     return (
-        <div className={"scrollable scrollable--x scrollable--bigger"}>
+        <div className={"scrollable scrollable--x scrollable--bigger mw-100 mh-100"}>
             <div className="app" style={styles}>
                 <Entry/>
             </div>
