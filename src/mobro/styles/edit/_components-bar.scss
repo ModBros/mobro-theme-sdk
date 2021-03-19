@@ -11,10 +11,11 @@
   .btn.btn-link {
     color: white;
   }
-
   .components-bar__control {
     display: block;
+    z-index: 100;
   }
+
 }
 
 .components-bar__up, .components-bar__down {

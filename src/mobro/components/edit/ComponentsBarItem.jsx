@@ -37,7 +37,7 @@ function ComponentsBarItem(props) {
                     <IconButton
                         icon={"chevron-up"}
                         size={"sm"}
-                        className={"btn-inline"}
+                        className={"btn-inline btn-move-widget"}
                         onClick={(event) => {
                             if (index === 0) {
                                 return false;
@@ -98,7 +98,7 @@ function ComponentsBarItem(props) {
                     <IconButton
                         icon={"chevron-down"}
                         size={"sm"}
-                        className={"btn-inline"}
+                        className={"btn-inline btn-move-widget"}
                         onClick={(event) => {
                             if (index === componentsCount - 1) {
                                 return false;

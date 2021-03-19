@@ -3,3 +3,10 @@
   padding-bottom: 0;
   font-size: inherit;
 }
+
+.btn-move-widget{
+  background-color: $primary80;
+  color: #fff;
+  border: 1px solid #fff;
+  z-index: 10;
+}
