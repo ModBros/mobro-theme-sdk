@@ -14,6 +14,6 @@ If you want to develop a theme, follow the steps of our [official documentation 
 
 
 <!-- prettier-ignore-start -->
-[discord-badge]: https://img.shields.io/discord/723559267868737556.svg?color=7389D8&labelColor=6A7EC2&logo=discord&logoColor=ffffff&style=flat-square
+[discord-badge]: https://img.shields.io/discord/620204412706750466.svg?color=7389D8&labelColor=6A7EC2&logo=discord&logoColor=ffffff&style=flat-square
 [discord]: https://discord.gg/ZzJAHMqZ
 <!-- prettier-ignore-end -->
