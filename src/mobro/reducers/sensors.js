@@ -4,6 +4,7 @@ import {NOT_ASKED} from "mobro/utils/communication";
 import dotPropImmutable from "dot-prop-immutable";
 import {sensorDataFailed, sensorDataFetched, sensorDataModified, sensorDataRequested} from "mobro/actions/sensors";
 import {registerPublicEndpoint} from "mobro/utils/public";
+import {empty} from "mobro/utils/helper";
 
 // ----------------------------------------------
 // initial state
@@ -43,7 +44,7 @@ export const getSensorDataModified = state => dotPropImmutable.get(getSensorsSta
 registerPublicEndpoint("reducers.sensors.getSensorDataModified", getSensorDataModified);
 
 // sensor data selectors
-export const getSensorSources = state => Object.keys(getSensorData(state));
+export const getSensorSources = state => Object.keys(getSensorData(state)).filter((source) => !empty(getSensorDataBySource(state, source)));
 registerPublicEndpoint("reducers.sensors.getSensorSources", getSensorSources);
 
 export const getInformationBySource = (state, source) => dotPropImmutable.get(getSensorData(state), source, []);
