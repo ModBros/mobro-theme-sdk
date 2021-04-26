@@ -41,6 +41,10 @@ import HWInfoIcon from "mobro/icons/sources/hwinfo.svg";
 addIcon("data_source.hwinfo", HWInfoIcon);
 addIconAlias("option_hwinfo", "data_source.hwinfo");
 
+import Aida64Icon from "mobro/icons/sources/aida64.svg";
+addIcon("data_source.aida64", Aida64Icon);
+addIconAlias("option_aida64", "data_source.aida64");
+
 // data categories
 
 import BatteryIcon from "mobro/icons/data_categories/battery.svg";
