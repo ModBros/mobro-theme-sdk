@@ -1,7 +1,7 @@
-import {memo} from "react";
-import {map, noop} from "mobro/utils/helper";
-import {getOptionByValue, valueToOption} from "mobro/utils/component/select";
-import Select from "mobro/containers/shared/form/Select";
+import {memo} from 'react';
+import {map, noop} from 'mobro/utils/helper';
+import {getOptionByValue, valueToOption} from 'mobro/utils/component/select';
+import Select from 'mobro/containers/shared/form/Select';
 
 function FamilySelect(props) {
     const {
@@ -10,11 +10,11 @@ function FamilySelect(props) {
         onChange = noop
     } = props;
 
-    const options = map(fontList, (font, family) => valueToOption(family));
+    const options = [{value: null, label: 'none'}].concat(map(fontList, (font, family) => valueToOption(family)));
 
     return (
         <Select
-            placeholder={"select font family"}
+            placeholder={'select font family'}
             options={options}
             value={getOptionByValue(options, family)}
             onChange={(value) => onChange(value.value)}
