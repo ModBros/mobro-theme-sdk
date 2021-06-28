@@ -1,11 +1,13 @@
 import React from "react";
 import {getPublicUploadUrl} from "mobro/utils/socket";
 import Entry from "mobro/containers/Entry";
+import {isEditMode} from "mobro/utils/layout";
 
 function AppContainer(props) {
     const {
         config,
         style,
+        layoutMode,
         zoomLevel
     } = props;
 
@@ -27,7 +29,7 @@ function AppContainer(props) {
     }
 
     return (
-        <div className={"scrollable scrollable--x scrollable--bigger mw-100 mh-100"}>
+        <div className={`${isEditMode(layoutMode) ? "scrollable scrollable--x scrollable--bigger" : ""} mw-100 mh-100`}>
             <div className="app" style={styles}>
                 <Entry/>
             </div>

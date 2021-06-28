@@ -24,56 +24,62 @@ function EditmodeHeader(props) {
                         <small>
                             Resolution
                         </small>
-
-                        <div className={"d-flex align-items-center"}>
-                            <small
-                                className={"clickable"}
-                                onClick={() => {
-                                    layoutEdit({name: "width", data: layoutConfig?.height});
-                                    layoutEdit({name: "height", data: layoutConfig?.width});
-                                }}
-                            >
-                                <FontAwesomeIcon icon={"retweet"}/>
-                            </small>
-
-                            {getDeviceResolution() ? (
-                                <small
-                                    className={"clickable ml-1"}
-                                    onClick={() => adaptToDeviceResolution()}
-                                    title={"Use device resolution"}
-                                >
-                                    <FontAwesomeIcon icon={"tablet-alt"}/>
-                                </small>
-                            ) : null}
-                        </div>
                     </div>
 
                     <div className={"d-flex align-items-center flex-nowrap"}>
-                    <span>
-                        <input
-                            type={"text"}
-                            className={"form-control form-control-sm form-control-inline"}
-                            value={layoutConfig?.width || ""}
-                            onChange={(event) => {
-                                layoutEdit({name: "width", data: event.target.value})
-                            }}
-                        />
-                    </span>
+                        <span>
+                            <input
+                                type={"text"}
+                                className={"form-control form-control-sm form-control-inline"}
+                                value={layoutConfig?.width || ""}
+                                onChange={(event) => {
+                                    layoutEdit({name: "width", data: event.target.value})
+                                }}
+                            />
+                        </span>
 
                         <small className={"px-2"}>
                             <FontAwesomeIcon icon={"times"}/>
                         </small>
 
                         <span>
-                        <input
-                            type={"text"}
-                            value={layoutConfig?.height || ""}
-                            className={"form-control form-control-sm form-control-inline"}
-                            onChange={(event) => {
-                                layoutEdit({name: "height", data: event.target.value})
+                            <input
+                                type={"text"}
+                                value={layoutConfig?.height || ""}
+                                className={"form-control form-control-sm form-control-inline"}
+                                onChange={(event) => {
+                                    layoutEdit({name: "height", data: event.target.value})
+                                }}
+                            />
+                        </span>
+
+                        <span
+                            className={"clickable ml-3 d-flex align-items-center"}
+                            onClick={() => {
+                                layoutEdit({name: "width", data: layoutConfig?.height});
+                                layoutEdit({name: "height", data: layoutConfig?.width});
                             }}
-                        />
-                    </span>
+                        >
+                            <FontAwesomeIcon icon={"retweet"}/>
+
+                            <span className={"ml-1"}>
+                                Rotate
+                            </span>
+                        </span>
+
+                        {getDeviceResolution() ? (
+                            <span
+                                className={"text-white clickable ml-3 d-flex align-items-center"}
+                                onClick={() => adaptToDeviceResolution()}
+                                title={"Use device resolution"}
+                            >
+                                <FontAwesomeIcon icon={"tablet-alt"}/>
+
+                                <span className={"ml-1"}>
+                                    Use device resolution
+                                </span>
+                            </span>
+                        ) : null}
                     </div>
                 </div>
 

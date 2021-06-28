@@ -108,6 +108,10 @@ export function getDeviceResolution() {
     if (originalParams && originalParams.get("resolution")) {
         const [width, height] = originalParams.get("resolution").split("x");
 
+        if(!width || !height) {
+            return null;
+        }
+
         return {width, height};
     }
 
