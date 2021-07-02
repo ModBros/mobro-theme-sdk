@@ -9,7 +9,7 @@ module.exports = {
     },
 
     output: {
-        path: path.resolve(__dirname, "dist"),
+        path: path.resolve(__dirname, "..", "mobro-desktop", "resources", "assets"),
         filename: "[name]-v2.js"
     },
 
@@ -76,11 +76,5 @@ module.exports = {
             test: /\.(png|jpg|gif|asset\.svg)$/,
             loader: 'url-loader'
         }]
-    },
-
-    devServer: {
-        contentBase: path.resolve(__dirname, "dist"),
-        compress: true,
-        port: 80
     }
 };

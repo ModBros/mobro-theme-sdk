@@ -29,7 +29,7 @@ function AppContainer(props) {
     }
 
     return (
-        <div className={`${isEditMode(layoutMode) ? "scrollable scrollable--x scrollable--bigger" : ""} mw-100 mh-100`}>
+        <div className={`${isEditMode(layoutMode) ? "scrollable scrollable--x scrollable--bigger" : ""} mw-100 mh-100`} style={style}>
             <div className="app" style={styles}>
                 <Entry/>
             </div>
