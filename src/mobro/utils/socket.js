@@ -38,9 +38,9 @@ function init() {
     });
 
     socket.on(EVENT_CHANGE_THEME, (data) => {
-        console.info("Switching theme to", data.theme);
+        console.info("Switching theme to", data.payload.theme);
 
-        fetch(`${url}/theme/?theme=${data.theme}`)
+        fetch(`${url}/theme/?theme=${data.payload.theme}`)
             .then(() => {
                 console.info("Reloading due to theme switch ...");
                 window.location = `/${originalSearchParams}`;
@@ -51,7 +51,7 @@ function init() {
     });
 
     socket.on(EVENT_CHANGE_LAYOUT, (data) => {
-        dispatch(layoutChange(data));
+        dispatch(layoutChange(data.payload));
     });
 
     socket.on("connect", () => {
@@ -125,3 +125,9 @@ export function hasEditmodeParam() {
 }
 
 registerPublicEndpoint("utils.socket.getDeviceUuid", getDeviceUuid);
+
+export function isInline() {
+    return originalParams ? !!originalParams.get("inline") : false
+}
+
+registerPublicEndpoint("utils.socket.isInline", isInline);

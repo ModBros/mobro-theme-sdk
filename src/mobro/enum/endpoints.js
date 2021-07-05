@@ -32,3 +32,9 @@ registerPublicEndpoint("enum.endpoints.GET_SETTINGS", GET_SETTINGS);
 
 export const GET_FONT_LIST = "theme:font:list";
 registerPublicEndpoint("enum.endpoints.GET_FONT_LIST", GET_FONT_LIST);
+
+export const UPDATE_RESOLUTION = "theme:layout:update-resolution";
+registerPublicEndpoint("enum.endpoints.UPDATE_RESOLUTION", UPDATE_RESOLUTION);
+
+export const GET_RESOLUTION = "theme:layout:get-resolution";
+registerPublicEndpoint("enum.endpoints.GET_RESOLUTION", GET_RESOLUTION);

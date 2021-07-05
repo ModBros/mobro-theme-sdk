@@ -82,4 +82,4 @@ export const saveLayout = debounce((layout) => {
     }
 
     send(SAVE_LAYOUT, layout);
-}, 300);
+}, 500);
