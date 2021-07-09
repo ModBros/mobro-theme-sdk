@@ -1,5 +1,5 @@
 import React from "react";
-import {getPublicUploadUrl} from "mobro/utils/socket";
+import {getPublicUploadUrl, isInline} from 'mobro/utils/socket';
 import Entry from "mobro/containers/Entry";
 import {isEditMode} from "mobro/utils/layout";
 
@@ -29,7 +29,7 @@ function AppContainer(props) {
     }
 
     return (
-        <div className={`${isEditMode(layoutMode) ? "scrollable scrollable--x scrollable--bigger" : "overflow-hidden"} mw-100 mh-100`} style={style}>
+        <div className={`${isEditMode(layoutMode) || isInline() ? "scrollable scrollable--x scrollable--bigger" : "overflow-hidden"} mw-100 mh-100`} style={style}>
             <div className="app" style={styles}>
                 <Entry/>
             </div>

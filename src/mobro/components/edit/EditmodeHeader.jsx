@@ -30,6 +30,10 @@ function EditmodeHeader(props) {
             }
         })
 
+        if(isInline() && isEditMode(layoutMode)) {
+            getSocket().emit(GET_RESOLUTION);
+        }
+
         return () => {
             getSocket().off('update:resolution')
         }
@@ -42,6 +46,14 @@ function EditmodeHeader(props) {
                     <div className={'d-flex align-items-center justify-content-between'}>
                         <small>
                             Resolution
+                            {isInline() ? (
+                                <>
+                                    &nbsp;
+                                    <small>
+                                        [ Locked, inline mode ]
+                                    </small>
+                                </>
+                            ) : null}
                         </small>
                     </div>
 
@@ -51,6 +63,8 @@ function EditmodeHeader(props) {
                                 type={'text'}
                                 className={'form-control form-control-sm form-control-inline'}
                                 value={layoutConfig?.width || ''}
+                                readOnly={isInline()}
+                                disabled={isInline()}
                                 onChange={(event) => {
                                     layoutEdit({name: 'width', data: event.target.value})
                                 }}
@@ -66,38 +80,43 @@ function EditmodeHeader(props) {
                                 type={'text'}
                                 value={layoutConfig?.height || ''}
                                 className={'form-control form-control-sm form-control-inline'}
+                                readOnly={isInline()}
+                                disabled={isInline()}
                                 onChange={(event) => {
                                     layoutEdit({name: 'height', data: event.target.value})
                                 }}
                             />
                         </span>
 
-                        <span
-                            className={'clickable ml-3 d-flex align-items-center'}
-                            onClick={() => {
-                                layoutEdit({name: 'width', data: layoutConfig?.height})
-                                layoutEdit({name: 'height', data: layoutConfig?.width})
-                            }}
-                        >
-                            <FontAwesomeIcon icon={'retweet'}/>
+                        {!isInline() ? (
+                            <>
+                                <span
+                                    className={'clickable ml-3 d-flex align-items-center'}
+                                    onClick={() => {
+                                        layoutEdit({name: 'width', data: layoutConfig?.height})
+                                        layoutEdit({name: 'height', data: layoutConfig?.width})
+                                    }}
+                                >
+                                    <FontAwesomeIcon icon={'retweet'}/>
 
-                            <span className={'ml-1'}>
-                                Rotate
-                            </span>
-                        </span>
+                                    <span className={'ml-1'}>
+                                        Rotate
+                                    </span>
+                                </span>
 
+                                <span
+                                    className={'text-white clickable ml-3 d-flex align-items-center'}
+                                    onClick={() => getSocket().emit(GET_RESOLUTION)}
+                                    title={'Use device resolution'}
+                                >
+                                    <FontAwesomeIcon icon={'tablet-alt'}/>
 
-                        <span
-                            className={'text-white clickable ml-3 d-flex align-items-center'}
-                            onClick={() => getSocket().emit(GET_RESOLUTION)}
-                            title={'Use device resolution'}
-                        >
-                            <FontAwesomeIcon icon={'tablet-alt'}/>
-
-                            <span className={'ml-1'}>
-                                Use device resolution
-                            </span>
-                        </span>
+                                    <span className={'ml-1'}>
+                                        Use device resolution
+                                    </span>
+                                </span>
+                            </>
+                        ) : null}
                     </div>
                 </div>
 

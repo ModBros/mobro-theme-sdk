@@ -8,8 +8,9 @@ import {LAYOUT_MODE_DISPLAY, LAYOUT_MODE_EDIT} from 'mobro/enum/layout'
 import {isEditMode} from 'mobro/utils/layout'
 import Editmode from 'mobro/containers/edit/Editmode'
 import AppContainer from 'mobro/containers/AppContainer'
-import {GET_RESOLUTION, UPDATE_RESOLUTION} from 'mobro/enum/endpoints'
+import {UPDATE_RESOLUTION} from 'mobro/enum/endpoints'
 import debounce from 'debounce'
+import {isInline} from '../utils/socket'
 
 function App(props) {
     const {
@@ -88,11 +89,19 @@ function App(props) {
         }
     }
 
+    const containerStyles = extractSize(config);
+
+    // force 100% x 100% for inline mode
+    if (isInline() && !isEditMode(layoutMode)) {
+        containerStyles.width = '100%';
+        containerStyles.height = '100%';
+    }
+
     let content = (
         <div
             className={`d-flex w-100 align-items-center justify-content-center ${isEditMode(layoutMode) ? 'editmode-container' : ''}`}
             style={styles}>
-            <AppContainer style={extractSize(config)}/>
+            <AppContainer style={containerStyles}/>
         </div>
     )
 
