@@ -170,10 +170,14 @@ export default createReducer(initialState, {
         // force given path to be an array if it does not exist yet
         state = dotPropImmutable.set(state, `layout${path}`, dotPropImmutable.get(state, `layout${path}`, []));
 
-        return dotPropImmutable.merge(state, `layout${path}`, {
+        state = dotPropImmutable.merge(state, `layout${path}`, {
             type: type,
             config: getWidgetDefaultValue(type)
         });
+
+        doSaveLayout(state.layoutName, state.layout);
+
+        return state;
     },
 
     [moveComponent]: (state, {payload}) => {
@@ -187,27 +191,38 @@ export default createReducer(initialState, {
 
         state = dotPropImmutable.set(state, accessSourcePath, destination);
         state = dotPropImmutable.set(state, "selectedComponent", destinationPath);
+        state = dotPropImmutable.set(state, accessDestinationPath, source);
 
-        return dotPropImmutable.set(state, accessDestinationPath, source);
+        doSaveLayout(state.layoutName, state.layout);
+
+        return state;
     },
 
     [removeComponent.type]: (state, {payload}) => {
         const {path} = payload;
 
-        return dotPropImmutable.delete(state, `layout${path}`);
+        state = dotPropImmutable.delete(state, `layout${path}`);
+
+        doSaveLayout(state.layoutName, state.layout);
+
+        return state;
     },
 
     [copyComponent.type]: (state, {payload}) => {
         const {type, config} = payload;
 
-        return dotPropImmutable.set(state, "componentTemporaryStorage", {type, config});
+        dotPropImmutable.set(state, "componentTemporaryStorage", {type, config});
     },
 
     [pasteComponent.type]: (state, {payload}) => {
         const {path = ""} = payload;
         const {type, config} = state.componentTemporaryStorage;
 
-        return dotPropImmutable.merge(state, `layout${path}.components`, {type, config});
+        state = dotPropImmutable.merge(state, `layout${path}.components`, {type, config});
+
+        doSaveLayout(state.layoutName, state.layout);
+
+        return state;
     },
 
     [duplicateComponent.type]: (state, {payload}) => {
@@ -217,7 +232,11 @@ export default createReducer(initialState, {
             config
         } = payload;
 
-        return dotPropImmutable.merge(state, `layout${path}.components`, {type, config});
+        state = dotPropImmutable.merge(state, `layout${path}.components`, {type, config});
+
+        doSaveLayout(state.layoutName, state.layout);
+
+        return state;
     },
 
     [updateEditmode.type]: (state, {payload}) => {
