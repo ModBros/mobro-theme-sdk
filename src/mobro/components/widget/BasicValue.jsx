@@ -1,9 +1,9 @@
-import React from "react";
-import {useBasicChannelListener} from "mobro/utils/component";
-import {extractLabel, extractRawUnit, extractValue} from "mobro/utils/channel-data";
-import dotPropImmutable from "dot-prop-immutable";
-import LoadingIndicator from "mobro/containers/shared/LoadingIndicator";
-import AlignCenter from "mobro/containers/shared/layout/AlignCenter";
+import React from 'react';
+import {useBasicChannelListener} from 'mobro/utils/component';
+import {extractLabel, extractRawUnit, extractValue} from 'mobro/utils/channel-data';
+import dotPropImmutable from 'dot-prop-immutable';
+import LoadingIndicator from 'mobro/containers/shared/LoadingIndicator';
+import AlignCenter from 'mobro/containers/shared/layout/AlignCenter';
 
 function BasicValue(props) {
     const {
@@ -16,10 +16,12 @@ function BasicValue(props) {
         return (<AlignCenter><LoadingIndicator className="small"/></AlignCenter>);
     }
 
+    const label = config?.label || extractLabel(channelData);
+
     return (
         <div className="basic-value d-flex align-items-center justify-content-between">
             <span>
-                {dotPropImmutable.get(config, "showLabel") ? extractLabel(channelData) : ""}
+                {dotPropImmutable.get(config, 'showLabel') ? label : ''}
             </span>
 
             <strong>

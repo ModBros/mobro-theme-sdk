@@ -13,6 +13,7 @@ function Grid(props) {
         layoutChange,
         rowHeight,
         width,
+        gutter=4,
         height,
         components
     } = props;
@@ -34,7 +35,7 @@ function Grid(props) {
                 width={width}
                 cols={{lg: 24, md: 24, sm: 24, xs: 24, xxs: 24}}
                 rowHeight={parseInt(rowHeight)}
-                margin={[4, 4]}
+                margin={[gutter, gutter]}
                 isDraggable={isEditMode(layoutMode)}
                 isResizable={isEditMode(layoutMode)}
                 layouts={{lg: layout}}

@@ -95,6 +95,7 @@ function App(props) {
     if (isInline() && !isEditMode(layoutMode)) {
         containerStyles.width = '100%';
         containerStyles.height = '100%';
+        document.body.style.backgroundColor = 'transparent';
     }
 
     let content = (

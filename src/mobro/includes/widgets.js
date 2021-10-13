@@ -52,6 +52,10 @@ addWidget({
             type: "checkbox"
         },
 
+        label: {
+            type: 'input'
+        },
+
         channel: {
             type: "channel"
         }
