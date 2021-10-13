@@ -14,6 +14,7 @@ function Grid(props) {
         rowHeight,
         width,
         gutter=4,
+        cols={lg: 24, md: 24, sm: 24, xs: 24, xxs: 24},
         height,
         components
     } = props;
@@ -33,7 +34,7 @@ function Grid(props) {
             <ResponsiveGridLayout
                 className="layout"
                 width={width}
-                cols={{lg: 24, md: 24, sm: 24, xs: 24, xxs: 24}}
+                cols={cols}
                 rowHeight={parseInt(rowHeight)}
                 margin={[gutter, gutter]}
                 isDraggable={isEditMode(layoutMode)}
