@@ -40,14 +40,18 @@ function init() {
     socket.on(EVENT_CHANGE_THEME, (data) => {
         console.info("Switching theme to", data.payload.theme);
 
-        fetch(`${url}/theme/?theme=${data.payload.theme}`)
-            .then(() => {
-                console.info("Reloading due to theme switch ...");
-                window.location = `/${originalSearchParams}`;
-            })
-            .catch((error) => {
-                console.error("Could not switch themes", error);
-            });
+        if(data.payload.reloadOnly) {
+            window.location = `/${originalSearchParams}`;
+        } else {
+            fetch(`${url}/theme/${originalSearchParams}&theme=${data.payload.theme}`)
+                .then(() => {
+                    console.info("Reloading due to theme switch ...");
+                    window.location = `/${originalSearchParams}`;
+                })
+                .catch((error) => {
+                    console.error("Could not switch themes", error);
+                });
+        }
     });
 
     socket.on(EVENT_CHANGE_LAYOUT, (data) => {
